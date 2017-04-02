@@ -1,23 +1,23 @@
 -- phpMyAdmin SQL Dump
--- version 3.5.2
--- http://www.phpmyadmin.net
+-- version 4.6.4
+-- https://www.phpmyadmin.net/
 --
--- Host: internal-db.s217846.gridserver.com
--- Generation Time: Feb 05, 2017 at 01:06 PM
--- Server version: 5.6.33-79.0
--- PHP Version: 5.6.21
+-- Host: localhost:8889
+-- Generation Time: Apr 02, 2017 at 05:33 PM
+-- Server version: 5.6.33
+-- PHP Version: 7.0.12
 
-SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
+/*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `db217846_hamishgray`
+-- Database: `hamishgray`
 --
 
 -- --------------------------------------------------------
@@ -26,13 +26,11 @@ SET time_zone = "+00:00";
 -- Table structure for table `Blog`
 --
 
-CREATE TABLE IF NOT EXISTS `Blog` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `Blog` (
+  `ID` int(11) NOT NULL,
   `PostsPerPage` int(11) NOT NULL DEFAULT '0',
-  `ParentID` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`ID`),
-  KEY `ParentID` (`ParentID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=24 ;
+  `ParentID` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `Blog`
@@ -47,18 +45,15 @@ INSERT INTO `Blog` (`ID`, `PostsPerPage`, `ParentID`) VALUES
 -- Table structure for table `BlogCategory`
 --
 
-CREATE TABLE IF NOT EXISTS `BlogCategory` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `BlogCategory` (
+  `ID` int(11) NOT NULL,
   `ClassName` enum('BlogCategory') DEFAULT 'BlogCategory',
   `LastEdited` datetime DEFAULT NULL,
   `Created` datetime DEFAULT NULL,
   `Title` varchar(255) DEFAULT NULL,
   `URLSegment` varchar(255) DEFAULT NULL,
-  `BlogID` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`ID`),
-  KEY `BlogID` (`BlogID`),
-  KEY `ClassName` (`ClassName`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `BlogID` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -66,13 +61,12 @@ CREATE TABLE IF NOT EXISTS `BlogCategory` (
 -- Table structure for table `BlogEntry`
 --
 
-CREATE TABLE IF NOT EXISTS `BlogEntry` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `BlogEntry` (
+  `ID` int(11) NOT NULL,
   `Date` datetime DEFAULT NULL,
   `Author` mediumtext,
-  `Tags` mediumtext,
-  PRIMARY KEY (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `Tags` mediumtext
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -80,13 +74,12 @@ CREATE TABLE IF NOT EXISTS `BlogEntry` (
 -- Table structure for table `BlogEntry_Live`
 --
 
-CREATE TABLE IF NOT EXISTS `BlogEntry_Live` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `BlogEntry_Live` (
+  `ID` int(11) NOT NULL,
   `Date` datetime DEFAULT NULL,
   `Author` mediumtext,
-  `Tags` mediumtext,
-  PRIMARY KEY (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `Tags` mediumtext
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -94,18 +87,14 @@ CREATE TABLE IF NOT EXISTS `BlogEntry_Live` (
 -- Table structure for table `BlogEntry_versions`
 --
 
-CREATE TABLE IF NOT EXISTS `BlogEntry_versions` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `BlogEntry_versions` (
+  `ID` int(11) NOT NULL,
   `RecordID` int(11) NOT NULL DEFAULT '0',
   `Version` int(11) NOT NULL DEFAULT '0',
   `Date` datetime DEFAULT NULL,
   `Author` mediumtext,
-  `Tags` mediumtext,
-  PRIMARY KEY (`ID`),
-  UNIQUE KEY `RecordID_Version` (`RecordID`,`Version`),
-  KEY `RecordID` (`RecordID`),
-  KEY `Version` (`Version`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `Tags` mediumtext
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -113,14 +102,12 @@ CREATE TABLE IF NOT EXISTS `BlogEntry_versions` (
 -- Table structure for table `BlogHolder`
 --
 
-CREATE TABLE IF NOT EXISTS `BlogHolder` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
-  `AllowCustomAuthors` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  `ShowFullEntry` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  `OwnerID` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`ID`),
-  KEY `OwnerID` (`OwnerID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+CREATE TABLE `BlogHolder` (
+  `ID` int(11) NOT NULL,
+  `AllowCustomAuthors` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
+  `ShowFullEntry` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
+  `OwnerID` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -128,14 +115,12 @@ CREATE TABLE IF NOT EXISTS `BlogHolder` (
 -- Table structure for table `BlogHolder_Live`
 --
 
-CREATE TABLE IF NOT EXISTS `BlogHolder_Live` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
-  `AllowCustomAuthors` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  `ShowFullEntry` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  `OwnerID` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`ID`),
-  KEY `OwnerID` (`OwnerID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+CREATE TABLE `BlogHolder_Live` (
+  `ID` int(11) NOT NULL,
+  `AllowCustomAuthors` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
+  `ShowFullEntry` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
+  `OwnerID` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -143,19 +128,14 @@ CREATE TABLE IF NOT EXISTS `BlogHolder_Live` (
 -- Table structure for table `BlogHolder_versions`
 --
 
-CREATE TABLE IF NOT EXISTS `BlogHolder_versions` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `BlogHolder_versions` (
+  `ID` int(11) NOT NULL,
   `RecordID` int(11) NOT NULL DEFAULT '0',
   `Version` int(11) NOT NULL DEFAULT '0',
-  `AllowCustomAuthors` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  `ShowFullEntry` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  `OwnerID` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`ID`),
-  UNIQUE KEY `RecordID_Version` (`RecordID`,`Version`),
-  KEY `RecordID` (`RecordID`),
-  KEY `Version` (`Version`),
-  KEY `OwnerID` (`OwnerID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `AllowCustomAuthors` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
+  `ShowFullEntry` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
+  `OwnerID` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -163,15 +143,13 @@ CREATE TABLE IF NOT EXISTS `BlogHolder_versions` (
 -- Table structure for table `BlogPost`
 --
 
-CREATE TABLE IF NOT EXISTS `BlogPost` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `BlogPost` (
+  `ID` int(11) NOT NULL,
   `PublishDate` datetime DEFAULT NULL,
   `AuthorNames` varchar(1024) DEFAULT NULL,
   `Summary` mediumtext,
-  `FeaturedImageID` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`ID`),
-  KEY `FeaturedImageID` (`FeaturedImageID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `FeaturedImageID` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -179,14 +157,11 @@ CREATE TABLE IF NOT EXISTS `BlogPost` (
 -- Table structure for table `BlogPost_Authors`
 --
 
-CREATE TABLE IF NOT EXISTS `BlogPost_Authors` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `BlogPost_Authors` (
+  `ID` int(11) NOT NULL,
   `BlogPostID` int(11) NOT NULL DEFAULT '0',
-  `MemberID` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`ID`),
-  KEY `BlogPostID` (`BlogPostID`),
-  KEY `MemberID` (`MemberID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
+  `MemberID` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `BlogPost_Authors`
@@ -205,14 +180,11 @@ INSERT INTO `BlogPost_Authors` (`ID`, `BlogPostID`, `MemberID`) VALUES
 -- Table structure for table `BlogPost_Categories`
 --
 
-CREATE TABLE IF NOT EXISTS `BlogPost_Categories` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `BlogPost_Categories` (
+  `ID` int(11) NOT NULL,
   `BlogPostID` int(11) NOT NULL DEFAULT '0',
-  `BlogCategoryID` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`ID`),
-  KEY `BlogPostID` (`BlogPostID`),
-  KEY `BlogCategoryID` (`BlogCategoryID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `BlogCategoryID` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -220,15 +192,13 @@ CREATE TABLE IF NOT EXISTS `BlogPost_Categories` (
 -- Table structure for table `BlogPost_Live`
 --
 
-CREATE TABLE IF NOT EXISTS `BlogPost_Live` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `BlogPost_Live` (
+  `ID` int(11) NOT NULL,
   `PublishDate` datetime DEFAULT NULL,
   `AuthorNames` varchar(1024) DEFAULT NULL,
   `Summary` mediumtext,
-  `FeaturedImageID` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`ID`),
-  KEY `FeaturedImageID` (`FeaturedImageID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `FeaturedImageID` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -236,14 +206,11 @@ CREATE TABLE IF NOT EXISTS `BlogPost_Live` (
 -- Table structure for table `BlogPost_Tags`
 --
 
-CREATE TABLE IF NOT EXISTS `BlogPost_Tags` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `BlogPost_Tags` (
+  `ID` int(11) NOT NULL,
   `BlogPostID` int(11) NOT NULL DEFAULT '0',
-  `BlogTagID` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`ID`),
-  KEY `BlogPostID` (`BlogPostID`),
-  KEY `BlogTagID` (`BlogTagID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `BlogTagID` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -251,20 +218,15 @@ CREATE TABLE IF NOT EXISTS `BlogPost_Tags` (
 -- Table structure for table `BlogPost_versions`
 --
 
-CREATE TABLE IF NOT EXISTS `BlogPost_versions` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `BlogPost_versions` (
+  `ID` int(11) NOT NULL,
   `RecordID` int(11) NOT NULL DEFAULT '0',
   `Version` int(11) NOT NULL DEFAULT '0',
   `PublishDate` datetime DEFAULT NULL,
   `AuthorNames` varchar(1024) DEFAULT NULL,
   `Summary` mediumtext,
-  `FeaturedImageID` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`ID`),
-  UNIQUE KEY `RecordID_Version` (`RecordID`,`Version`),
-  KEY `RecordID` (`RecordID`),
-  KEY `Version` (`Version`),
-  KEY `FeaturedImageID` (`FeaturedImageID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+  `FeaturedImageID` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `BlogPost_versions`
@@ -281,18 +243,15 @@ INSERT INTO `BlogPost_versions` (`ID`, `RecordID`, `Version`, `PublishDate`, `Au
 -- Table structure for table `BlogTag`
 --
 
-CREATE TABLE IF NOT EXISTS `BlogTag` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `BlogTag` (
+  `ID` int(11) NOT NULL,
   `ClassName` enum('BlogTag') DEFAULT 'BlogTag',
   `LastEdited` datetime DEFAULT NULL,
   `Created` datetime DEFAULT NULL,
   `Title` varchar(255) DEFAULT NULL,
   `URLSegment` varchar(255) DEFAULT NULL,
-  `BlogID` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`ID`),
-  KEY `BlogID` (`BlogID`),
-  KEY `ClassName` (`ClassName`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `BlogID` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -300,12 +259,11 @@ CREATE TABLE IF NOT EXISTS `BlogTag` (
 -- Table structure for table `BlogTree`
 --
 
-CREATE TABLE IF NOT EXISTS `BlogTree` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `BlogTree` (
+  `ID` int(11) NOT NULL,
   `Name` varchar(255) DEFAULT NULL,
-  `LandingPageFreshness` varchar(50) DEFAULT NULL,
-  PRIMARY KEY (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `LandingPageFreshness` varchar(50) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -313,12 +271,11 @@ CREATE TABLE IF NOT EXISTS `BlogTree` (
 -- Table structure for table `BlogTree_Live`
 --
 
-CREATE TABLE IF NOT EXISTS `BlogTree_Live` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `BlogTree_Live` (
+  `ID` int(11) NOT NULL,
   `Name` varchar(255) DEFAULT NULL,
-  `LandingPageFreshness` varchar(50) DEFAULT NULL,
-  PRIMARY KEY (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `LandingPageFreshness` varchar(50) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -326,17 +283,13 @@ CREATE TABLE IF NOT EXISTS `BlogTree_Live` (
 -- Table structure for table `BlogTree_versions`
 --
 
-CREATE TABLE IF NOT EXISTS `BlogTree_versions` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `BlogTree_versions` (
+  `ID` int(11) NOT NULL,
   `RecordID` int(11) NOT NULL DEFAULT '0',
   `Version` int(11) NOT NULL DEFAULT '0',
   `Name` varchar(255) DEFAULT NULL,
-  `LandingPageFreshness` varchar(50) DEFAULT NULL,
-  PRIMARY KEY (`ID`),
-  UNIQUE KEY `RecordID_Version` (`RecordID`,`Version`),
-  KEY `RecordID` (`RecordID`),
-  KEY `Version` (`Version`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `LandingPageFreshness` varchar(50) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -344,14 +297,11 @@ CREATE TABLE IF NOT EXISTS `BlogTree_versions` (
 -- Table structure for table `Blog_Contributors`
 --
 
-CREATE TABLE IF NOT EXISTS `Blog_Contributors` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `Blog_Contributors` (
+  `ID` int(11) NOT NULL,
   `BlogID` int(11) NOT NULL DEFAULT '0',
-  `MemberID` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`ID`),
-  KEY `BlogID` (`BlogID`),
-  KEY `MemberID` (`MemberID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `MemberID` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -359,14 +309,11 @@ CREATE TABLE IF NOT EXISTS `Blog_Contributors` (
 -- Table structure for table `Blog_Editors`
 --
 
-CREATE TABLE IF NOT EXISTS `Blog_Editors` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `Blog_Editors` (
+  `ID` int(11) NOT NULL,
   `BlogID` int(11) NOT NULL DEFAULT '0',
-  `MemberID` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`ID`),
-  KEY `BlogID` (`BlogID`),
-  KEY `MemberID` (`MemberID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `MemberID` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -374,13 +321,11 @@ CREATE TABLE IF NOT EXISTS `Blog_Editors` (
 -- Table structure for table `Blog_Live`
 --
 
-CREATE TABLE IF NOT EXISTS `Blog_Live` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `Blog_Live` (
+  `ID` int(11) NOT NULL,
   `PostsPerPage` int(11) NOT NULL DEFAULT '0',
-  `ParentID` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`ID`),
-  KEY `ParentID` (`ParentID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=24 ;
+  `ParentID` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `Blog_Live`
@@ -395,18 +340,13 @@ INSERT INTO `Blog_Live` (`ID`, `PostsPerPage`, `ParentID`) VALUES
 -- Table structure for table `Blog_versions`
 --
 
-CREATE TABLE IF NOT EXISTS `Blog_versions` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `Blog_versions` (
+  `ID` int(11) NOT NULL,
   `RecordID` int(11) NOT NULL DEFAULT '0',
   `Version` int(11) NOT NULL DEFAULT '0',
   `PostsPerPage` int(11) NOT NULL DEFAULT '0',
-  `ParentID` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`ID`),
-  UNIQUE KEY `RecordID_Version` (`RecordID`,`Version`),
-  KEY `RecordID` (`RecordID`),
-  KEY `Version` (`Version`),
-  KEY `ParentID` (`ParentID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `ParentID` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -414,14 +354,11 @@ CREATE TABLE IF NOT EXISTS `Blog_versions` (
 -- Table structure for table `Blog_Writers`
 --
 
-CREATE TABLE IF NOT EXISTS `Blog_Writers` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `Blog_Writers` (
+  `ID` int(11) NOT NULL,
   `BlogID` int(11) NOT NULL DEFAULT '0',
-  `MemberID` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`ID`),
-  KEY `BlogID` (`BlogID`),
-  KEY `MemberID` (`MemberID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `MemberID` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -429,18 +366,16 @@ CREATE TABLE IF NOT EXISTS `Blog_Writers` (
 -- Table structure for table `ContactRequest`
 --
 
-CREATE TABLE IF NOT EXISTS `ContactRequest` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `ContactRequest` (
+  `ID` int(11) NOT NULL,
   `ClassName` enum('ContactRequest') DEFAULT 'ContactRequest',
   `LastEdited` datetime DEFAULT NULL,
   `Created` datetime DEFAULT NULL,
   `Name` mediumtext,
   `Email` mediumtext,
   `Message` mediumtext,
-  `Sort` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`ID`),
-  KEY `ClassName` (`ClassName`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `Sort` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -448,11 +383,10 @@ CREATE TABLE IF NOT EXISTS `ContactRequest` (
 -- Table structure for table `ErrorPage`
 --
 
-CREATE TABLE IF NOT EXISTS `ErrorPage` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
-  `ErrorCode` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`ID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
+CREATE TABLE `ErrorPage` (
+  `ID` int(11) NOT NULL,
+  `ErrorCode` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `ErrorPage`
@@ -468,11 +402,10 @@ INSERT INTO `ErrorPage` (`ID`, `ErrorCode`) VALUES
 -- Table structure for table `ErrorPage_Live`
 --
 
-CREATE TABLE IF NOT EXISTS `ErrorPage_Live` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
-  `ErrorCode` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`ID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
+CREATE TABLE `ErrorPage_Live` (
+  `ID` int(11) NOT NULL,
+  `ErrorCode` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `ErrorPage_Live`
@@ -488,16 +421,12 @@ INSERT INTO `ErrorPage_Live` (`ID`, `ErrorCode`) VALUES
 -- Table structure for table `ErrorPage_versions`
 --
 
-CREATE TABLE IF NOT EXISTS `ErrorPage_versions` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `ErrorPage_versions` (
+  `ID` int(11) NOT NULL,
   `RecordID` int(11) NOT NULL DEFAULT '0',
   `Version` int(11) NOT NULL DEFAULT '0',
-  `ErrorCode` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`ID`),
-  UNIQUE KEY `RecordID_Version` (`RecordID`,`Version`),
-  KEY `RecordID` (`RecordID`),
-  KEY `Version` (`Version`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `ErrorCode` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -505,8 +434,8 @@ CREATE TABLE IF NOT EXISTS `ErrorPage_versions` (
 -- Table structure for table `File`
 --
 
-CREATE TABLE IF NOT EXISTS `File` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `File` (
+  `ID` int(11) NOT NULL,
   `ClassName` enum('File','Folder','Image','Image_Cached') DEFAULT 'File',
   `LastEdited` datetime DEFAULT NULL,
   `Created` datetime DEFAULT NULL,
@@ -514,14 +443,10 @@ CREATE TABLE IF NOT EXISTS `File` (
   `Title` varchar(255) DEFAULT NULL,
   `Filename` mediumtext,
   `Content` mediumtext,
-  `ShowInSearch` tinyint(1) unsigned NOT NULL DEFAULT '1',
+  `ShowInSearch` tinyint(1) UNSIGNED NOT NULL DEFAULT '1',
   `ParentID` int(11) NOT NULL DEFAULT '0',
-  `OwnerID` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`ID`),
-  KEY `ParentID` (`ParentID`),
-  KEY `OwnerID` (`OwnerID`),
-  KEY `ClassName` (`ClassName`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=67 ;
+  `OwnerID` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `File`
@@ -601,22 +526,19 @@ INSERT INTO `File` (`ID`, `ClassName`, `LastEdited`, `Created`, `Name`, `Title`,
 -- Table structure for table `Group`
 --
 
-CREATE TABLE IF NOT EXISTS `Group` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `Group` (
+  `ID` int(11) NOT NULL,
   `ClassName` enum('Group') DEFAULT 'Group',
   `LastEdited` datetime DEFAULT NULL,
   `Created` datetime DEFAULT NULL,
   `Title` varchar(255) DEFAULT NULL,
   `Description` mediumtext,
   `Code` varchar(255) DEFAULT NULL,
-  `Locked` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `Locked` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
   `Sort` int(11) NOT NULL DEFAULT '0',
   `HtmlEditorConfig` mediumtext,
-  `ParentID` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`ID`),
-  KEY `ParentID` (`ParentID`),
-  KEY `ClassName` (`ClassName`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+  `ParentID` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `Group`
@@ -633,14 +555,11 @@ INSERT INTO `Group` (`ID`, `ClassName`, `LastEdited`, `Created`, `Title`, `Descr
 -- Table structure for table `Group_Members`
 --
 
-CREATE TABLE IF NOT EXISTS `Group_Members` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `Group_Members` (
+  `ID` int(11) NOT NULL,
   `GroupID` int(11) NOT NULL DEFAULT '0',
-  `MemberID` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`ID`),
-  KEY `GroupID` (`GroupID`),
-  KEY `MemberID` (`MemberID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+  `MemberID` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `Group_Members`
@@ -655,14 +574,11 @@ INSERT INTO `Group_Members` (`ID`, `GroupID`, `MemberID`) VALUES
 -- Table structure for table `Group_Roles`
 --
 
-CREATE TABLE IF NOT EXISTS `Group_Roles` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `Group_Roles` (
+  `ID` int(11) NOT NULL,
   `GroupID` int(11) NOT NULL DEFAULT '0',
-  `PermissionRoleID` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`ID`),
-  KEY `GroupID` (`GroupID`),
-  KEY `PermissionRoleID` (`PermissionRoleID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `PermissionRoleID` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -670,19 +586,16 @@ CREATE TABLE IF NOT EXISTS `Group_Roles` (
 -- Table structure for table `LoginAttempt`
 --
 
-CREATE TABLE IF NOT EXISTS `LoginAttempt` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `LoginAttempt` (
+  `ID` int(11) NOT NULL,
   `ClassName` enum('LoginAttempt') DEFAULT 'LoginAttempt',
   `LastEdited` datetime DEFAULT NULL,
   `Created` datetime DEFAULT NULL,
   `Email` varchar(255) DEFAULT NULL,
   `Status` enum('Success','Failure') DEFAULT 'Success',
   `IP` varchar(255) DEFAULT NULL,
-  `MemberID` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`ID`),
-  KEY `MemberID` (`MemberID`),
-  KEY `ClassName` (`ClassName`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `MemberID` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -690,8 +603,8 @@ CREATE TABLE IF NOT EXISTS `LoginAttempt` (
 -- Table structure for table `Member`
 --
 
-CREATE TABLE IF NOT EXISTS `Member` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `Member` (
+  `ID` int(11) NOT NULL,
   `ClassName` enum('Member') DEFAULT 'Member',
   `LastEdited` datetime DEFAULT NULL,
   `Created` datetime DEFAULT NULL,
@@ -716,12 +629,8 @@ CREATE TABLE IF NOT EXISTS `Member` (
   `TimeFormat` varchar(30) DEFAULT NULL,
   `URLSegment` varchar(50) DEFAULT NULL,
   `BlogProfileSummary` mediumtext,
-  `BlogProfileImageID` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`ID`),
-  KEY `Email` (`Email`),
-  KEY `ClassName` (`ClassName`),
-  KEY `BlogProfileImageID` (`BlogProfileImageID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+  `BlogProfileImageID` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `Member`
@@ -736,19 +645,16 @@ INSERT INTO `Member` (`ID`, `ClassName`, `LastEdited`, `Created`, `FirstName`, `
 -- Table structure for table `MemberPassword`
 --
 
-CREATE TABLE IF NOT EXISTS `MemberPassword` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `MemberPassword` (
+  `ID` int(11) NOT NULL,
   `ClassName` enum('MemberPassword') DEFAULT 'MemberPassword',
   `LastEdited` datetime DEFAULT NULL,
   `Created` datetime DEFAULT NULL,
   `Password` varchar(160) DEFAULT NULL,
   `Salt` varchar(50) DEFAULT NULL,
   `PasswordEncryption` varchar(50) DEFAULT NULL,
-  `MemberID` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`ID`),
-  KEY `MemberID` (`MemberID`),
-  KEY `ClassName` (`ClassName`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+  `MemberID` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `MemberPassword`
@@ -763,15 +669,13 @@ INSERT INTO `MemberPassword` (`ID`, `ClassName`, `LastEdited`, `Created`, `Passw
 -- Table structure for table `Page`
 --
 
-CREATE TABLE IF NOT EXISTS `Page` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `Page` (
+  `ID` int(11) NOT NULL,
   `BannerImageID` int(11) NOT NULL DEFAULT '0',
   `PageColor` varchar(6) CHARACTER SET utf8 DEFAULT NULL,
-  `LightTheme` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  `NoBannerImage` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  PRIMARY KEY (`ID`),
-  KEY `BannerImageID` (`BannerImageID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=33 ;
+  `LightTheme` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
+  `NoBannerImage` tinyint(1) UNSIGNED NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `Page`
@@ -799,15 +703,13 @@ INSERT INTO `Page` (`ID`, `BannerImageID`, `PageColor`, `LightTheme`, `NoBannerI
 -- Table structure for table `Page_Live`
 --
 
-CREATE TABLE IF NOT EXISTS `Page_Live` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `Page_Live` (
+  `ID` int(11) NOT NULL,
   `BannerImageID` int(11) NOT NULL DEFAULT '0',
   `PageColor` varchar(6) CHARACTER SET utf8 DEFAULT NULL,
-  `LightTheme` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  `NoBannerImage` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  PRIMARY KEY (`ID`),
-  KEY `BannerImageID` (`BannerImageID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=33 ;
+  `LightTheme` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
+  `NoBannerImage` tinyint(1) UNSIGNED NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `Page_Live`
@@ -832,20 +734,15 @@ INSERT INTO `Page_Live` (`ID`, `BannerImageID`, `PageColor`, `LightTheme`, `NoBa
 -- Table structure for table `Page_versions`
 --
 
-CREATE TABLE IF NOT EXISTS `Page_versions` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `Page_versions` (
+  `ID` int(11) NOT NULL,
   `RecordID` int(11) NOT NULL DEFAULT '0',
   `Version` int(11) NOT NULL DEFAULT '0',
   `BannerImageID` int(11) NOT NULL DEFAULT '0',
   `PageColor` varchar(6) CHARACTER SET utf8 DEFAULT NULL,
-  `LightTheme` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  `NoBannerImage` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  PRIMARY KEY (`ID`),
-  UNIQUE KEY `RecordID_Version` (`RecordID`,`Version`),
-  KEY `RecordID` (`RecordID`),
-  KEY `Version` (`Version`),
-  KEY `BannerImageID` (`BannerImageID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=125 ;
+  `LightTheme` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
+  `NoBannerImage` tinyint(1) UNSIGNED NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `Page_versions`
@@ -983,20 +880,16 @@ INSERT INTO `Page_versions` (`ID`, `RecordID`, `Version`, `BannerImageID`, `Page
 -- Table structure for table `Permission`
 --
 
-CREATE TABLE IF NOT EXISTS `Permission` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `Permission` (
+  `ID` int(11) NOT NULL,
   `ClassName` enum('Permission') DEFAULT 'Permission',
   `LastEdited` datetime DEFAULT NULL,
   `Created` datetime DEFAULT NULL,
   `Code` varchar(50) DEFAULT NULL,
   `Arg` int(11) NOT NULL DEFAULT '0',
   `Type` int(11) NOT NULL DEFAULT '1',
-  `GroupID` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`ID`),
-  KEY `GroupID` (`GroupID`),
-  KEY `Code` (`Code`),
-  KEY `ClassName` (`ClassName`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
+  `GroupID` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `Permission`
@@ -1016,16 +909,14 @@ INSERT INTO `Permission` (`ID`, `ClassName`, `LastEdited`, `Created`, `Code`, `A
 -- Table structure for table `PermissionRole`
 --
 
-CREATE TABLE IF NOT EXISTS `PermissionRole` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `PermissionRole` (
+  `ID` int(11) NOT NULL,
   `ClassName` enum('PermissionRole') DEFAULT 'PermissionRole',
   `LastEdited` datetime DEFAULT NULL,
   `Created` datetime DEFAULT NULL,
   `Title` varchar(50) DEFAULT NULL,
-  `OnlyAdminCanApply` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  PRIMARY KEY (`ID`),
-  KEY `ClassName` (`ClassName`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `OnlyAdminCanApply` tinyint(1) UNSIGNED NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -1033,17 +924,14 @@ CREATE TABLE IF NOT EXISTS `PermissionRole` (
 -- Table structure for table `PermissionRoleCode`
 --
 
-CREATE TABLE IF NOT EXISTS `PermissionRoleCode` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `PermissionRoleCode` (
+  `ID` int(11) NOT NULL,
   `ClassName` enum('PermissionRoleCode') DEFAULT 'PermissionRoleCode',
   `LastEdited` datetime DEFAULT NULL,
   `Created` datetime DEFAULT NULL,
   `Code` varchar(50) DEFAULT NULL,
-  `RoleID` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`ID`),
-  KEY `RoleID` (`RoleID`),
-  KEY `ClassName` (`ClassName`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `RoleID` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -1051,8 +939,8 @@ CREATE TABLE IF NOT EXISTS `PermissionRoleCode` (
 -- Table structure for table `PortfolioImage`
 --
 
-CREATE TABLE IF NOT EXISTS `PortfolioImage` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `PortfolioImage` (
+  `ID` int(11) NOT NULL,
   `ClassName` enum('PortfolioImage') CHARACTER SET utf8 DEFAULT 'PortfolioImage',
   `LastEdited` datetime DEFAULT NULL,
   `Created` datetime DEFAULT NULL,
@@ -1061,12 +949,8 @@ CREATE TABLE IF NOT EXISTS `PortfolioImage` (
   `ImageID` int(11) NOT NULL DEFAULT '0',
   `ParentID` int(11) NOT NULL DEFAULT '0',
   `Description` mediumtext CHARACTER SET utf8,
-  `Format` mediumtext CHARACTER SET utf8,
-  PRIMARY KEY (`ID`),
-  KEY `ImageID` (`ImageID`),
-  KEY `ParentID` (`ParentID`),
-  KEY `ClassName` (`ClassName`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=18 ;
+  `Format` mediumtext CHARACTER SET utf8
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `PortfolioImage`
@@ -1096,8 +980,8 @@ INSERT INTO `PortfolioImage` (`ID`, `ClassName`, `LastEdited`, `Created`, `Title
 -- Table structure for table `PortfolioPage`
 --
 
-CREATE TABLE IF NOT EXISTS `PortfolioPage` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `PortfolioPage` (
+  `ID` int(11) NOT NULL,
   `ThumbnailImageID` int(11) NOT NULL DEFAULT '0',
   `PublishDate` date DEFAULT NULL,
   `ShortDescription` mediumtext,
@@ -1111,24 +995,22 @@ CREATE TABLE IF NOT EXISTS `PortfolioPage` (
   `CreditArtDirector` mediumtext,
   `CreditDesigner` mediumtext,
   `CreditPhotographer` mediumtext,
-  `Feature` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `Feature` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
   `VideoURL` mediumtext,
   `VimeoURL` mediumtext,
-  `VimeoID` mediumtext,
-  PRIMARY KEY (`ID`),
-  KEY `ThumbnailImageID` (`ThumbnailImageID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=33 ;
+  `VimeoID` mediumtext
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `PortfolioPage`
 --
 
 INSERT INTO `PortfolioPage` (`ID`, `ThumbnailImageID`, `PublishDate`, `ShortDescription`, `Client`, `Scope`, `Tagline`, `Credits`, `Link`, `WebLink`, `CreditCreativeDirector`, `CreditArtDirector`, `CreditDesigner`, `CreditPhotographer`, `Feature`, `VideoURL`, `VimeoURL`, `VimeoID`) VALUES
-(7, 13, '2012-09-20', 'It''s been predicted that newspapers and traditional news media will not survive the next 15 years', 'Personal', 'Print, Website', 'Exhibit Explore Expand', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL),
+(7, 13, '2012-09-20', 'It\'s been predicted that newspapers and traditional news media will not survive the next 15 years', 'Personal', 'Print, Website', 'Exhibit Explore Expand', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL),
 (8, 16, '2012-06-14', 'Take this burden from my shoulders that I may carry a child. He will see the distant horizons that we will achieve together.', 'Personal', 'Print', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL),
 (9, 58, '2012-11-01', 'A story of community wellbeing and strength, and support from peers and organisations in the aftermath of the disastrous Christchurch earthquakes', 'CERA', 'Short Video', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, '54063097', '54063097'),
 (10, 19, '2012-03-15', 'A tribute poster to the movie Playtime by Jacques Tati', 'Personal', 'Print', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL),
-(11, 15, '2011-07-14', 'Matson’s believe tradition and progress go hand in hand. Their beer is brewed using traditional, tried and tested recipes together with state of the art production processes.', 'Matsons Brewery', 'Brand, Print', 'God''s own, for the godzone', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL),
+(11, 15, '2011-07-14', 'Matson’s believe tradition and progress go hand in hand. Their beer is brewed using traditional, tried and tested recipes together with state of the art production processes.', 'Matsons Brewery', 'Brand, Print', 'God\'s own, for the godzone', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL),
 (12, 20, '2013-07-18', 'Sinfully pure', 'Religion Tequila', 'Website, Photo Manipulation', 'We offer you tequila reborn...in the sinfully pure taste of Religion Tequila.', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, NULL, NULL),
 (14, 66, '2015-06-10', 'Building a great relationship with your child through the magic of play!', 'Autism NZ', 'Website', NULL, NULL, NULL, 'http://waytoplay.co.nz/', NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL),
 (15, 65, '2015-10-01', 'Maori Innovation Challenge', 'Borderless Productions', 'Website', NULL, NULL, NULL, 'http://digmyidea.nz/', NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL),
@@ -1149,8 +1031,8 @@ INSERT INTO `PortfolioPage` (`ID`, `ThumbnailImageID`, `PublishDate`, `ShortDesc
 -- Table structure for table `PortfolioPage_Live`
 --
 
-CREATE TABLE IF NOT EXISTS `PortfolioPage_Live` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `PortfolioPage_Live` (
+  `ID` int(11) NOT NULL,
   `ThumbnailImageID` int(11) NOT NULL DEFAULT '0',
   `PublishDate` date DEFAULT NULL,
   `ShortDescription` mediumtext,
@@ -1164,24 +1046,22 @@ CREATE TABLE IF NOT EXISTS `PortfolioPage_Live` (
   `CreditArtDirector` mediumtext,
   `CreditDesigner` mediumtext,
   `CreditPhotographer` mediumtext,
-  `Feature` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `Feature` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
   `VideoURL` mediumtext,
   `VimeoURL` mediumtext,
-  `VimeoID` mediumtext,
-  PRIMARY KEY (`ID`),
-  KEY `ThumbnailImageID` (`ThumbnailImageID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=33 ;
+  `VimeoID` mediumtext
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `PortfolioPage_Live`
 --
 
 INSERT INTO `PortfolioPage_Live` (`ID`, `ThumbnailImageID`, `PublishDate`, `ShortDescription`, `Client`, `Scope`, `Tagline`, `Credits`, `Link`, `WebLink`, `CreditCreativeDirector`, `CreditArtDirector`, `CreditDesigner`, `CreditPhotographer`, `Feature`, `VideoURL`, `VimeoURL`, `VimeoID`) VALUES
-(7, 13, '2012-09-20', 'It''s been predicted that newspapers and traditional news media will not survive the next 15 years', 'Personal', 'Print, Website', 'Exhibit Explore Expand', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL),
+(7, 13, '2012-09-20', 'It\'s been predicted that newspapers and traditional news media will not survive the next 15 years', 'Personal', 'Print, Website', 'Exhibit Explore Expand', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL),
 (8, 16, '2012-06-14', 'Take this burden from my shoulders that I may carry a child. He will see the distant horizons that we will achieve together.', 'Personal', 'Print', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL),
 (9, 58, '2012-11-01', 'A story of community wellbeing and strength, and support from peers and organisations in the aftermath of the disastrous Christchurch earthquakes', 'CERA', 'Short Video', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, '54063097', '54063097'),
 (10, 19, '2012-03-15', 'A tribute poster to the movie Playtime by Jacques Tati', 'Personal', 'Print', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL),
-(11, 15, '2011-07-14', 'Matson’s believe tradition and progress go hand in hand. Their beer is brewed using traditional, tried and tested recipes together with state of the art production processes.', 'Matsons Brewery', 'Brand, Print', 'God''s own, for the godzone', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL),
+(11, 15, '2011-07-14', 'Matson’s believe tradition and progress go hand in hand. Their beer is brewed using traditional, tried and tested recipes together with state of the art production processes.', 'Matsons Brewery', 'Brand, Print', 'God\'s own, for the godzone', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL),
 (14, 66, '2015-06-10', 'Building a great relationship with your child through the magic of play!', 'Autism NZ', 'Website', NULL, NULL, NULL, 'http://waytoplay.co.nz/', NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL),
 (15, 65, '2015-10-01', 'Maori Innovation Challenge', 'Borderless Productions', 'Website', NULL, NULL, NULL, 'http://digmyidea.nz/', NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL),
 (16, 61, '2015-10-15', NULL, 'Line 7', 'Website, Photo Retouching', NULL, '<ul class="lined"><li><strong>Agency:</strong> Gravitybureau</li>\n<li><strong>Creative Director:</strong> Ben Medina</li>\n</ul>', 'http://line7frontier.com/', 'http://line7frontier.com/', 'Ben Medina', NULL, NULL, NULL, 1, NULL, NULL, NULL),
@@ -1194,8 +1074,8 @@ INSERT INTO `PortfolioPage_Live` (`ID`, `ThumbnailImageID`, `PublishDate`, `Shor
 -- Table structure for table `PortfolioPage_versions`
 --
 
-CREATE TABLE IF NOT EXISTS `PortfolioPage_versions` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `PortfolioPage_versions` (
+  `ID` int(11) NOT NULL,
   `RecordID` int(11) NOT NULL DEFAULT '0',
   `Version` int(11) NOT NULL DEFAULT '0',
   `ThumbnailImageID` int(11) NOT NULL DEFAULT '0',
@@ -1211,16 +1091,11 @@ CREATE TABLE IF NOT EXISTS `PortfolioPage_versions` (
   `CreditArtDirector` mediumtext,
   `CreditDesigner` mediumtext,
   `CreditPhotographer` mediumtext,
-  `Feature` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `Feature` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
   `VideoURL` mediumtext,
   `VimeoURL` mediumtext,
-  `VimeoID` mediumtext,
-  PRIMARY KEY (`ID`),
-  UNIQUE KEY `RecordID_Version` (`RecordID`,`Version`),
-  KEY `RecordID` (`RecordID`),
-  KEY `Version` (`Version`),
-  KEY `ThumbnailImageID` (`ThumbnailImageID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=173 ;
+  `VimeoID` mediumtext
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `PortfolioPage_versions`
@@ -1278,8 +1153,8 @@ INSERT INTO `PortfolioPage_versions` (`ID`, `RecordID`, `Version`, `ThumbnailIma
 (105, 32, 5, 22, '2013-02-03', 'Providing open source solutions that work', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL),
 (106, 32, 6, 49, '2013-02-03', 'Providing open source solutions that work', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL),
 (107, 7, 11, 13, '2012-09-20', 'Contrary to popular belief, there is still a place in the world for news media - in both print and digital formats', 'Personal', 'Print, Website', 'Exhibit Explore Expand', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL),
-(108, 7, 12, 13, '2012-09-20', 'It''s been predicted that newspapers and traditional news media will not survive the next 15 years', 'Personal', 'Print, Website', 'Exhibit Explore Expand', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL),
-(109, 7, 13, 13, '2012-09-20', 'It''s been predicted that newspapers and traditional news media will not survive the next 15 years', 'Personal', 'Print, Website', 'Exhibit Explore Expand', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL),
+(108, 7, 12, 13, '2012-09-20', 'It\'s been predicted that newspapers and traditional news media will not survive the next 15 years', 'Personal', 'Print, Website', 'Exhibit Explore Expand', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL),
+(109, 7, 13, 13, '2012-09-20', 'It\'s been predicted that newspapers and traditional news media will not survive the next 15 years', 'Personal', 'Print, Website', 'Exhibit Explore Expand', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL),
 (110, 8, 22, 16, '2012-06-14', NULL, 'Personal', 'Print', 'Taku kupu ko koutou', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL),
 (111, 8, 23, 16, '2012-06-14', 'Take this burden from my shoulders that I may carry a child. He will see the distant horizons that we will achieve together.', 'Personal', 'Print', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL),
 (112, 8, 24, 16, '2012-06-14', 'Take this burden from my shoulders that I may carry a child. He will see the distant horizons that we will achieve together.', 'Personal', 'Print', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL),
@@ -1290,7 +1165,7 @@ INSERT INTO `PortfolioPage_versions` (`ID`, `RecordID`, `Version`, `ThumbnailIma
 (117, 32, 9, 49, '2013-02-03', 'Providing open source solutions that work', 'Treshna Enterprises', 'Website', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL),
 (118, 32, 10, 49, '2013-02-03', 'Providing open source solutions that work', 'Treshna Enterprises', 'Website', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL),
 (119, 10, 9, 19, '2012-03-15', 'A tribute poster to the movie Playtime by Jacques Tati', 'Personal', 'Print', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL),
-(120, 11, 9, 15, '2011-07-14', 'Matson’s believe tradition and progress go hand in hand. Their beer is brewed using traditional, tried and tested recipes together with state of the art production processes.', 'Matsons Brewery', 'Brand, Print', 'God''s own, for the godzone', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL),
+(120, 11, 9, 15, '2011-07-14', 'Matson’s believe tradition and progress go hand in hand. Their beer is brewed using traditional, tried and tested recipes together with state of the art production processes.', 'Matsons Brewery', 'Brand, Print', 'God\'s own, for the godzone', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL),
 (121, 13, 8, 41, '2013-05-10', NULL, 'Ascot Angiography', 'Brand', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL),
 (122, 13, 9, 41, '2013-05-10', NULL, 'Ascot Angiography', 'Brand', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL),
 (123, 13, 10, 41, '2013-05-10', NULL, 'Ascot Angiography', 'Brand', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL),
@@ -1350,14 +1225,12 @@ INSERT INTO `PortfolioPage_versions` (`ID`, `RecordID`, `Version`, `ThumbnailIma
 -- Table structure for table `RedirectorPage`
 --
 
-CREATE TABLE IF NOT EXISTS `RedirectorPage` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `RedirectorPage` (
+  `ID` int(11) NOT NULL,
   `RedirectionType` enum('Internal','External') DEFAULT 'Internal',
   `ExternalURL` varchar(2083) DEFAULT NULL,
-  `LinkToID` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`ID`),
-  KEY `LinkToID` (`LinkToID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `LinkToID` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -1365,14 +1238,12 @@ CREATE TABLE IF NOT EXISTS `RedirectorPage` (
 -- Table structure for table `RedirectorPage_Live`
 --
 
-CREATE TABLE IF NOT EXISTS `RedirectorPage_Live` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `RedirectorPage_Live` (
+  `ID` int(11) NOT NULL,
   `RedirectionType` enum('Internal','External') DEFAULT 'Internal',
   `ExternalURL` varchar(2083) DEFAULT NULL,
-  `LinkToID` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`ID`),
-  KEY `LinkToID` (`LinkToID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `LinkToID` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -1380,19 +1251,14 @@ CREATE TABLE IF NOT EXISTS `RedirectorPage_Live` (
 -- Table structure for table `RedirectorPage_versions`
 --
 
-CREATE TABLE IF NOT EXISTS `RedirectorPage_versions` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `RedirectorPage_versions` (
+  `ID` int(11) NOT NULL,
   `RecordID` int(11) NOT NULL DEFAULT '0',
   `Version` int(11) NOT NULL DEFAULT '0',
   `RedirectionType` enum('Internal','External') DEFAULT 'Internal',
   `ExternalURL` varchar(2083) DEFAULT NULL,
-  `LinkToID` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`ID`),
-  UNIQUE KEY `RecordID_Version` (`RecordID`,`Version`),
-  KEY `RecordID` (`RecordID`),
-  KEY `Version` (`Version`),
-  KEY `LinkToID` (`LinkToID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `LinkToID` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -1400,8 +1266,8 @@ CREATE TABLE IF NOT EXISTS `RedirectorPage_versions` (
 -- Table structure for table `SiteConfig`
 --
 
-CREATE TABLE IF NOT EXISTS `SiteConfig` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `SiteConfig` (
+  `ID` int(11) NOT NULL,
   `ClassName` enum('SiteConfig') DEFAULT 'SiteConfig',
   `LastEdited` datetime DEFAULT NULL,
   `Created` datetime DEFAULT NULL,
@@ -1422,12 +1288,8 @@ CREATE TABLE IF NOT EXISTS `SiteConfig` (
   `PhoneNumber` varchar(250) DEFAULT NULL,
   `Email` varchar(250) DEFAULT NULL,
   `LogoID` int(11) NOT NULL DEFAULT '0',
-  `LogoAltID` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`ID`),
-  KEY `ClassName` (`ClassName`),
-  KEY `LogoID` (`LogoID`),
-  KEY `LogoAltID` (`LogoAltID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+  `LogoAltID` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `SiteConfig`
@@ -1442,14 +1304,11 @@ INSERT INTO `SiteConfig` (`ID`, `ClassName`, `LastEdited`, `Created`, `Title`, `
 -- Table structure for table `SiteConfig_CreateTopLevelGroups`
 --
 
-CREATE TABLE IF NOT EXISTS `SiteConfig_CreateTopLevelGroups` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `SiteConfig_CreateTopLevelGroups` (
+  `ID` int(11) NOT NULL,
   `SiteConfigID` int(11) NOT NULL DEFAULT '0',
-  `GroupID` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`ID`),
-  KEY `SiteConfigID` (`SiteConfigID`),
-  KEY `GroupID` (`GroupID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `GroupID` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -1457,14 +1316,11 @@ CREATE TABLE IF NOT EXISTS `SiteConfig_CreateTopLevelGroups` (
 -- Table structure for table `SiteConfig_EditorGroups`
 --
 
-CREATE TABLE IF NOT EXISTS `SiteConfig_EditorGroups` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `SiteConfig_EditorGroups` (
+  `ID` int(11) NOT NULL,
   `SiteConfigID` int(11) NOT NULL DEFAULT '0',
-  `GroupID` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`ID`),
-  KEY `SiteConfigID` (`SiteConfigID`),
-  KEY `GroupID` (`GroupID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `GroupID` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -1472,14 +1328,11 @@ CREATE TABLE IF NOT EXISTS `SiteConfig_EditorGroups` (
 -- Table structure for table `SiteConfig_ViewerGroups`
 --
 
-CREATE TABLE IF NOT EXISTS `SiteConfig_ViewerGroups` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `SiteConfig_ViewerGroups` (
+  `ID` int(11) NOT NULL,
   `SiteConfigID` int(11) NOT NULL DEFAULT '0',
-  `GroupID` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`ID`),
-  KEY `SiteConfigID` (`SiteConfigID`),
-  KEY `GroupID` (`GroupID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `GroupID` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -1487,8 +1340,8 @@ CREATE TABLE IF NOT EXISTS `SiteConfig_ViewerGroups` (
 -- Table structure for table `SiteTree`
 --
 
-CREATE TABLE IF NOT EXISTS `SiteTree` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `SiteTree` (
+  `ID` int(11) NOT NULL,
   `ClassName` enum('SiteTree','Page','Blog','BlogPost','BlogEntry','ErrorPage','RedirectorPage','VirtualPage','HomePage','PortfolioHolder','PortfolioPage','BlogTree','BlogHolder') DEFAULT 'SiteTree',
   `LastEdited` datetime DEFAULT NULL,
   `Created` datetime DEFAULT NULL,
@@ -1498,34 +1351,30 @@ CREATE TABLE IF NOT EXISTS `SiteTree` (
   `Content` mediumtext,
   `MetaDescription` mediumtext,
   `ExtraMeta` mediumtext,
-  `ShowInMenus` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  `ShowInSearch` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `ShowInMenus` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
+  `ShowInSearch` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
   `Sort` int(11) NOT NULL DEFAULT '0',
-  `HasBrokenFile` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  `HasBrokenLink` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `HasBrokenFile` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
+  `HasBrokenLink` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
   `ReportClass` varchar(50) DEFAULT NULL,
   `CanViewType` enum('Anyone','LoggedInUsers','OnlyTheseUsers','Inherit') DEFAULT 'Inherit',
   `CanEditType` enum('LoggedInUsers','OnlyTheseUsers','Inherit') DEFAULT 'Inherit',
   `Version` int(11) NOT NULL DEFAULT '0',
-  `ParentID` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`ID`),
-  KEY `ParentID` (`ParentID`),
-  KEY `URLSegment` (`URLSegment`),
-  KEY `ClassName` (`ClassName`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=33 ;
+  `ParentID` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `SiteTree`
 --
 
 INSERT INTO `SiteTree` (`ID`, `ClassName`, `LastEdited`, `Created`, `URLSegment`, `Title`, `MenuTitle`, `Content`, `MetaDescription`, `ExtraMeta`, `ShowInMenus`, `ShowInSearch`, `Sort`, `HasBrokenFile`, `HasBrokenLink`, `ReportClass`, `CanViewType`, `CanEditType`, `Version`, `ParentID`) VALUES
-(1, 'HomePage', '2016-02-22 10:23:59', '2015-10-23 22:53:25', 'home', 'Home', NULL, '<p class="lead"><span>Hi! I''m Hamish. </span>Designer, developer, dreamer. </p>\n<p class="lead"><span>I have years of experience working in digital design, this is a selection of my recent projects. Take a look around and if you want to work together, please feel free to get in touch.</span></p>', NULL, NULL, 1, 1, 1, 0, 0, NULL, 'Inherit', 'Inherit', 12, 0),
-(4, 'ErrorPage', '2015-10-23 22:53:26', '2015-10-23 22:53:25', 'page-not-found', 'Page not found', NULL, '<p>Sorry, it seems you were trying to access a page that doesn''t exist.</p><p>Please check the spelling of the URL you were trying to access and try again.</p>', NULL, NULL, 0, 0, 6, 0, 0, NULL, 'Inherit', 'Inherit', 1, 0),
+(1, 'HomePage', '2016-02-22 10:23:59', '2015-10-23 22:53:25', 'home', 'Home', NULL, '<p class="lead"><span>Hi! I\'m Hamish. </span>Designer, developer, dreamer. </p>\n<p class="lead"><span>I have years of experience working in digital design, this is a selection of my recent projects. Take a look around and if you want to work together, please feel free to get in touch.</span></p>', NULL, NULL, 1, 1, 1, 0, 0, NULL, 'Inherit', 'Inherit', 12, 0),
+(4, 'ErrorPage', '2015-10-23 22:53:26', '2015-10-23 22:53:25', 'page-not-found', 'Page not found', NULL, '<p>Sorry, it seems you were trying to access a page that doesn\'t exist.</p><p>Please check the spelling of the URL you were trying to access and try again.</p>', NULL, NULL, 0, 0, 6, 0, 0, NULL, 'Inherit', 'Inherit', 1, 0),
 (5, 'ErrorPage', '2015-10-23 22:53:26', '2015-10-23 22:53:26', 'server-error', 'Server error', NULL, '<p>Sorry, there was a problem with handling your request.</p>', NULL, NULL, 0, 0, 7, 0, 0, NULL, 'Inherit', 'Inherit', 1, 0),
 (6, 'PortfolioHolder', '2015-10-24 05:10:35', '2015-10-24 05:03:46', 'work', 'Work', NULL, NULL, NULL, NULL, 1, 1, 2, 0, 0, NULL, 'Inherit', 'Inherit', 3, 0),
-(7, 'PortfolioPage', '2016-01-19 12:11:48', '2015-10-24 05:03:55', 'exhibit', 'Exhibit', NULL, '<p>The technological innovations of the past 10–20 years have made us change how we find information, how we interact, and what we expect of products and services. It''s been predicted that newspapers and traditional news media will not survive the next 15 years. I wanted to prove that there is still a place for news media in print and digital formats. </p>\n<p>In todays technology driven age, we all desire total control over all of our devices and media platforms. It''s no longer acceptable to sit back and simply accept what we''re given. The level of customisation available in every facet of our lives is growing by the day. </p>\n<p>This led me to think of a new approach to news media. Where instead of having the same information repeated across all platforms, instead the user has control over a print magazine, a website, and an app, choosing relevant topics for the platforms and being served content to fit the purpose. The web platform will have up to the minute news and events with some long form pieces for developing stories. The app allows for tiny bitesize pieces and breaking news updates. And finally, the print magazine is broken into topics which are more heavily interest focused. These can be opted in or out of, so you only get what you''re interested in. </p>', NULL, NULL, 1, 1, 1, 0, 0, NULL, 'Inherit', 'Inherit', 13, 6),
-(8, 'PortfolioPage', '2016-01-19 12:14:59', '2015-10-24 05:04:11', 'my-word-is-yours', 'My Word Is Yours', NULL, '<p class="lead">The project goal was to take a Maori writing, and working directly with the author create two typographic artworks which resonated with the story.</p>\n<p>The author wrote the following to describe the writing and help guide my design:</p>\n<p>"As adults, we live in a modern world of cumbersome obligations and responsibilities that simply have us exist in, rather than allow ourselves to experience our environment.  We lose sight of the fact that our first responsibility is the protection of this environment for future generations.  We allow ourselves to be weighted with our perception of success and failure that we forget the delight of discovery and from our environment.  </p>\n<p>"The simple, innocent view of the world that is experienced by the child - a world that has seen physical, cultural and spiritual elements eroded.  The traditional narratives I grew up with, became myths and legends to having no meaning or relevance in the context of the ''modern'' world ... But with my learning of te reo, I have gone back to my childhood and those narratives to discover that their context and relevance were of significance in the world that existed then.  And with this discovery I am able to experience again the environment that I am in, with my renewed perspective.  </p>', NULL, NULL, 1, 1, 2, 0, 0, NULL, 'Inherit', 'Inherit', 26, 6),
-(9, 'PortfolioPage', '2016-02-11 07:47:30', '2015-10-24 05:04:37', 'road-to-recovery', 'Road to Recovery', NULL, '<p class="lead">The aim of this project was to visually communicate the story of community wellbeing following the disastrous Christchurch earthquakes.</p>\n<p>Collaborating with a friend, we created a video for CERA, the Christchurch Earthquake Recovery Authority, to use in house and promotionally to spread the message of all that''s being done for affected communities. From disaster response to recovery and the general support of the Christchurch residents.</p>\n<p>  In displaying this key information we decided to use the more human, expressive approach of stop motion revolving around the story of a character and his experience’s post earthquake; deciding the animation would follow a story. Our choice of materials reflects the nature of the message we wanted to convey; a raw and genuine warmth to an otherwise cold and serious subject. We chose to use paper with its creases and imperfections to express the feeling of the story. Paper is very effective in portraying the story based feeling, giving it a depth and authenticity that would be lacking in a purely digital animation. Our chosen audio adds to this impression with the natural, human sounding acoustic music combined with the realistic sounds of life on top, it’s effective in supporting the visuals throughout the story.</p>', NULL, NULL, 1, 1, 3, 0, 0, NULL, 'Inherit', 'Inherit', 13, 6),
+(7, 'PortfolioPage', '2016-01-19 12:11:48', '2015-10-24 05:03:55', 'exhibit', 'Exhibit', NULL, '<p>The technological innovations of the past 10–20 years have made us change how we find information, how we interact, and what we expect of products and services. It\'s been predicted that newspapers and traditional news media will not survive the next 15 years. I wanted to prove that there is still a place for news media in print and digital formats. </p>\n<p>In todays technology driven age, we all desire total control over all of our devices and media platforms. It\'s no longer acceptable to sit back and simply accept what we\'re given. The level of customisation available in every facet of our lives is growing by the day. </p>\n<p>This led me to think of a new approach to news media. Where instead of having the same information repeated across all platforms, instead the user has control over a print magazine, a website, and an app, choosing relevant topics for the platforms and being served content to fit the purpose. The web platform will have up to the minute news and events with some long form pieces for developing stories. The app allows for tiny bitesize pieces and breaking news updates. And finally, the print magazine is broken into topics which are more heavily interest focused. These can be opted in or out of, so you only get what you\'re interested in. </p>', NULL, NULL, 1, 1, 1, 0, 0, NULL, 'Inherit', 'Inherit', 13, 6),
+(8, 'PortfolioPage', '2016-01-19 12:14:59', '2015-10-24 05:04:11', 'my-word-is-yours', 'My Word Is Yours', NULL, '<p class="lead">The project goal was to take a Maori writing, and working directly with the author create two typographic artworks which resonated with the story.</p>\n<p>The author wrote the following to describe the writing and help guide my design:</p>\n<p>"As adults, we live in a modern world of cumbersome obligations and responsibilities that simply have us exist in, rather than allow ourselves to experience our environment.  We lose sight of the fact that our first responsibility is the protection of this environment for future generations.  We allow ourselves to be weighted with our perception of success and failure that we forget the delight of discovery and from our environment.  </p>\n<p>"The simple, innocent view of the world that is experienced by the child - a world that has seen physical, cultural and spiritual elements eroded.  The traditional narratives I grew up with, became myths and legends to having no meaning or relevance in the context of the \'modern\' world ... But with my learning of te reo, I have gone back to my childhood and those narratives to discover that their context and relevance were of significance in the world that existed then.  And with this discovery I am able to experience again the environment that I am in, with my renewed perspective.  </p>', NULL, NULL, 1, 1, 2, 0, 0, NULL, 'Inherit', 'Inherit', 26, 6),
+(9, 'PortfolioPage', '2016-02-11 07:47:30', '2015-10-24 05:04:37', 'road-to-recovery', 'Road to Recovery', NULL, '<p class="lead">The aim of this project was to visually communicate the story of community wellbeing following the disastrous Christchurch earthquakes.</p>\n<p>Collaborating with a friend, we created a video for CERA, the Christchurch Earthquake Recovery Authority, to use in house and promotionally to spread the message of all that\'s being done for affected communities. From disaster response to recovery and the general support of the Christchurch residents.</p>\n<p>  In displaying this key information we decided to use the more human, expressive approach of stop motion revolving around the story of a character and his experience’s post earthquake; deciding the animation would follow a story. Our choice of materials reflects the nature of the message we wanted to convey; a raw and genuine warmth to an otherwise cold and serious subject. We chose to use paper with its creases and imperfections to express the feeling of the story. Paper is very effective in portraying the story based feeling, giving it a depth and authenticity that would be lacking in a purely digital animation. Our chosen audio adds to this impression with the natural, human sounding acoustic music combined with the realistic sounds of life on top, it’s effective in supporting the visuals throughout the story.</p>', NULL, NULL, 1, 1, 3, 0, 0, NULL, 'Inherit', 'Inherit', 13, 6),
 (10, 'PortfolioPage', '2016-01-20 10:12:54', '2015-10-24 05:05:42', 'playtime', 'Playtime', NULL, '<p class="lead">In a collaboration project, we were asked to create a poster for a special screening event in tribute to Playtime by Jacques Tati.</p>\n<p>We used a style that was playful and exciting, showing the feeling of being lost and made to feel small and insignificant in a big city. The graphical elements reflect plot points from the film, things like the icon, the landmarks of France and the hero with his pipe. </p>', NULL, NULL, 1, 1, 4, 0, 0, NULL, 'Inherit', 'Inherit', 9, 6),
 (11, 'PortfolioPage', '2016-01-20 10:48:13', '2015-10-24 05:05:58', 'matsons', 'Matsons', NULL, '<div class="page" title="Page 1">\n<div class="layoutArea">\n<div class="column">\n<p><span>This logo was designed in keeping with the core values of the company, which is to produce and provide high quality, fresh, New Zealand made beverages. I’ve used water symbolically throughout the rebrand as a symbol of freshness and purity. </span></p>\n<p><span>The graphical logo design reminiscent of a waterfall or </span><span>fountain, reinforcing Matson’s dedication to pure and fresh ingredients, </span><span>and the natural artesian water they use. </span></p>\n<p><span>The typography has been manipulated to reflect the </span><span>look and feel of water.</span><span> I used Grendel font as it’s dynamic and modern, while carrying confidence and a sense of heritage.</span></p>\n</div>\n</div>\n</div>', NULL, NULL, 1, 1, 5, 0, 0, NULL, 'Inherit', 'Inherit', 9, 6),
 (12, 'PortfolioPage', '2016-02-11 07:40:31', '2015-10-24 05:06:12', 'religion-tequila', 'Religion Tequila', NULL, '<p>Our plan was monastically simple: use only the finest organic ingredients in a patient, natural process, allowing the true flavor of the blue agave to travel from the Amatitán valley all the way to our bottle, on the shelf before your eyes or the hands of a skilled mixologist, and into the glass wrapped in your fingers.</p>', NULL, NULL, 1, 1, 6, 0, 0, NULL, 'Inherit', 'Inherit', 7, 6),
@@ -1538,7 +1387,7 @@ INSERT INTO `SiteTree` (`ID`, `ClassName`, `LastEdited`, `Created`, `URLSegment`
 (21, 'PortfolioPage', '2016-02-11 06:52:52', '2015-10-24 05:08:52', 'borderless-productions', 'Borderless Productions', NULL, NULL, NULL, NULL, 1, 1, 18, 0, 0, NULL, 'Inherit', 'Inherit', 2, 6),
 (22, 'PortfolioPage', '2016-02-11 06:52:52', '2015-10-24 05:09:07', 'ecast', 'Ecast', NULL, NULL, NULL, NULL, 1, 1, 19, 0, 0, NULL, 'Inherit', 'Inherit', 2, 6),
 (23, 'Blog', '2015-10-24 05:11:16', '2015-10-24 05:10:42', 'thoughts', 'Thoughts', NULL, NULL, NULL, NULL, 1, 1, 3, 0, 0, NULL, 'Inherit', 'Inherit', 3, 0),
-(29, 'PortfolioPage', '2016-02-11 07:56:11', '2015-10-24 05:03:55', 'lifes-a-gamble', 'Life''s a Gamble', NULL, '<p class="lead">Life is a gamble, so roll the dice.</p>\n<p>This poster design was a personal project to practice photo manipulation and technical editing in Photoshop. </p>', NULL, NULL, 1, 1, 10, 0, 0, NULL, 'Inherit', 'Inherit', 11, 6),
+(29, 'PortfolioPage', '2016-02-11 07:56:11', '2015-10-24 05:03:55', 'lifes-a-gamble', 'Life\'s a Gamble', NULL, '<p class="lead">Life is a gamble, so roll the dice.</p>\n<p>This poster design was a personal project to practice photo manipulation and technical editing in Photoshop. </p>', NULL, NULL, 1, 1, 10, 0, 0, NULL, 'Inherit', 'Inherit', 11, 6),
 (30, 'PortfolioPage', '2016-02-11 07:56:34', '2016-01-18 12:52:50', 'reflections', 'Reflections', NULL, NULL, NULL, NULL, 1, 1, 12, 0, 0, NULL, 'Inherit', 'Inherit', 5, 6),
 (31, 'PortfolioPage', '2016-02-11 07:57:04', '2016-01-18 12:55:44', 'plains-fm', 'Plains FM', NULL, NULL, NULL, NULL, 1, 1, 11, 0, 0, NULL, 'Inherit', 'Inherit', 5, 6),
 (32, 'PortfolioPage', '2016-01-26 08:04:15', '2016-01-18 13:07:39', 'treshna', 'Treshna', NULL, '<p class="lead">Treshna Enterprises required a redesign of their website to portray them as a modern, innovative and exciting local company.</p>\n<p>It was important the website communicate clearly the business services and goals so that a visitor knows exactly what Treshna does the moment they arrive. A short company story was also placed front and centre. By understanding the target audience we knew the importance of a local team with history and commitment to quality. </p>\n<p>The design was successful through its use of bold typography, vivid imagery, and designing with a clear purpose and audience in mind.</p>', NULL, NULL, 1, 1, 13, 0, 0, NULL, 'Inherit', 'Inherit', 12, 6);
@@ -1549,14 +1398,11 @@ INSERT INTO `SiteTree` (`ID`, `ClassName`, `LastEdited`, `Created`, `URLSegment`
 -- Table structure for table `SiteTree_EditorGroups`
 --
 
-CREATE TABLE IF NOT EXISTS `SiteTree_EditorGroups` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `SiteTree_EditorGroups` (
+  `ID` int(11) NOT NULL,
   `SiteTreeID` int(11) NOT NULL DEFAULT '0',
-  `GroupID` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`ID`),
-  KEY `SiteTreeID` (`SiteTreeID`),
-  KEY `GroupID` (`GroupID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `GroupID` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -1564,15 +1410,12 @@ CREATE TABLE IF NOT EXISTS `SiteTree_EditorGroups` (
 -- Table structure for table `SiteTree_ImageTracking`
 --
 
-CREATE TABLE IF NOT EXISTS `SiteTree_ImageTracking` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `SiteTree_ImageTracking` (
+  `ID` int(11) NOT NULL,
   `SiteTreeID` int(11) NOT NULL DEFAULT '0',
   `FileID` int(11) NOT NULL DEFAULT '0',
-  `FieldName` varchar(50) DEFAULT NULL,
-  PRIMARY KEY (`ID`),
-  KEY `SiteTreeID` (`SiteTreeID`),
-  KEY `FileID` (`FileID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `FieldName` varchar(50) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -1580,15 +1423,12 @@ CREATE TABLE IF NOT EXISTS `SiteTree_ImageTracking` (
 -- Table structure for table `SiteTree_LinkTracking`
 --
 
-CREATE TABLE IF NOT EXISTS `SiteTree_LinkTracking` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `SiteTree_LinkTracking` (
+  `ID` int(11) NOT NULL,
   `SiteTreeID` int(11) NOT NULL DEFAULT '0',
   `ChildID` int(11) NOT NULL DEFAULT '0',
-  `FieldName` varchar(50) DEFAULT NULL,
-  PRIMARY KEY (`ID`),
-  KEY `SiteTreeID` (`SiteTreeID`),
-  KEY `ChildID` (`ChildID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `FieldName` varchar(50) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -1596,8 +1436,8 @@ CREATE TABLE IF NOT EXISTS `SiteTree_LinkTracking` (
 -- Table structure for table `SiteTree_Live`
 --
 
-CREATE TABLE IF NOT EXISTS `SiteTree_Live` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `SiteTree_Live` (
+  `ID` int(11) NOT NULL,
   `ClassName` enum('SiteTree','Page','Blog','BlogPost','BlogEntry','ErrorPage','RedirectorPage','VirtualPage','HomePage','PortfolioHolder','PortfolioPage','BlogTree','BlogHolder') DEFAULT 'SiteTree',
   `LastEdited` datetime DEFAULT NULL,
   `Created` datetime DEFAULT NULL,
@@ -1607,41 +1447,37 @@ CREATE TABLE IF NOT EXISTS `SiteTree_Live` (
   `Content` mediumtext,
   `MetaDescription` mediumtext,
   `ExtraMeta` mediumtext,
-  `ShowInMenus` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  `ShowInSearch` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `ShowInMenus` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
+  `ShowInSearch` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
   `Sort` int(11) NOT NULL DEFAULT '0',
-  `HasBrokenFile` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  `HasBrokenLink` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `HasBrokenFile` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
+  `HasBrokenLink` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
   `ReportClass` varchar(50) DEFAULT NULL,
   `CanViewType` enum('Anyone','LoggedInUsers','OnlyTheseUsers','Inherit') DEFAULT 'Inherit',
   `CanEditType` enum('LoggedInUsers','OnlyTheseUsers','Inherit') DEFAULT 'Inherit',
   `Version` int(11) NOT NULL DEFAULT '0',
-  `ParentID` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`ID`),
-  KEY `ParentID` (`ParentID`),
-  KEY `URLSegment` (`URLSegment`),
-  KEY `ClassName` (`ClassName`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=33 ;
+  `ParentID` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `SiteTree_Live`
 --
 
 INSERT INTO `SiteTree_Live` (`ID`, `ClassName`, `LastEdited`, `Created`, `URLSegment`, `Title`, `MenuTitle`, `Content`, `MetaDescription`, `ExtraMeta`, `ShowInMenus`, `ShowInSearch`, `Sort`, `HasBrokenFile`, `HasBrokenLink`, `ReportClass`, `CanViewType`, `CanEditType`, `Version`, `ParentID`) VALUES
-(1, 'HomePage', '2016-02-22 10:23:59', '2015-10-23 22:53:25', 'home', 'Home', NULL, '<p class="lead"><span>Hi! I''m Hamish. </span>Designer, developer, dreamer. </p>\n<p class="lead"><span>I have years of experience working in digital design, this is a selection of my recent projects. Take a look around and if you want to work together, please feel free to get in touch.</span></p>', NULL, NULL, 1, 1, 1, 0, 0, NULL, 'Inherit', 'Inherit', 12, 0),
-(4, 'ErrorPage', '2015-10-23 22:53:35', '2015-10-23 22:53:25', 'page-not-found', 'Page not found', NULL, '<p>Sorry, it seems you were trying to access a page that doesn''t exist.</p><p>Please check the spelling of the URL you were trying to access and try again.</p>', NULL, NULL, 0, 0, 6, 0, 0, NULL, 'Inherit', 'Inherit', 1, 0),
+(1, 'HomePage', '2016-02-22 10:23:59', '2015-10-23 22:53:25', 'home', 'Home', NULL, '<p class="lead"><span>Hi! I\'m Hamish. </span>Designer, developer, dreamer. </p>\n<p class="lead"><span>I have years of experience working in digital design, this is a selection of my recent projects. Take a look around and if you want to work together, please feel free to get in touch.</span></p>', NULL, NULL, 1, 1, 1, 0, 0, NULL, 'Inherit', 'Inherit', 12, 0),
+(4, 'ErrorPage', '2015-10-23 22:53:35', '2015-10-23 22:53:25', 'page-not-found', 'Page not found', NULL, '<p>Sorry, it seems you were trying to access a page that doesn\'t exist.</p><p>Please check the spelling of the URL you were trying to access and try again.</p>', NULL, NULL, 0, 0, 6, 0, 0, NULL, 'Inherit', 'Inherit', 1, 0),
 (5, 'ErrorPage', '2015-10-23 22:53:26', '2015-10-23 22:53:26', 'server-error', 'Server error', NULL, '<p>Sorry, there was a problem with handling your request.</p>', NULL, NULL, 0, 0, 7, 0, 0, NULL, 'Inherit', 'Inherit', 1, 0),
 (6, 'PortfolioHolder', '2015-10-24 05:10:35', '2015-10-24 05:03:46', 'work', 'Work', NULL, NULL, NULL, NULL, 1, 1, 2, 0, 0, NULL, 'Inherit', 'Inherit', 3, 0),
-(7, 'PortfolioPage', '2016-01-19 12:11:48', '2015-10-24 05:03:55', 'exhibit', 'Exhibit', NULL, '<p>The technological innovations of the past 10–20 years have made us change how we find information, how we interact, and what we expect of products and services. It''s been predicted that newspapers and traditional news media will not survive the next 15 years. I wanted to prove that there is still a place for news media in print and digital formats. </p>\n<p>In todays technology driven age, we all desire total control over all of our devices and media platforms. It''s no longer acceptable to sit back and simply accept what we''re given. The level of customisation available in every facet of our lives is growing by the day. </p>\n<p>This led me to think of a new approach to news media. Where instead of having the same information repeated across all platforms, instead the user has control over a print magazine, a website, and an app, choosing relevant topics for the platforms and being served content to fit the purpose. The web platform will have up to the minute news and events with some long form pieces for developing stories. The app allows for tiny bitesize pieces and breaking news updates. And finally, the print magazine is broken into topics which are more heavily interest focused. These can be opted in or out of, so you only get what you''re interested in. </p>', NULL, NULL, 1, 1, 1, 0, 0, NULL, 'Inherit', 'Inherit', 13, 6),
-(8, 'PortfolioPage', '2016-01-19 12:15:00', '2015-10-24 05:04:11', 'my-word-is-yours', 'My Word Is Yours', NULL, '<p class="lead">The project goal was to take a Maori writing, and working directly with the author create two typographic artworks which resonated with the story.</p>\n<p>The author wrote the following to describe the writing and help guide my design:</p>\n<p>"As adults, we live in a modern world of cumbersome obligations and responsibilities that simply have us exist in, rather than allow ourselves to experience our environment.  We lose sight of the fact that our first responsibility is the protection of this environment for future generations.  We allow ourselves to be weighted with our perception of success and failure that we forget the delight of discovery and from our environment.  </p>\n<p>"The simple, innocent view of the world that is experienced by the child - a world that has seen physical, cultural and spiritual elements eroded.  The traditional narratives I grew up with, became myths and legends to having no meaning or relevance in the context of the ''modern'' world ... But with my learning of te reo, I have gone back to my childhood and those narratives to discover that their context and relevance were of significance in the world that existed then.  And with this discovery I am able to experience again the environment that I am in, with my renewed perspective.  </p>', NULL, NULL, 1, 1, 2, 0, 0, NULL, 'Inherit', 'Inherit', 26, 6),
-(9, 'PortfolioPage', '2016-02-11 07:47:31', '2015-10-24 05:04:37', 'road-to-recovery', 'Road to Recovery', NULL, '<p class="lead">The aim of this project was to visually communicate the story of community wellbeing following the disastrous Christchurch earthquakes.</p>\n<p>Collaborating with a friend, we created a video for CERA, the Christchurch Earthquake Recovery Authority, to use in house and promotionally to spread the message of all that''s being done for affected communities. From disaster response to recovery and the general support of the Christchurch residents.</p>\n<p>  In displaying this key information we decided to use the more human, expressive approach of stop motion revolving around the story of a character and his experience’s post earthquake; deciding the animation would follow a story. Our choice of materials reflects the nature of the message we wanted to convey; a raw and genuine warmth to an otherwise cold and serious subject. We chose to use paper with its creases and imperfections to express the feeling of the story. Paper is very effective in portraying the story based feeling, giving it a depth and authenticity that would be lacking in a purely digital animation. Our chosen audio adds to this impression with the natural, human sounding acoustic music combined with the realistic sounds of life on top, it’s effective in supporting the visuals throughout the story.</p>', NULL, NULL, 1, 1, 3, 0, 0, NULL, 'Inherit', 'Inherit', 13, 6),
+(7, 'PortfolioPage', '2016-01-19 12:11:48', '2015-10-24 05:03:55', 'exhibit', 'Exhibit', NULL, '<p>The technological innovations of the past 10–20 years have made us change how we find information, how we interact, and what we expect of products and services. It\'s been predicted that newspapers and traditional news media will not survive the next 15 years. I wanted to prove that there is still a place for news media in print and digital formats. </p>\n<p>In todays technology driven age, we all desire total control over all of our devices and media platforms. It\'s no longer acceptable to sit back and simply accept what we\'re given. The level of customisation available in every facet of our lives is growing by the day. </p>\n<p>This led me to think of a new approach to news media. Where instead of having the same information repeated across all platforms, instead the user has control over a print magazine, a website, and an app, choosing relevant topics for the platforms and being served content to fit the purpose. The web platform will have up to the minute news and events with some long form pieces for developing stories. The app allows for tiny bitesize pieces and breaking news updates. And finally, the print magazine is broken into topics which are more heavily interest focused. These can be opted in or out of, so you only get what you\'re interested in. </p>', NULL, NULL, 1, 1, 1, 0, 0, NULL, 'Inherit', 'Inherit', 13, 6),
+(8, 'PortfolioPage', '2016-01-19 12:15:00', '2015-10-24 05:04:11', 'my-word-is-yours', 'My Word Is Yours', NULL, '<p class="lead">The project goal was to take a Maori writing, and working directly with the author create two typographic artworks which resonated with the story.</p>\n<p>The author wrote the following to describe the writing and help guide my design:</p>\n<p>"As adults, we live in a modern world of cumbersome obligations and responsibilities that simply have us exist in, rather than allow ourselves to experience our environment.  We lose sight of the fact that our first responsibility is the protection of this environment for future generations.  We allow ourselves to be weighted with our perception of success and failure that we forget the delight of discovery and from our environment.  </p>\n<p>"The simple, innocent view of the world that is experienced by the child - a world that has seen physical, cultural and spiritual elements eroded.  The traditional narratives I grew up with, became myths and legends to having no meaning or relevance in the context of the \'modern\' world ... But with my learning of te reo, I have gone back to my childhood and those narratives to discover that their context and relevance were of significance in the world that existed then.  And with this discovery I am able to experience again the environment that I am in, with my renewed perspective.  </p>', NULL, NULL, 1, 1, 2, 0, 0, NULL, 'Inherit', 'Inherit', 26, 6),
+(9, 'PortfolioPage', '2016-02-11 07:47:31', '2015-10-24 05:04:37', 'road-to-recovery', 'Road to Recovery', NULL, '<p class="lead">The aim of this project was to visually communicate the story of community wellbeing following the disastrous Christchurch earthquakes.</p>\n<p>Collaborating with a friend, we created a video for CERA, the Christchurch Earthquake Recovery Authority, to use in house and promotionally to spread the message of all that\'s being done for affected communities. From disaster response to recovery and the general support of the Christchurch residents.</p>\n<p>  In displaying this key information we decided to use the more human, expressive approach of stop motion revolving around the story of a character and his experience’s post earthquake; deciding the animation would follow a story. Our choice of materials reflects the nature of the message we wanted to convey; a raw and genuine warmth to an otherwise cold and serious subject. We chose to use paper with its creases and imperfections to express the feeling of the story. Paper is very effective in portraying the story based feeling, giving it a depth and authenticity that would be lacking in a purely digital animation. Our chosen audio adds to this impression with the natural, human sounding acoustic music combined with the realistic sounds of life on top, it’s effective in supporting the visuals throughout the story.</p>', NULL, NULL, 1, 1, 3, 0, 0, NULL, 'Inherit', 'Inherit', 13, 6),
 (10, 'PortfolioPage', '2016-01-20 10:12:54', '2015-10-24 05:05:42', 'playtime', 'Playtime', NULL, '<p class="lead">In a collaboration project, we were asked to create a poster for a special screening event in tribute to Playtime by Jacques Tati.</p>\n<p>We used a style that was playful and exciting, showing the feeling of being lost and made to feel small and insignificant in a big city. The graphical elements reflect plot points from the film, things like the icon, the landmarks of France and the hero with his pipe. </p>', NULL, NULL, 1, 1, 4, 0, 0, NULL, 'Inherit', 'Inherit', 9, 6),
 (11, 'PortfolioPage', '2016-01-20 10:48:13', '2015-10-24 05:05:58', 'matsons', 'Matsons', NULL, '<div class="page" title="Page 1">\n<div class="layoutArea">\n<div class="column">\n<p><span>This logo was designed in keeping with the core values of the company, which is to produce and provide high quality, fresh, New Zealand made beverages. I’ve used water symbolically throughout the rebrand as a symbol of freshness and purity. </span></p>\n<p><span>The graphical logo design reminiscent of a waterfall or </span><span>fountain, reinforcing Matson’s dedication to pure and fresh ingredients, </span><span>and the natural artesian water they use. </span></p>\n<p><span>The typography has been manipulated to reflect the </span><span>look and feel of water.</span><span> I used Grendel font as it’s dynamic and modern, while carrying confidence and a sense of heritage.</span></p>\n</div>\n</div>\n</div>', NULL, NULL, 1, 1, 5, 0, 0, NULL, 'Inherit', 'Inherit', 9, 6),
 (14, 'PortfolioPage', '2016-02-22 10:26:59', '2015-10-24 05:06:34', 'way-to-play', 'Way to Play', NULL, '<p class="lead">Way to Play is a one-day introduction to playing with children on the Autism Spectrum.</p>\n<p>Playing with a child with autism can be challenging, so the Way to Play workshop offers simple, easy to use strategies to begin playing joyously together. </p>\n<p>The Way to Play website was created to be a supplementary tool for parents and caregivers after completing the one-day workshop. Parents and caregivers are able to engage with a community of like-minded people to share experiences, and get support and advice from peers. </p>\n<p>As part of the website, users are also able to contact the coaches directly with questions, and upload videos showing their efforts for more targeted help with their problems. This tool is invaluable for parents who have so often felt like they are on their own, and on a bad day have no one to turn to for support. </p>', NULL, NULL, 1, 1, 8, 0, 0, NULL, 'Inherit', 'Inherit', 8, 6),
 (15, 'PortfolioPage', '2016-02-22 10:23:45', '2015-10-24 05:06:59', 'dig-my-idea', 'Dig My Idea', NULL, '<p>DIGMYIDEA is the Māori Innovation Challenge, and presented people with a chance to submit a digital business idea that has the potential to go global.</p>\n<p>Our brief was to create a website that communicates extreme digital innovation, and combining this with Maori iconography.</p>\n<p>With the branding and image treatments already defined, I expanded on those ideas by creating repeating graphics of kowhaiwhai, and opting for a gradual colour change as the user scrolls. With these simple effects I was able to make the site feel quite cutting edge and fresh, but still hold onto some Maori influence through subtle patterns.</p>', NULL, NULL, 1, 1, 9, 0, 0, NULL, 'Inherit', 'Inherit', 11, 6),
 (16, 'PortfolioPage', '2016-02-11 07:36:32', '2015-10-24 05:07:10', 'line-7-frontier', 'Line 7 Frontier', NULL, '<p class="lead">To launch Line 7 Frontier into the United States, we created a highly-responsive web experience integrating bold campaign commercial content.</p>\n<p>Visitors are encouraged to explore the product range, and discover what it means to go “Into the Wonder”. Products feature rich lifestyle imagery, and 360° rotating  shots to show the products from all angles. </p>\n<p> Line 7 Frontier now has all the tools to become globally-recognised for engineered and intrepid adventure design.</p>', NULL, NULL, 1, 1, 14, 0, 0, NULL, 'Inherit', 'Inherit', 21, 6),
 (23, 'Blog', '2015-10-24 05:11:16', '2015-10-24 05:10:42', 'thoughts', 'Thoughts', NULL, NULL, NULL, NULL, 1, 1, 3, 0, 0, NULL, 'Inherit', 'Inherit', 3, 0),
-(29, 'PortfolioPage', '2016-02-11 07:56:11', '2015-10-24 05:03:55', 'lifes-a-gamble', 'Life''s a Gamble', NULL, '<p class="lead">Life is a gamble, so roll the dice.</p>\n<p>This poster design was a personal project to practice photo manipulation and technical editing in Photoshop. </p>', NULL, NULL, 1, 1, 10, 0, 0, NULL, 'Inherit', 'Inherit', 11, 6),
+(29, 'PortfolioPage', '2016-02-11 07:56:11', '2015-10-24 05:03:55', 'lifes-a-gamble', 'Life\'s a Gamble', NULL, '<p class="lead">Life is a gamble, so roll the dice.</p>\n<p>This poster design was a personal project to practice photo manipulation and technical editing in Photoshop. </p>', NULL, NULL, 1, 1, 10, 0, 0, NULL, 'Inherit', 'Inherit', 11, 6),
 (32, 'PortfolioPage', '2016-01-26 08:04:15', '2016-01-18 13:07:39', 'treshna', 'Treshna', NULL, '<p class="lead">Treshna Enterprises required a redesign of their website to portray them as a modern, innovative and exciting local company.</p>\n<p>It was important the website communicate clearly the business services and goals so that a visitor knows exactly what Treshna does the moment they arrive. A short company story was also placed front and centre. By understanding the target audience we knew the importance of a local team with history and commitment to quality. </p>\n<p>The design was successful through its use of bold typography, vivid imagery, and designing with a clear purpose and audience in mind.</p>', NULL, NULL, 1, 1, 13, 0, 0, NULL, 'Inherit', 'Inherit', 12, 6);
 
 -- --------------------------------------------------------
@@ -1650,11 +1486,11 @@ INSERT INTO `SiteTree_Live` (`ID`, `ClassName`, `LastEdited`, `Created`, `URLSeg
 -- Table structure for table `SiteTree_versions`
 --
 
-CREATE TABLE IF NOT EXISTS `SiteTree_versions` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `SiteTree_versions` (
+  `ID` int(11) NOT NULL,
   `RecordID` int(11) NOT NULL DEFAULT '0',
   `Version` int(11) NOT NULL DEFAULT '0',
-  `WasPublished` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `WasPublished` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
   `AuthorID` int(11) NOT NULL DEFAULT '0',
   `PublisherID` int(11) NOT NULL DEFAULT '0',
   `ClassName` enum('SiteTree','Page','Blog','BlogPost','BlogEntry','ErrorPage','RedirectorPage','VirtualPage','HomePage','PortfolioHolder','PortfolioPage','BlogTree','BlogHolder') DEFAULT 'SiteTree',
@@ -1666,25 +1502,16 @@ CREATE TABLE IF NOT EXISTS `SiteTree_versions` (
   `Content` mediumtext,
   `MetaDescription` mediumtext,
   `ExtraMeta` mediumtext,
-  `ShowInMenus` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  `ShowInSearch` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `ShowInMenus` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
+  `ShowInSearch` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
   `Sort` int(11) NOT NULL DEFAULT '0',
-  `HasBrokenFile` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  `HasBrokenLink` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `HasBrokenFile` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
+  `HasBrokenLink` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
   `ReportClass` varchar(50) DEFAULT NULL,
   `CanViewType` enum('Anyone','LoggedInUsers','OnlyTheseUsers','Inherit') DEFAULT 'Inherit',
   `CanEditType` enum('LoggedInUsers','OnlyTheseUsers','Inherit') DEFAULT 'Inherit',
-  `ParentID` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`ID`),
-  KEY `RecordID_Version` (`RecordID`,`Version`),
-  KEY `RecordID` (`RecordID`),
-  KEY `Version` (`Version`),
-  KEY `AuthorID` (`AuthorID`),
-  KEY `PublisherID` (`PublisherID`),
-  KEY `ParentID` (`ParentID`),
-  KEY `URLSegment` (`URLSegment`),
-  KEY `ClassName` (`ClassName`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=212 ;
+  `ParentID` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `SiteTree_versions`
@@ -1694,7 +1521,7 @@ INSERT INTO `SiteTree_versions` (`ID`, `RecordID`, `Version`, `WasPublished`, `A
 (1, 1, 1, 1, 0, 0, 'Page', '2015-10-23 22:53:25', '2015-10-23 22:53:25', 'home', 'Home', NULL, '<p>Welcome to SilverStripe! This is the default homepage. You can edit this page by opening <a href="admin/">the CMS</a>.</p><p>You can now access the <a href="http://docs.silverstripe.org">developer documentation</a>, or begin the <a href="http://www.silverstripe.org/learn/lessons">SilverStripe lessons</a>.</p>', NULL, NULL, 1, 1, 1, 0, 0, NULL, 'Inherit', 'Inherit', 0),
 (2, 2, 1, 1, 0, 0, 'Page', '2015-10-23 22:53:25', '2015-10-23 22:53:25', 'about-us', 'About Us', NULL, '<p>You can fill this page out with your own content, or delete it and create your own pages.<br></p>', NULL, NULL, 1, 1, 2, 0, 0, NULL, 'Inherit', 'Inherit', 0),
 (3, 3, 1, 1, 0, 0, 'Page', '2015-10-23 22:53:25', '2015-10-23 22:53:25', 'contact-us', 'Contact Us', NULL, '<p>You can fill this page out with your own content, or delete it and create your own pages.<br></p>', NULL, NULL, 1, 1, 3, 0, 0, NULL, 'Inherit', 'Inherit', 0),
-(4, 4, 1, 1, 0, 0, 'ErrorPage', '2015-10-23 22:53:25', '2015-10-23 22:53:25', 'page-not-found', 'Page not found', NULL, '<p>Sorry, it seems you were trying to access a page that doesn''t exist.</p><p>Please check the spelling of the URL you were trying to access and try again.</p>', NULL, NULL, 0, 0, 4, 0, 0, NULL, 'Inherit', 'Inherit', 0),
+(4, 4, 1, 1, 0, 0, 'ErrorPage', '2015-10-23 22:53:25', '2015-10-23 22:53:25', 'page-not-found', 'Page not found', NULL, '<p>Sorry, it seems you were trying to access a page that doesn\'t exist.</p><p>Please check the spelling of the URL you were trying to access and try again.</p>', NULL, NULL, 0, 0, 4, 0, 0, NULL, 'Inherit', 'Inherit', 0),
 (5, 5, 1, 1, 0, 0, 'ErrorPage', '2015-10-23 22:53:26', '2015-10-23 22:53:26', 'server-error', 'Server error', NULL, '<p>Sorry, there was a problem with handling your request.</p>', NULL, NULL, 0, 0, 5, 0, 0, NULL, 'Inherit', 'Inherit', 0),
 (6, 1, 2, 1, 1, 1, 'HomePage', '2015-10-24 03:37:40', '2015-10-23 22:53:25', 'home', 'Home', NULL, '<p>Welcome to SilverStripe! This is the default homepage. You can edit this page by opening <a href="admin/">the CMS</a>.</p><p>You can now access the <a href="http://docs.silverstripe.org">developer documentation</a>, or begin the <a href="http://www.silverstripe.org/learn/lessons">SilverStripe lessons</a>.</p>', NULL, NULL, 1, 1, 1, 0, 0, NULL, 'Inherit', 'Inherit', 0),
 (7, 1, 3, 1, 1, 1, 'HomePage', '2015-10-24 03:46:16', '2015-10-23 22:53:25', 'home', 'Home', NULL, '<p class="lead">Material Good is an inviting space housing the rarest objects and desires of a life well-lived. Here, the most exclusive of timepieces, jewelry, art, and accessories can be contemplated, studied, and acquired in the warmth and comfort of an expressive new loft, where customers are welcomed guests, and design is not an exhibition — it’s an experience.</p>', NULL, NULL, 1, 1, 1, 0, 0, NULL, 'Inherit', 'Inherit', 0),
@@ -1747,7 +1574,7 @@ INSERT INTO `SiteTree_versions` (`ID`, `RecordID`, `Version`, `WasPublished`, `A
 (54, 28, 2, 0, 1, 0, 'BlogPost', '2016-01-17 12:04:06', '2016-01-17 12:03:59', 'new-blog-post-4', 'New Blog Post 2', NULL, NULL, NULL, NULL, 0, 1, 4, 0, 0, NULL, 'Inherit', 'Inherit', 23),
 (55, 28, 3, 1, 1, 1, 'BlogPost', '2016-01-17 12:04:06', '2016-01-17 12:03:59', 'new-blog-post-4', 'New Blog Post 2', NULL, NULL, NULL, NULL, 0, 1, 4, 0, 0, NULL, 'Inherit', 'Inherit', 23),
 (56, 1, 6, 1, 1, 1, 'HomePage', '2016-01-18 11:11:14', '2015-10-23 22:53:25', 'home', 'Home', NULL, '<p class="lead"><span>I have extensive real world experience in the design industry, ranging from branding and advertising, to digital design, motion graphics and website design and development.</span></p>', NULL, NULL, 1, 1, 1, 0, 0, NULL, 'Inherit', 'Inherit', 0),
-(57, 1, 7, 1, 1, 1, 'HomePage', '2016-01-18 11:11:32', '2015-10-23 22:53:25', 'home', 'Home', NULL, '<p class="lead"><span>Hi, I''m Hamish!</span></p>\n<p class="lead">I have extensive real world experience in the design industry, ranging from branding and advertising, to digital design, motion graphics and website design and development.</p>', NULL, NULL, 1, 1, 1, 0, 0, NULL, 'Inherit', 'Inherit', 0),
+(57, 1, 7, 1, 1, 1, 'HomePage', '2016-01-18 11:11:32', '2015-10-23 22:53:25', 'home', 'Home', NULL, '<p class="lead"><span>Hi, I\'m Hamish!</span></p>\n<p class="lead">I have extensive real world experience in the design industry, ranging from branding and advertising, to digital design, motion graphics and website design and development.</p>', NULL, NULL, 1, 1, 1, 0, 0, NULL, 'Inherit', 'Inherit', 0),
 (58, 7, 3, 1, 1, 1, 'PortfolioPage', '2016-01-18 11:25:11', '2015-10-24 05:03:55', 'exhibit', 'Exhibit', NULL, NULL, NULL, NULL, 1, 1, 1, 0, 0, NULL, 'Inherit', 'Inherit', 6),
 (59, 8, 3, 1, 1, 1, 'PortfolioPage', '2016-01-18 11:25:22', '2015-10-24 05:04:11', 'my-word-is-yours', 'My Word Is Yours', NULL, NULL, NULL, NULL, 1, 1, 2, 0, 0, NULL, 'Inherit', 'Inherit', 6),
 (60, 9, 3, 1, 1, 1, 'PortfolioPage', '2016-01-18 11:25:32', '2015-10-24 05:04:37', 'road-to-recovery', 'Road to Recovery', NULL, NULL, NULL, NULL, 1, 1, 3, 0, 0, NULL, 'Inherit', 'Inherit', 6),
@@ -1761,7 +1588,7 @@ INSERT INTO `SiteTree_versions` (`ID`, `RecordID`, `Version`, `WasPublished`, `A
 (68, 27, 2, 1, 1, 1, 'PortfolioPage', '2016-01-18 12:31:39', '2016-01-17 12:03:48', 'return-to-sender', 'Return to Sender', NULL, NULL, NULL, NULL, 1, 1, 16, 0, 0, NULL, 'Inherit', 'Inherit', 6),
 (69, 7, 5, 1, 1, 1, 'PortfolioPage', '2016-01-18 12:37:05', '2015-10-24 05:03:55', 'exhibit', 'Exhibit', NULL, NULL, NULL, NULL, 1, 1, 1, 0, 0, NULL, 'Inherit', 'Inherit', 6),
 (70, 29, 1, 0, 1, 0, 'PortfolioPage', '2016-01-18 12:39:58', '2015-10-24 05:03:55', 'exhibit-2', 'Exhibit', NULL, NULL, NULL, NULL, 1, 1, 17, 0, 0, NULL, 'Inherit', 'Inherit', 6),
-(71, 29, 2, 1, 1, 1, 'PortfolioPage', '2016-01-18 12:40:36', '2015-10-24 05:03:55', 'lifes-a-gamble', 'Life''s a Gamble', NULL, NULL, NULL, NULL, 1, 1, 17, 0, 0, NULL, 'Inherit', 'Inherit', 6),
+(71, 29, 2, 1, 1, 1, 'PortfolioPage', '2016-01-18 12:40:36', '2015-10-24 05:03:55', 'lifes-a-gamble', 'Life\'s a Gamble', NULL, NULL, NULL, NULL, 1, 1, 17, 0, 0, NULL, 'Inherit', 'Inherit', 6),
 (72, 11, 4, 1, 1, 1, 'PortfolioPage', '2016-01-18 12:48:50', '2015-10-24 05:05:58', 'matsons', 'Matsons', NULL, NULL, NULL, NULL, 1, 1, 5, 0, 0, NULL, 'Inherit', 'Inherit', 6),
 (73, 8, 4, 1, 1, 1, 'PortfolioPage', '2016-01-18 12:52:11', '2015-10-24 05:04:11', 'my-word-is-yours', 'My Word Is Yours', NULL, NULL, NULL, NULL, 1, 1, 2, 0, 0, NULL, 'Inherit', 'Inherit', 6),
 (74, 30, 1, 0, 1, 0, 'PortfolioPage', '2016-01-18 12:52:50', '2016-01-18 12:52:50', 'new-portfolio-page', 'New Portfolio Page', NULL, NULL, NULL, NULL, 1, 1, 18, 0, 0, NULL, 'Inherit', 'Inherit', 6),
@@ -1792,24 +1619,24 @@ INSERT INTO `SiteTree_versions` (`ID`, `RecordID`, `Version`, `WasPublished`, `A
 (99, 7, 7, 1, 1, 1, 'PortfolioPage', '2016-01-19 08:37:20', '2015-10-24 05:03:55', 'exhibit', 'Exhibit', NULL, '<p class="lead">Donec sed odio dui.</p>\n<p>Maecenas sed diam eget risus varius blandit sit amet non magna. Nulla vitae elit libero, a pharetra augue. Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam.</p>', NULL, NULL, 1, 1, 1, 0, 0, NULL, 'Inherit', 'Inherit', 6),
 (100, 7, 8, 1, 1, 1, 'PortfolioPage', '2016-01-19 08:37:37', '2015-10-24 05:03:55', 'exhibit', 'Exhibit', NULL, '<p class="lead">Donec sed odio dui.</p>\n<p>Maecenas sed diam eget risus varius blandit sit amet non magna. Nulla vitae elit libero, a pharetra augue. Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam.</p>', NULL, NULL, 1, 1, 1, 0, 0, NULL, 'Inherit', 'Inherit', 6),
 (101, 7, 9, 1, 1, 1, 'PortfolioPage', '2016-01-19 08:45:00', '2015-10-24 05:03:55', 'exhibit', 'Exhibit', NULL, '<p class="lead">Donec sed odio dui.</p>\n<p>Maecenas sed diam eget risus varius blandit sit amet non magna. Nulla vitae elit libero, a pharetra augue. Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam.</p>', NULL, NULL, 1, 1, 1, 0, 0, NULL, 'Inherit', 'Inherit', 6),
-(102, 29, 3, 1, 1, 1, 'PortfolioPage', '2016-01-19 08:47:49', '2015-10-24 05:03:55', 'lifes-a-gamble', 'Life''s a Gamble', NULL, NULL, NULL, NULL, 1, 1, 17, 0, 0, NULL, 'Inherit', 'Inherit', 6),
-(103, 29, 4, 1, 1, 1, 'PortfolioPage', '2016-01-19 08:54:38', '2015-10-24 05:03:55', 'lifes-a-gamble', 'Life''s a Gamble', NULL, NULL, NULL, NULL, 1, 1, 17, 0, 0, NULL, 'Inherit', 'Inherit', 6),
-(104, 29, 5, 1, 1, 1, 'PortfolioPage', '2016-01-19 08:55:01', '2015-10-24 05:03:55', 'lifes-a-gamble', 'Life''s a Gamble', NULL, NULL, NULL, NULL, 1, 1, 17, 0, 0, NULL, 'Inherit', 'Inherit', 6),
-(105, 29, 6, 1, 1, 1, 'PortfolioPage', '2016-01-19 08:55:24', '2015-10-24 05:03:55', 'lifes-a-gamble', 'Life''s a Gamble', NULL, '<p class="lead">Curabitur blandit tempus porttitor. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean lacinia bibendum nulla sed consectetur.</p>', NULL, NULL, 1, 1, 17, 0, 0, NULL, 'Inherit', 'Inherit', 6),
-(106, 29, 7, 1, 1, 1, 'PortfolioPage', '2016-01-19 09:03:58', '2015-10-24 05:03:55', 'lifes-a-gamble', 'Life''s a Gamble', NULL, '<p class="lead">Take this burden from my shoulders that I may carry a child. He will see the distant horizons that we will achieve together.</p>\n<p>This </p>\n<p> </p>', NULL, NULL, 1, 1, 17, 0, 0, NULL, 'Inherit', 'Inherit', 6),
-(107, 29, 8, 1, 1, 1, 'PortfolioPage', '2016-01-19 09:04:09', '2015-10-24 05:03:55', 'lifes-a-gamble', 'Life''s a Gamble', NULL, '<p class="lead">Take this burden from my shoulders that I may carry a child. He will see the distant horizons that we will achieve together.</p>\n<p>This </p>\n<p> </p>', NULL, NULL, 1, 1, 17, 0, 0, NULL, 'Inherit', 'Inherit', 6),
+(102, 29, 3, 1, 1, 1, 'PortfolioPage', '2016-01-19 08:47:49', '2015-10-24 05:03:55', 'lifes-a-gamble', 'Life\'s a Gamble', NULL, NULL, NULL, NULL, 1, 1, 17, 0, 0, NULL, 'Inherit', 'Inherit', 6),
+(103, 29, 4, 1, 1, 1, 'PortfolioPage', '2016-01-19 08:54:38', '2015-10-24 05:03:55', 'lifes-a-gamble', 'Life\'s a Gamble', NULL, NULL, NULL, NULL, 1, 1, 17, 0, 0, NULL, 'Inherit', 'Inherit', 6),
+(104, 29, 5, 1, 1, 1, 'PortfolioPage', '2016-01-19 08:55:01', '2015-10-24 05:03:55', 'lifes-a-gamble', 'Life\'s a Gamble', NULL, NULL, NULL, NULL, 1, 1, 17, 0, 0, NULL, 'Inherit', 'Inherit', 6),
+(105, 29, 6, 1, 1, 1, 'PortfolioPage', '2016-01-19 08:55:24', '2015-10-24 05:03:55', 'lifes-a-gamble', 'Life\'s a Gamble', NULL, '<p class="lead">Curabitur blandit tempus porttitor. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean lacinia bibendum nulla sed consectetur.</p>', NULL, NULL, 1, 1, 17, 0, 0, NULL, 'Inherit', 'Inherit', 6),
+(106, 29, 7, 1, 1, 1, 'PortfolioPage', '2016-01-19 09:03:58', '2015-10-24 05:03:55', 'lifes-a-gamble', 'Life\'s a Gamble', NULL, '<p class="lead">Take this burden from my shoulders that I may carry a child. He will see the distant horizons that we will achieve together.</p>\n<p>This </p>\n<p> </p>', NULL, NULL, 1, 1, 17, 0, 0, NULL, 'Inherit', 'Inherit', 6),
+(107, 29, 8, 1, 1, 1, 'PortfolioPage', '2016-01-19 09:04:09', '2015-10-24 05:03:55', 'lifes-a-gamble', 'Life\'s a Gamble', NULL, '<p class="lead">Take this burden from my shoulders that I may carry a child. He will see the distant horizons that we will achieve together.</p>\n<p>This </p>\n<p> </p>', NULL, NULL, 1, 1, 17, 0, 0, NULL, 'Inherit', 'Inherit', 6),
 (108, 8, 17, 1, 1, 1, 'PortfolioPage', '2016-01-19 09:04:39', '2015-10-24 05:04:11', 'my-word-is-yours', 'My Word Is Yours', NULL, '<p class="lead">Take this burden from my shoulders that I may carry a child. He will see the distant horizons that we will achieve together.</p>', NULL, NULL, 1, 1, 2, 0, 0, NULL, 'Inherit', 'Inherit', 6),
-(109, 8, 18, 1, 1, 1, 'PortfolioPage', '2016-01-19 09:07:27', '2015-10-24 05:04:11', 'my-word-is-yours', 'My Word Is Yours', NULL, '<p class="lead">Take this burden from my shoulders that I may carry a child. He will see the distant horizons that we will achieve together.</p>\n<p>The project goal was to take a Maori writing, and working directly with the author create two typographic artworks which resonated with the story. </p>\n<p>The author wrote the following as the meaning behind the story:</p>\n<p>"As adults, we live in a modern world of cumbersome obligations and responsibilities that simply have us exist in, rather than allow ourselves to experience our environment.  We lose sight of the fact that our first responsibility is the protection of this environment for future generations.  We allow ourselves to be weighted with our perception of success and failure that we forget the delight of discovery and from our environment.  </p>\n<p>"The simple, innocent view of the world that is experienced by the child - a world that has seen physical, cultural and spiritual elements eroded.  The traditional narratives I grew up with, became myths and legends to having no meaning or relevance in the context of the ''modern'' world ... But with my learning of te reo, I have gone back to my childhood and those narratives to discover that their context and relevance were of significance in the world that existed then.  And with this discovery I am able to experience again the environment that I am in, with my renewed perspective.  </p>\n<p>"I am Māori, I am a descendent of the tribes of Waikato and Te Riu o Tūwharetoa, my maunga tapu are Pūtauaki and Taupiri.  My awa tapu are Waikato and Tarawera. My ancestors travelled across the Pacific, navigating by star and tide in the waka Tainui and Te Arawa, to their landing places of Whangaparaoa and Maketū.  </p>\n<p>"These narratives were taught to me as a child along with the practices of my people that ensured their physical and spiritual well-being - kai tiākitanga ... guardianship of resources that would be preserved for future generations.  In essence, by allowing myself to view my environment with ''the eyes of a child'' once again, the ''distant horizon'' (goals, responsibilities) became clearer"</p>', NULL, NULL, 1, 1, 2, 0, 0, NULL, 'Inherit', 'Inherit', 6),
-(110, 8, 19, 1, 1, 1, 'PortfolioPage', '2016-01-19 09:08:12', '2015-10-24 05:04:11', 'my-word-is-yours', 'My Word Is Yours', NULL, '<p class="lead">Take this burden from my shoulders that I may carry a child. He will see the distant horizons that we will achieve together.</p>\n<p>The project goal was to take a Maori writing, and working directly with the author create two typographic artworks which resonated with the story. </p>\n<p>The author wrote the following to describe the writing, and guide my design:</p>\n<p>"As adults, we live in a modern world of cumbersome obligations and responsibilities that simply have us exist in, rather than allow ourselves to experience our environment.  We lose sight of the fact that our first responsibility is the protection of this environment for future generations.  We allow ourselves to be weighted with our perception of success and failure that we forget the delight of discovery and from our environment.  </p>\n<p>"The simple, innocent view of the world that is experienced by the child - a world that has seen physical, cultural and spiritual elements eroded.  The traditional narratives I grew up with, became myths and legends to having no meaning or relevance in the context of the ''modern'' world ... But with my learning of te reo, I have gone back to my childhood and those narratives to discover that their context and relevance were of significance in the world that existed then.  And with this discovery I am able to experience again the environment that I am in, with my renewed perspective.  </p>\n<p>"I am Māori, I am a descendent of the tribes of Waikato and Te Riu o Tūwharetoa, my maunga tapu are Pūtauaki and Taupiri.  My awa tapu are Waikato and Tarawera. My ancestors travelled across the Pacific, navigating by star and tide in the waka Tainui and Te Arawa, to their landing places of Whangaparaoa and Maketū.  </p>\n<p>"These narratives were taught to me as a child along with the practices of my people that ensured their physical and spiritual well-being - kai tiākitanga ... guardianship of resources that would be preserved for future generations.  In essence, by allowing myself to view my environment with ''the eyes of a child'' once again, the ''distant horizon'' (goals, responsibilities) became clearer"</p>', NULL, NULL, 1, 1, 2, 0, 0, NULL, 'Inherit', 'Inherit', 6),
+(109, 8, 18, 1, 1, 1, 'PortfolioPage', '2016-01-19 09:07:27', '2015-10-24 05:04:11', 'my-word-is-yours', 'My Word Is Yours', NULL, '<p class="lead">Take this burden from my shoulders that I may carry a child. He will see the distant horizons that we will achieve together.</p>\n<p>The project goal was to take a Maori writing, and working directly with the author create two typographic artworks which resonated with the story. </p>\n<p>The author wrote the following as the meaning behind the story:</p>\n<p>"As adults, we live in a modern world of cumbersome obligations and responsibilities that simply have us exist in, rather than allow ourselves to experience our environment.  We lose sight of the fact that our first responsibility is the protection of this environment for future generations.  We allow ourselves to be weighted with our perception of success and failure that we forget the delight of discovery and from our environment.  </p>\n<p>"The simple, innocent view of the world that is experienced by the child - a world that has seen physical, cultural and spiritual elements eroded.  The traditional narratives I grew up with, became myths and legends to having no meaning or relevance in the context of the \'modern\' world ... But with my learning of te reo, I have gone back to my childhood and those narratives to discover that their context and relevance were of significance in the world that existed then.  And with this discovery I am able to experience again the environment that I am in, with my renewed perspective.  </p>\n<p>"I am Māori, I am a descendent of the tribes of Waikato and Te Riu o Tūwharetoa, my maunga tapu are Pūtauaki and Taupiri.  My awa tapu are Waikato and Tarawera. My ancestors travelled across the Pacific, navigating by star and tide in the waka Tainui and Te Arawa, to their landing places of Whangaparaoa and Maketū.  </p>\n<p>"These narratives were taught to me as a child along with the practices of my people that ensured their physical and spiritual well-being - kai tiākitanga ... guardianship of resources that would be preserved for future generations.  In essence, by allowing myself to view my environment with \'the eyes of a child\' once again, the \'distant horizon\' (goals, responsibilities) became clearer"</p>', NULL, NULL, 1, 1, 2, 0, 0, NULL, 'Inherit', 'Inherit', 6),
+(110, 8, 19, 1, 1, 1, 'PortfolioPage', '2016-01-19 09:08:12', '2015-10-24 05:04:11', 'my-word-is-yours', 'My Word Is Yours', NULL, '<p class="lead">Take this burden from my shoulders that I may carry a child. He will see the distant horizons that we will achieve together.</p>\n<p>The project goal was to take a Maori writing, and working directly with the author create two typographic artworks which resonated with the story. </p>\n<p>The author wrote the following to describe the writing, and guide my design:</p>\n<p>"As adults, we live in a modern world of cumbersome obligations and responsibilities that simply have us exist in, rather than allow ourselves to experience our environment.  We lose sight of the fact that our first responsibility is the protection of this environment for future generations.  We allow ourselves to be weighted with our perception of success and failure that we forget the delight of discovery and from our environment.  </p>\n<p>"The simple, innocent view of the world that is experienced by the child - a world that has seen physical, cultural and spiritual elements eroded.  The traditional narratives I grew up with, became myths and legends to having no meaning or relevance in the context of the \'modern\' world ... But with my learning of te reo, I have gone back to my childhood and those narratives to discover that their context and relevance were of significance in the world that existed then.  And with this discovery I am able to experience again the environment that I am in, with my renewed perspective.  </p>\n<p>"I am Māori, I am a descendent of the tribes of Waikato and Te Riu o Tūwharetoa, my maunga tapu are Pūtauaki and Taupiri.  My awa tapu are Waikato and Tarawera. My ancestors travelled across the Pacific, navigating by star and tide in the waka Tainui and Te Arawa, to their landing places of Whangaparaoa and Maketū.  </p>\n<p>"These narratives were taught to me as a child along with the practices of my people that ensured their physical and spiritual well-being - kai tiākitanga ... guardianship of resources that would be preserved for future generations.  In essence, by allowing myself to view my environment with \'the eyes of a child\' once again, the \'distant horizon\' (goals, responsibilities) became clearer"</p>', NULL, NULL, 1, 1, 2, 0, 0, NULL, 'Inherit', 'Inherit', 6),
 (111, 8, 20, 1, 1, 1, 'PortfolioPage', '2016-01-19 09:10:58', '2015-10-24 05:04:11', 'my-word-is-yours', 'My Word Is Yours', NULL, '<p class="lead">Take this burden from my shoulders that I may carry a child. He will see the distant horizons that we will achieve together.</p>\n<p>The project goal was to take a Maori writing, and working directly with the author create two typographic artworks which resonated with the story. </p>', NULL, NULL, 1, 1, 2, 0, 0, NULL, 'Inherit', 'Inherit', 6),
-(112, 8, 21, 1, 1, 1, 'PortfolioPage', '2016-01-19 09:11:16', '2015-10-24 05:04:11', 'my-word-is-yours', 'My Word Is Yours', NULL, '<p class="lead">Take this burden from my shoulders that I may carry a child. He will see the distant horizons that we will achieve together.</p>\n<p>The project goal was to take a Maori writing, and working directly with the author create two typographic artworks which resonated with the story. </p>\n<p>The author wrote the following to describe the writing, and guide my design:</p>\n<p>"As adults, we live in a modern world of cumbersome obligations and responsibilities that simply have us exist in, rather than allow ourselves to experience our environment.  We lose sight of the fact that our first responsibility is the protection of this environment for future generations.  We allow ourselves to be weighted with our perception of success and failure that we forget the delight of discovery and from our environment.  </p>\n<p>"The simple, innocent view of the world that is experienced by the child - a world that has seen physical, cultural and spiritual elements eroded.  The traditional narratives I grew up with, became myths and legends to having no meaning or relevance in the context of the ''modern'' world ... But with my learning of te reo, I have gone back to my childhood and those narratives to discover that their context and relevance were of significance in the world that existed then.  And with this discovery I am able to experience again the environment that I am in, with my renewed perspective.  </p>\n<p>"I am Māori, I am a descendent of the tribes of Waikato and Te Riu o Tūwharetoa, my maunga tapu are Pūtauaki and Taupiri.  My awa tapu are Waikato and Tarawera. My ancestors travelled across the Pacific, navigating by star and tide in the waka Tainui and Te Arawa, to their landing places of Whangaparaoa and Maketū.  </p>\n<p>"These narratives were taught to me as a child along with the practices of my people that ensured their physical and spiritual well-being - kai tiākitanga ... guardianship of resources that would be preserved for future generations.  In essence, by allowing myself to view my environment with ''the eyes of a child'' once again, the ''distant horizon'' (goals, responsibilities) became clearer"</p>', NULL, NULL, 1, 1, 2, 0, 0, NULL, 'Inherit', 'Inherit', 6),
+(112, 8, 21, 1, 1, 1, 'PortfolioPage', '2016-01-19 09:11:16', '2015-10-24 05:04:11', 'my-word-is-yours', 'My Word Is Yours', NULL, '<p class="lead">Take this burden from my shoulders that I may carry a child. He will see the distant horizons that we will achieve together.</p>\n<p>The project goal was to take a Maori writing, and working directly with the author create two typographic artworks which resonated with the story. </p>\n<p>The author wrote the following to describe the writing, and guide my design:</p>\n<p>"As adults, we live in a modern world of cumbersome obligations and responsibilities that simply have us exist in, rather than allow ourselves to experience our environment.  We lose sight of the fact that our first responsibility is the protection of this environment for future generations.  We allow ourselves to be weighted with our perception of success and failure that we forget the delight of discovery and from our environment.  </p>\n<p>"The simple, innocent view of the world that is experienced by the child - a world that has seen physical, cultural and spiritual elements eroded.  The traditional narratives I grew up with, became myths and legends to having no meaning or relevance in the context of the \'modern\' world ... But with my learning of te reo, I have gone back to my childhood and those narratives to discover that their context and relevance were of significance in the world that existed then.  And with this discovery I am able to experience again the environment that I am in, with my renewed perspective.  </p>\n<p>"I am Māori, I am a descendent of the tribes of Waikato and Te Riu o Tūwharetoa, my maunga tapu are Pūtauaki and Taupiri.  My awa tapu are Waikato and Tarawera. My ancestors travelled across the Pacific, navigating by star and tide in the waka Tainui and Te Arawa, to their landing places of Whangaparaoa and Maketū.  </p>\n<p>"These narratives were taught to me as a child along with the practices of my people that ensured their physical and spiritual well-being - kai tiākitanga ... guardianship of resources that would be preserved for future generations.  In essence, by allowing myself to view my environment with \'the eyes of a child\' once again, the \'distant horizon\' (goals, responsibilities) became clearer"</p>', NULL, NULL, 1, 1, 2, 0, 0, NULL, 'Inherit', 'Inherit', 6),
 (113, 7, 10, 1, 1, 1, 'PortfolioPage', '2016-01-19 09:13:52', '2015-10-24 05:03:55', 'exhibit', 'Exhibit', NULL, '<p>The technological innovations of the past 10 – 20 years have made us change how we find information, how we interact, and what we expect of products and services. It has been predicted that newspapers and traditional news media will not survive the next 15 years, but I wanted to prove that there is still a place in our future for news media in print and digital formats. </p>\n<p>The need for interaction and control is something born out of using the internet, and is something that must be taken into account. Splitting the news up into sections to entertain and inform based on the readers interests seems like an obvious solution to suit our changed lifestyles. We can enjoy and appreciate things we’re interested in and care about, in a well designed physical print format that reduces the amount of wasted resources. My solutions used together will create a cohesive service to inform, educate, entertain and update in an efficient way.</p>', NULL, NULL, 1, 1, 1, 0, 0, NULL, 'Inherit', 'Inherit', 6),
 (114, 9, 5, 1, 1, 1, 'PortfolioPage', '2016-01-19 09:27:57', '2015-10-24 05:04:37', 'road-to-recovery', 'Road to Recovery', NULL, NULL, NULL, NULL, 1, 1, 3, 0, 0, NULL, 'Inherit', 'Inherit', 6);
 INSERT INTO `SiteTree_versions` (`ID`, `RecordID`, `Version`, `WasPublished`, `AuthorID`, `PublisherID`, `ClassName`, `LastEdited`, `Created`, `URLSegment`, `Title`, `MenuTitle`, `Content`, `MetaDescription`, `ExtraMeta`, `ShowInMenus`, `ShowInSearch`, `Sort`, `HasBrokenFile`, `HasBrokenLink`, `ReportClass`, `CanViewType`, `CanEditType`, `ParentID`) VALUES
 (115, 9, 6, 1, 1, 1, 'PortfolioPage', '2016-01-19 09:31:44', '2015-10-24 05:04:37', 'road-to-recovery', 'Road to Recovery', NULL, '<p>For our last project of the year we opted to work on a collaborative 3 minute animation piece for CERA, the Christchurch Earthquake Recovery Authority.</p>\n<p>Having been supplied with the brief, the aim was to visually communicate the story of community wellbeing, from disaster response to recovery and the general support of the Christchurch residents.  In displaying this key information we decided to use the more human, expressive approach of stop motion revolving around the story of a character and his experience’s post earthquake; deciding the animation would follow a story. Our choice of materials reflects the nature of the message we wanted to convey; a raw and genuine warmth to an otherwise cold and serious subject. We chose to use paper with its creases and imperfections to express the feeling of the story. The paper is very effective in portraying the story based feeling, giving it a depth of feeling and a genuineness that would be lacking in a purely digital animation. Our chosen audio adds to this impression with the natural, human sounding acoustic music combined with the realistic sounds of life on top, it’s effective in supporting the visuals throughout the story.</p>\n<p>For the short time we had and having worked together before we were familiar with each others working styles and used this to our advantage. As a result the project came together really well. In both of our cases, as a first time for stop motion animation, majority of the time we were learning on the project and as we progressed the models and techniques became more sophisticated; this tied in well with the unfolding journey of our main character. The idea behind having him as a continual feature within the animation was to allow the viewer to follow the story and to be able to identify with him through their own experiences.</p>\n<p>In our final video all of our research, ideas and working is put into effect. Keeping a workbook and making to do lists helped to downsize the scale of the project into more manageable sections. Given more time, a budget and better resources we would have been able to experiment further with areas like lighting and more complex animation techniques.</p>\n<p>Overall given the scale of the project and the restrictions we faced, we are both proud of our achievements and our persevering creative problem solving. Three words- Double. Sided. Tape.</p>', NULL, NULL, 1, 1, 3, 0, 0, NULL, 'Inherit', 'Inherit', 6),
-(116, 9, 7, 1, 1, 1, 'PortfolioPage', '2016-01-19 09:34:28', '2015-10-24 05:04:37', 'road-to-recovery', 'Road to Recovery', NULL, '<p class="lead">The aim of this project was to visually communicate the story of community wellbeing following the disastrous Christchurch earthquakes.</p>\n<p>We created a video for CERA, the Christchurch Earthquake Recovery Authority, to use in house and promotionally to spread the message of all that''s being done for affected communities. From disaster response to recovery and the general support of the Christchurch residents.</p>\n<p>  In displaying this key information we decided to use the more human, expressive approach of stop motion revolving around the story of a character and his experience’s post earthquake; deciding the animation would follow a story. Our choice of materials reflects the nature of the message we wanted to convey; a raw and genuine warmth to an otherwise cold and serious subject. We chose to use paper with its creases and imperfections to express the feeling of the story. The paper is very effective in portraying the story based feeling, giving it a depth of feeling and a genuineness that would be lacking in a purely digital animation. Our chosen audio adds to this impression with the natural, human sounding acoustic music combined with the realistic sounds of life on top, it’s effective in supporting the visuals throughout the story.</p>\n<p>For the short time we had and having worked together before we were familiar with each others working styles and used this to our advantage. As a result the project came together really well. In both of our cases, as a first time for stop motion animation, majority of the time we were learning on the project and as we progressed the models and techniques became more sophisticated; this tied in well with the unfolding journey of our main character. The idea behind having him as a continual feature within the animation was to allow the viewer to follow the story and to be able to identify with him through their own experiences.</p>\n<p>In our final video all of our research, ideas and working is put into effect. Keeping a workbook and making to do lists helped to downsize the scale of the project into more manageable sections. Given more time, a budget and better resources we would have been able to experiment further with areas like lighting and more complex animation techniques.</p>\n<p>Overall given the scale of the project and the restrictions we faced, we are both proud of our achievements and our persevering creative problem solving. Three words- Double. Sided. Tape.</p>', NULL, NULL, 1, 1, 3, 0, 0, NULL, 'Inherit', 'Inherit', 6),
-(117, 9, 8, 1, 1, 1, 'PortfolioPage', '2016-01-19 09:35:04', '2015-10-24 05:04:37', 'road-to-recovery', 'Road to Recovery', NULL, '<p class="lead">The aim of this project was to visually communicate the story of community wellbeing following the disastrous Christchurch earthquakes.</p>\n<p>Collaborating with a friend, we created a video for CERA, the Christchurch Earthquake Recovery Authority, to use in house and promotionally to spread the message of all that''s being done for affected communities. From disaster response to recovery and the general support of the Christchurch residents.</p>\n<p>  In displaying this key information we decided to use the more human, expressive approach of stop motion revolving around the story of a character and his experience’s post earthquake; deciding the animation would follow a story. Our choice of materials reflects the nature of the message we wanted to convey; a raw and genuine warmth to an otherwise cold and serious subject. We chose to use paper with its creases and imperfections to express the feeling of the story. The paper is very effective in portraying the story based feeling, giving it a depth of feeling and a genuineness that would be lacking in a purely digital animation. Our chosen audio adds to this impression with the natural, human sounding acoustic music combined with the realistic sounds of life on top, it’s effective in supporting the visuals throughout the story.</p>\n<p>For the short time we had and having worked together before we were familiar with each others working styles and used this to our advantage. As a result the project came together really well. In both of our cases, as a first time for stop motion animation, majority of the time we were learning on the project and as we progressed the models and techniques became more sophisticated; this tied in well with the unfolding journey of our main character. The idea behind having him as a continual feature within the animation was to allow the viewer to follow the story and to be able to identify with him through their own experiences.</p>\n<p>In our final video all of our research, ideas and working is put into effect. Keeping a workbook and making to do lists helped to downsize the scale of the project into more manageable sections. Given more time, a budget and better resources we would have been able to experiment further with areas like lighting and more complex animation techniques.</p>\n<p>Overall given the scale of the project and the restrictions we faced, we are both proud of our achievements and our persevering creative problem solving. Three words- Double. Sided. Tape.</p>', NULL, NULL, 1, 1, 3, 0, 0, NULL, 'Inherit', 'Inherit', 6),
-(118, 9, 9, 1, 1, 1, 'PortfolioPage', '2016-01-19 09:36:04', '2015-10-24 05:04:37', 'road-to-recovery', 'Road to Recovery', NULL, '<p class="lead">The aim of this project was to visually communicate the story of community wellbeing following the disastrous Christchurch earthquakes.</p>\n<p>Collaborating with a friend, we created a video for CERA, the Christchurch Earthquake Recovery Authority, to use in house and promotionally to spread the message of all that''s being done for affected communities. From disaster response to recovery and the general support of the Christchurch residents.</p>\n<p>  In displaying this key information we decided to use the more human, expressive approach of stop motion revolving around the story of a character and his experience’s post earthquake; deciding the animation would follow a story. Our choice of materials reflects the nature of the message we wanted to convey; a raw and genuine warmth to an otherwise cold and serious subject. We chose to use paper with its creases and imperfections to express the feeling of the story. Paper is very effective in portraying the story based feeling, giving it a depth and authenticity that would be lacking in a purely digital animation. Our chosen audio adds to this impression with the natural, human sounding acoustic music combined with the realistic sounds of life on top, it’s effective in supporting the visuals throughout the story.</p>', NULL, NULL, 1, 1, 3, 0, 0, NULL, 'Inherit', 'Inherit', 6),
+(116, 9, 7, 1, 1, 1, 'PortfolioPage', '2016-01-19 09:34:28', '2015-10-24 05:04:37', 'road-to-recovery', 'Road to Recovery', NULL, '<p class="lead">The aim of this project was to visually communicate the story of community wellbeing following the disastrous Christchurch earthquakes.</p>\n<p>We created a video for CERA, the Christchurch Earthquake Recovery Authority, to use in house and promotionally to spread the message of all that\'s being done for affected communities. From disaster response to recovery and the general support of the Christchurch residents.</p>\n<p>  In displaying this key information we decided to use the more human, expressive approach of stop motion revolving around the story of a character and his experience’s post earthquake; deciding the animation would follow a story. Our choice of materials reflects the nature of the message we wanted to convey; a raw and genuine warmth to an otherwise cold and serious subject. We chose to use paper with its creases and imperfections to express the feeling of the story. The paper is very effective in portraying the story based feeling, giving it a depth of feeling and a genuineness that would be lacking in a purely digital animation. Our chosen audio adds to this impression with the natural, human sounding acoustic music combined with the realistic sounds of life on top, it’s effective in supporting the visuals throughout the story.</p>\n<p>For the short time we had and having worked together before we were familiar with each others working styles and used this to our advantage. As a result the project came together really well. In both of our cases, as a first time for stop motion animation, majority of the time we were learning on the project and as we progressed the models and techniques became more sophisticated; this tied in well with the unfolding journey of our main character. The idea behind having him as a continual feature within the animation was to allow the viewer to follow the story and to be able to identify with him through their own experiences.</p>\n<p>In our final video all of our research, ideas and working is put into effect. Keeping a workbook and making to do lists helped to downsize the scale of the project into more manageable sections. Given more time, a budget and better resources we would have been able to experiment further with areas like lighting and more complex animation techniques.</p>\n<p>Overall given the scale of the project and the restrictions we faced, we are both proud of our achievements and our persevering creative problem solving. Three words- Double. Sided. Tape.</p>', NULL, NULL, 1, 1, 3, 0, 0, NULL, 'Inherit', 'Inherit', 6),
+(117, 9, 8, 1, 1, 1, 'PortfolioPage', '2016-01-19 09:35:04', '2015-10-24 05:04:37', 'road-to-recovery', 'Road to Recovery', NULL, '<p class="lead">The aim of this project was to visually communicate the story of community wellbeing following the disastrous Christchurch earthquakes.</p>\n<p>Collaborating with a friend, we created a video for CERA, the Christchurch Earthquake Recovery Authority, to use in house and promotionally to spread the message of all that\'s being done for affected communities. From disaster response to recovery and the general support of the Christchurch residents.</p>\n<p>  In displaying this key information we decided to use the more human, expressive approach of stop motion revolving around the story of a character and his experience’s post earthquake; deciding the animation would follow a story. Our choice of materials reflects the nature of the message we wanted to convey; a raw and genuine warmth to an otherwise cold and serious subject. We chose to use paper with its creases and imperfections to express the feeling of the story. The paper is very effective in portraying the story based feeling, giving it a depth of feeling and a genuineness that would be lacking in a purely digital animation. Our chosen audio adds to this impression with the natural, human sounding acoustic music combined with the realistic sounds of life on top, it’s effective in supporting the visuals throughout the story.</p>\n<p>For the short time we had and having worked together before we were familiar with each others working styles and used this to our advantage. As a result the project came together really well. In both of our cases, as a first time for stop motion animation, majority of the time we were learning on the project and as we progressed the models and techniques became more sophisticated; this tied in well with the unfolding journey of our main character. The idea behind having him as a continual feature within the animation was to allow the viewer to follow the story and to be able to identify with him through their own experiences.</p>\n<p>In our final video all of our research, ideas and working is put into effect. Keeping a workbook and making to do lists helped to downsize the scale of the project into more manageable sections. Given more time, a budget and better resources we would have been able to experiment further with areas like lighting and more complex animation techniques.</p>\n<p>Overall given the scale of the project and the restrictions we faced, we are both proud of our achievements and our persevering creative problem solving. Three words- Double. Sided. Tape.</p>', NULL, NULL, 1, 1, 3, 0, 0, NULL, 'Inherit', 'Inherit', 6),
+(118, 9, 9, 1, 1, 1, 'PortfolioPage', '2016-01-19 09:36:04', '2015-10-24 05:04:37', 'road-to-recovery', 'Road to Recovery', NULL, '<p class="lead">The aim of this project was to visually communicate the story of community wellbeing following the disastrous Christchurch earthquakes.</p>\n<p>Collaborating with a friend, we created a video for CERA, the Christchurch Earthquake Recovery Authority, to use in house and promotionally to spread the message of all that\'s being done for affected communities. From disaster response to recovery and the general support of the Christchurch residents.</p>\n<p>  In displaying this key information we decided to use the more human, expressive approach of stop motion revolving around the story of a character and his experience’s post earthquake; deciding the animation would follow a story. Our choice of materials reflects the nature of the message we wanted to convey; a raw and genuine warmth to an otherwise cold and serious subject. We chose to use paper with its creases and imperfections to express the feeling of the story. Paper is very effective in portraying the story based feeling, giving it a depth and authenticity that would be lacking in a purely digital animation. Our chosen audio adds to this impression with the natural, human sounding acoustic music combined with the realistic sounds of life on top, it’s effective in supporting the visuals throughout the story.</p>', NULL, NULL, 1, 1, 3, 0, 0, NULL, 'Inherit', 'Inherit', 6),
 (119, 11, 5, 1, 1, 1, 'PortfolioPage', '2016-01-19 09:47:40', '2015-10-24 05:05:58', 'matsons', 'Matsons', NULL, NULL, NULL, NULL, 1, 1, 5, 0, 0, NULL, 'Inherit', 'Inherit', 6),
 (120, 11, 6, 1, 1, 1, 'PortfolioPage', '2016-01-19 09:47:52', '2015-10-24 05:05:58', 'matsons', 'Matsons', NULL, NULL, NULL, NULL, 1, 1, 5, 0, 0, NULL, 'Inherit', 'Inherit', 6),
 (121, 11, 7, 1, 1, 1, 'PortfolioPage', '2016-01-19 09:48:30', '2015-10-24 05:05:58', 'matsons', 'Matsons', NULL, NULL, NULL, NULL, 1, 1, 5, 0, 0, NULL, 'Inherit', 'Inherit', 6),
@@ -1830,13 +1657,13 @@ INSERT INTO `SiteTree_versions` (`ID`, `RecordID`, `Version`, `WasPublished`, `A
 (136, 32, 5, 1, 1, 1, 'PortfolioPage', '2016-01-19 10:49:38', '2016-01-18 13:07:39', 'treshna', 'Treshna', NULL, NULL, NULL, NULL, 1, 1, 20, 0, 0, NULL, 'Inherit', 'Inherit', 6),
 (137, 32, 6, 1, 1, 1, 'PortfolioPage', '2016-01-19 10:53:03', '2016-01-18 13:07:39', 'treshna', 'Treshna', NULL, NULL, NULL, NULL, 1, 1, 20, 0, 0, NULL, 'Inherit', 'Inherit', 6),
 (138, 7, 11, 1, 1, 1, 'PortfolioPage', '2016-01-19 11:53:43', '2015-10-24 05:03:55', 'exhibit', 'Exhibit', NULL, '<p>The technological innovations of the past 10 – 20 years have made us change how we find information, how we interact, and what we expect of products and services. It has been predicted that newspapers and traditional news media will not survive the next 15 years, but I wanted to prove that there is still a place in our future for news media in print and digital formats. </p>\n<p>The need for interaction and control is something born out of using the internet, and is something that must be taken into account. Splitting the news up into sections to entertain and inform based on the readers interests seems like an obvious solution to suit our changed lifestyles. We can enjoy and appreciate things we’re interested in and care about, in a well designed physical print format that reduces the amount of wasted resources. My solutions used together will create a cohesive service to inform, educate, entertain and update in an efficient way.</p>', NULL, NULL, 1, 1, 1, 0, 0, NULL, 'Inherit', 'Inherit', 6),
-(139, 7, 12, 1, 1, 1, 'PortfolioPage', '2016-01-19 11:59:20', '2015-10-24 05:03:55', 'exhibit', 'Exhibit', NULL, '<p>The technological innovations of the past 10–20 years have made us change how we find information, how we interact, and what we expect of products and services. It''s been predicted that newspapers and traditional news media will not survive the next 15 years. I wanted to prove that there is still a place in our future for news media in print and digital formats. </p>\n<p>The need for interaction and control is something born out of using the internet, and is something that must be taken into account. Splitting the news up into sections to entertain and inform based on the readers interests seems like an obvious solution to suit our changed lifestyles. We can enjoy and appreciate things we’re interested in and care about, in a well designed physical print format that reduces the amount of wasted resources. My solutions used together will create a cohesive service to inform, educate, entertain and update in an efficient way.</p>', NULL, NULL, 1, 1, 1, 0, 0, NULL, 'Inherit', 'Inherit', 6),
-(140, 7, 13, 1, 1, 1, 'PortfolioPage', '2016-01-19 12:11:48', '2015-10-24 05:03:55', 'exhibit', 'Exhibit', NULL, '<p>The technological innovations of the past 10–20 years have made us change how we find information, how we interact, and what we expect of products and services. It''s been predicted that newspapers and traditional news media will not survive the next 15 years. I wanted to prove that there is still a place for news media in print and digital formats. </p>\n<p>In todays technology driven age, we all desire total control over all of our devices and media platforms. It''s no longer acceptable to sit back and simply accept what we''re given. The level of customisation available in every facet of our lives is growing by the day. </p>\n<p>This led me to think of a new approach to news media. Where instead of having the same information repeated across all platforms, instead the user has control over a print magazine, a website, and an app, choosing relevant topics for the platforms and being served content to fit the purpose. The web platform will have up to the minute news and events with some long form pieces for developing stories. The app allows for tiny bitesize pieces and breaking news updates. And finally, the print magazine is broken into topics which are more heavily interest focused. These can be opted in or out of, so you only get what you''re interested in. </p>', NULL, NULL, 1, 1, 1, 0, 0, NULL, 'Inherit', 'Inherit', 6),
-(141, 8, 22, 1, 1, 1, 'PortfolioPage', '2016-01-19 12:12:35', '2015-10-24 05:04:11', 'my-word-is-yours', 'My Word Is Yours', NULL, '<p class="lead">Take this burden from my shoulders that I may carry a child. He will see the distant horizons that we will achieve together.</p>\n<p>The project goal was to take a Maori writing, and working directly with the author create two typographic artworks which resonated with the story. </p>\n<p>The author wrote the following to describe the writing and help guide my design:</p>\n<p>"As adults, we live in a modern world of cumbersome obligations and responsibilities that simply have us exist in, rather than allow ourselves to experience our environment.  We lose sight of the fact that our first responsibility is the protection of this environment for future generations.  We allow ourselves to be weighted with our perception of success and failure that we forget the delight of discovery and from our environment.  </p>\n<p>"The simple, innocent view of the world that is experienced by the child - a world that has seen physical, cultural and spiritual elements eroded.  The traditional narratives I grew up with, became myths and legends to having no meaning or relevance in the context of the ''modern'' world ... But with my learning of te reo, I have gone back to my childhood and those narratives to discover that their context and relevance were of significance in the world that existed then.  And with this discovery I am able to experience again the environment that I am in, with my renewed perspective.  </p>\n<p>"I am Māori, I am a descendent of the tribes of Waikato and Te Riu o Tūwharetoa, my maunga tapu are Pūtauaki and Taupiri.  My awa tapu are Waikato and Tarawera. My ancestors travelled across the Pacific, navigating by star and tide in the waka Tainui and Te Arawa, to their landing places of Whangaparaoa and Maketū.  </p>\n<p>"These narratives were taught to me as a child along with the practices of my people that ensured their physical and spiritual well-being - kai tiākitanga ... guardianship of resources that would be preserved for future generations.  In essence, by allowing myself to view my environment with ''the eyes of a child'' once again, the ''distant horizon'' (goals, responsibilities) became clearer"</p>', NULL, NULL, 1, 1, 2, 0, 0, NULL, 'Inherit', 'Inherit', 6),
-(142, 8, 23, 1, 1, 1, 'PortfolioPage', '2016-01-19 12:12:45', '2015-10-24 05:04:11', 'my-word-is-yours', 'My Word Is Yours', NULL, '<p class="lead"><span style="font-family: &#039;Maisonneue Book&#039;, &#039;Helvetica Neue&#039;, Helvetica, Arial, sans-serif; font-size: 13px;">The project goal was to take a Maori writing, and working directly with the author create two typographic artworks which resonated with the story. </span></p>\n<p>The author wrote the following to describe the writing and help guide my design:</p>\n<p>"As adults, we live in a modern world of cumbersome obligations and responsibilities that simply have us exist in, rather than allow ourselves to experience our environment.  We lose sight of the fact that our first responsibility is the protection of this environment for future generations.  We allow ourselves to be weighted with our perception of success and failure that we forget the delight of discovery and from our environment.  </p>\n<p>"The simple, innocent view of the world that is experienced by the child - a world that has seen physical, cultural and spiritual elements eroded.  The traditional narratives I grew up with, became myths and legends to having no meaning or relevance in the context of the ''modern'' world ... But with my learning of te reo, I have gone back to my childhood and those narratives to discover that their context and relevance were of significance in the world that existed then.  And with this discovery I am able to experience again the environment that I am in, with my renewed perspective.  </p>\n<p>"I am Māori, I am a descendent of the tribes of Waikato and Te Riu o Tūwharetoa, my maunga tapu are Pūtauaki and Taupiri.  My awa tapu are Waikato and Tarawera. My ancestors travelled across the Pacific, navigating by star and tide in the waka Tainui and Te Arawa, to their landing places of Whangaparaoa and Maketū.  </p>\n<p>"These narratives were taught to me as a child along with the practices of my people that ensured their physical and spiritual well-being - kai tiākitanga ... guardianship of resources that would be preserved for future generations.  In essence, by allowing myself to view my environment with ''the eyes of a child'' once again, the ''distant horizon'' (goals, responsibilities) became clearer"</p>', NULL, NULL, 1, 1, 2, 0, 0, NULL, 'Inherit', 'Inherit', 6),
-(143, 8, 24, 1, 1, 1, 'PortfolioPage', '2016-01-19 12:13:19', '2015-10-24 05:04:11', 'my-word-is-yours', 'My Word Is Yours', NULL, '<p>The project goal was to take a Maori writing, and working directly with the author create two typographic artworks which resonated with the story.</p>\n<p>The author wrote the following to describe the writing and help guide my design:</p>\n<p>"As adults, we live in a modern world of cumbersome obligations and responsibilities that simply have us exist in, rather than allow ourselves to experience our environment.  We lose sight of the fact that our first responsibility is the protection of this environment for future generations.  We allow ourselves to be weighted with our perception of success and failure that we forget the delight of discovery and from our environment.  </p>\n<p>"The simple, innocent view of the world that is experienced by the child - a world that has seen physical, cultural and spiritual elements eroded.  The traditional narratives I grew up with, became myths and legends to having no meaning or relevance in the context of the ''modern'' world ... But with my learning of te reo, I have gone back to my childhood and those narratives to discover that their context and relevance were of significance in the world that existed then.  And with this discovery I am able to experience again the environment that I am in, with my renewed perspective.  </p>\n<p>"I am Māori, I am a descendent of the tribes of Waikato and Te Riu o Tūwharetoa, my maunga tapu are Pūtauaki and Taupiri.  My awa tapu are Waikato and Tarawera. My ancestors travelled across the Pacific, navigating by star and tide in the waka Tainui and Te Arawa, to their landing places of Whangaparaoa and Maketū.  </p>\n<p>"These narratives were taught to me as a child along with the practices of my people that ensured their physical and spiritual well-being - kai tiākitanga ... guardianship of resources that would be preserved for future generations.  In essence, by allowing myself to view my environment with ''the eyes of a child'' once again, the ''distant horizon'' (goals, responsibilities) became clearer"</p>', NULL, NULL, 1, 1, 2, 0, 0, NULL, 'Inherit', 'Inherit', 6),
-(144, 8, 25, 1, 1, 1, 'PortfolioPage', '2016-01-19 12:14:46', '2015-10-24 05:04:11', 'my-word-is-yours', 'My Word Is Yours', NULL, '<p>The project goal was to take a Maori writing, and working directly with the author create two typographic artworks which resonated with the story.</p>\n<p>The author wrote the following to describe the writing and help guide my design:</p>\n<p>"As adults, we live in a modern world of cumbersome obligations and responsibilities that simply have us exist in, rather than allow ourselves to experience our environment.  We lose sight of the fact that our first responsibility is the protection of this environment for future generations.  We allow ourselves to be weighted with our perception of success and failure that we forget the delight of discovery and from our environment.  </p>\n<p>"The simple, innocent view of the world that is experienced by the child - a world that has seen physical, cultural and spiritual elements eroded.  The traditional narratives I grew up with, became myths and legends to having no meaning or relevance in the context of the ''modern'' world ... But with my learning of te reo, I have gone back to my childhood and those narratives to discover that their context and relevance were of significance in the world that existed then.  And with this discovery I am able to experience again the environment that I am in, with my renewed perspective.  </p>', NULL, NULL, 1, 1, 2, 0, 0, NULL, 'Inherit', 'Inherit', 6),
-(145, 8, 26, 1, 1, 1, 'PortfolioPage', '2016-01-19 12:14:59', '2015-10-24 05:04:11', 'my-word-is-yours', 'My Word Is Yours', NULL, '<p class="lead">The project goal was to take a Maori writing, and working directly with the author create two typographic artworks which resonated with the story.</p>\n<p>The author wrote the following to describe the writing and help guide my design:</p>\n<p>"As adults, we live in a modern world of cumbersome obligations and responsibilities that simply have us exist in, rather than allow ourselves to experience our environment.  We lose sight of the fact that our first responsibility is the protection of this environment for future generations.  We allow ourselves to be weighted with our perception of success and failure that we forget the delight of discovery and from our environment.  </p>\n<p>"The simple, innocent view of the world that is experienced by the child - a world that has seen physical, cultural and spiritual elements eroded.  The traditional narratives I grew up with, became myths and legends to having no meaning or relevance in the context of the ''modern'' world ... But with my learning of te reo, I have gone back to my childhood and those narratives to discover that their context and relevance were of significance in the world that existed then.  And with this discovery I am able to experience again the environment that I am in, with my renewed perspective.  </p>', NULL, NULL, 1, 1, 2, 0, 0, NULL, 'Inherit', 'Inherit', 6),
+(139, 7, 12, 1, 1, 1, 'PortfolioPage', '2016-01-19 11:59:20', '2015-10-24 05:03:55', 'exhibit', 'Exhibit', NULL, '<p>The technological innovations of the past 10–20 years have made us change how we find information, how we interact, and what we expect of products and services. It\'s been predicted that newspapers and traditional news media will not survive the next 15 years. I wanted to prove that there is still a place in our future for news media in print and digital formats. </p>\n<p>The need for interaction and control is something born out of using the internet, and is something that must be taken into account. Splitting the news up into sections to entertain and inform based on the readers interests seems like an obvious solution to suit our changed lifestyles. We can enjoy and appreciate things we’re interested in and care about, in a well designed physical print format that reduces the amount of wasted resources. My solutions used together will create a cohesive service to inform, educate, entertain and update in an efficient way.</p>', NULL, NULL, 1, 1, 1, 0, 0, NULL, 'Inherit', 'Inherit', 6),
+(140, 7, 13, 1, 1, 1, 'PortfolioPage', '2016-01-19 12:11:48', '2015-10-24 05:03:55', 'exhibit', 'Exhibit', NULL, '<p>The technological innovations of the past 10–20 years have made us change how we find information, how we interact, and what we expect of products and services. It\'s been predicted that newspapers and traditional news media will not survive the next 15 years. I wanted to prove that there is still a place for news media in print and digital formats. </p>\n<p>In todays technology driven age, we all desire total control over all of our devices and media platforms. It\'s no longer acceptable to sit back and simply accept what we\'re given. The level of customisation available in every facet of our lives is growing by the day. </p>\n<p>This led me to think of a new approach to news media. Where instead of having the same information repeated across all platforms, instead the user has control over a print magazine, a website, and an app, choosing relevant topics for the platforms and being served content to fit the purpose. The web platform will have up to the minute news and events with some long form pieces for developing stories. The app allows for tiny bitesize pieces and breaking news updates. And finally, the print magazine is broken into topics which are more heavily interest focused. These can be opted in or out of, so you only get what you\'re interested in. </p>', NULL, NULL, 1, 1, 1, 0, 0, NULL, 'Inherit', 'Inherit', 6),
+(141, 8, 22, 1, 1, 1, 'PortfolioPage', '2016-01-19 12:12:35', '2015-10-24 05:04:11', 'my-word-is-yours', 'My Word Is Yours', NULL, '<p class="lead">Take this burden from my shoulders that I may carry a child. He will see the distant horizons that we will achieve together.</p>\n<p>The project goal was to take a Maori writing, and working directly with the author create two typographic artworks which resonated with the story. </p>\n<p>The author wrote the following to describe the writing and help guide my design:</p>\n<p>"As adults, we live in a modern world of cumbersome obligations and responsibilities that simply have us exist in, rather than allow ourselves to experience our environment.  We lose sight of the fact that our first responsibility is the protection of this environment for future generations.  We allow ourselves to be weighted with our perception of success and failure that we forget the delight of discovery and from our environment.  </p>\n<p>"The simple, innocent view of the world that is experienced by the child - a world that has seen physical, cultural and spiritual elements eroded.  The traditional narratives I grew up with, became myths and legends to having no meaning or relevance in the context of the \'modern\' world ... But with my learning of te reo, I have gone back to my childhood and those narratives to discover that their context and relevance were of significance in the world that existed then.  And with this discovery I am able to experience again the environment that I am in, with my renewed perspective.  </p>\n<p>"I am Māori, I am a descendent of the tribes of Waikato and Te Riu o Tūwharetoa, my maunga tapu are Pūtauaki and Taupiri.  My awa tapu are Waikato and Tarawera. My ancestors travelled across the Pacific, navigating by star and tide in the waka Tainui and Te Arawa, to their landing places of Whangaparaoa and Maketū.  </p>\n<p>"These narratives were taught to me as a child along with the practices of my people that ensured their physical and spiritual well-being - kai tiākitanga ... guardianship of resources that would be preserved for future generations.  In essence, by allowing myself to view my environment with \'the eyes of a child\' once again, the \'distant horizon\' (goals, responsibilities) became clearer"</p>', NULL, NULL, 1, 1, 2, 0, 0, NULL, 'Inherit', 'Inherit', 6),
+(142, 8, 23, 1, 1, 1, 'PortfolioPage', '2016-01-19 12:12:45', '2015-10-24 05:04:11', 'my-word-is-yours', 'My Word Is Yours', NULL, '<p class="lead"><span style="font-family: &#039;Maisonneue Book&#039;, &#039;Helvetica Neue&#039;, Helvetica, Arial, sans-serif; font-size: 13px;">The project goal was to take a Maori writing, and working directly with the author create two typographic artworks which resonated with the story. </span></p>\n<p>The author wrote the following to describe the writing and help guide my design:</p>\n<p>"As adults, we live in a modern world of cumbersome obligations and responsibilities that simply have us exist in, rather than allow ourselves to experience our environment.  We lose sight of the fact that our first responsibility is the protection of this environment for future generations.  We allow ourselves to be weighted with our perception of success and failure that we forget the delight of discovery and from our environment.  </p>\n<p>"The simple, innocent view of the world that is experienced by the child - a world that has seen physical, cultural and spiritual elements eroded.  The traditional narratives I grew up with, became myths and legends to having no meaning or relevance in the context of the \'modern\' world ... But with my learning of te reo, I have gone back to my childhood and those narratives to discover that their context and relevance were of significance in the world that existed then.  And with this discovery I am able to experience again the environment that I am in, with my renewed perspective.  </p>\n<p>"I am Māori, I am a descendent of the tribes of Waikato and Te Riu o Tūwharetoa, my maunga tapu are Pūtauaki and Taupiri.  My awa tapu are Waikato and Tarawera. My ancestors travelled across the Pacific, navigating by star and tide in the waka Tainui and Te Arawa, to their landing places of Whangaparaoa and Maketū.  </p>\n<p>"These narratives were taught to me as a child along with the practices of my people that ensured their physical and spiritual well-being - kai tiākitanga ... guardianship of resources that would be preserved for future generations.  In essence, by allowing myself to view my environment with \'the eyes of a child\' once again, the \'distant horizon\' (goals, responsibilities) became clearer"</p>', NULL, NULL, 1, 1, 2, 0, 0, NULL, 'Inherit', 'Inherit', 6),
+(143, 8, 24, 1, 1, 1, 'PortfolioPage', '2016-01-19 12:13:19', '2015-10-24 05:04:11', 'my-word-is-yours', 'My Word Is Yours', NULL, '<p>The project goal was to take a Maori writing, and working directly with the author create two typographic artworks which resonated with the story.</p>\n<p>The author wrote the following to describe the writing and help guide my design:</p>\n<p>"As adults, we live in a modern world of cumbersome obligations and responsibilities that simply have us exist in, rather than allow ourselves to experience our environment.  We lose sight of the fact that our first responsibility is the protection of this environment for future generations.  We allow ourselves to be weighted with our perception of success and failure that we forget the delight of discovery and from our environment.  </p>\n<p>"The simple, innocent view of the world that is experienced by the child - a world that has seen physical, cultural and spiritual elements eroded.  The traditional narratives I grew up with, became myths and legends to having no meaning or relevance in the context of the \'modern\' world ... But with my learning of te reo, I have gone back to my childhood and those narratives to discover that their context and relevance were of significance in the world that existed then.  And with this discovery I am able to experience again the environment that I am in, with my renewed perspective.  </p>\n<p>"I am Māori, I am a descendent of the tribes of Waikato and Te Riu o Tūwharetoa, my maunga tapu are Pūtauaki and Taupiri.  My awa tapu are Waikato and Tarawera. My ancestors travelled across the Pacific, navigating by star and tide in the waka Tainui and Te Arawa, to their landing places of Whangaparaoa and Maketū.  </p>\n<p>"These narratives were taught to me as a child along with the practices of my people that ensured their physical and spiritual well-being - kai tiākitanga ... guardianship of resources that would be preserved for future generations.  In essence, by allowing myself to view my environment with \'the eyes of a child\' once again, the \'distant horizon\' (goals, responsibilities) became clearer"</p>', NULL, NULL, 1, 1, 2, 0, 0, NULL, 'Inherit', 'Inherit', 6),
+(144, 8, 25, 1, 1, 1, 'PortfolioPage', '2016-01-19 12:14:46', '2015-10-24 05:04:11', 'my-word-is-yours', 'My Word Is Yours', NULL, '<p>The project goal was to take a Maori writing, and working directly with the author create two typographic artworks which resonated with the story.</p>\n<p>The author wrote the following to describe the writing and help guide my design:</p>\n<p>"As adults, we live in a modern world of cumbersome obligations and responsibilities that simply have us exist in, rather than allow ourselves to experience our environment.  We lose sight of the fact that our first responsibility is the protection of this environment for future generations.  We allow ourselves to be weighted with our perception of success and failure that we forget the delight of discovery and from our environment.  </p>\n<p>"The simple, innocent view of the world that is experienced by the child - a world that has seen physical, cultural and spiritual elements eroded.  The traditional narratives I grew up with, became myths and legends to having no meaning or relevance in the context of the \'modern\' world ... But with my learning of te reo, I have gone back to my childhood and those narratives to discover that their context and relevance were of significance in the world that existed then.  And with this discovery I am able to experience again the environment that I am in, with my renewed perspective.  </p>', NULL, NULL, 1, 1, 2, 0, 0, NULL, 'Inherit', 'Inherit', 6),
+(145, 8, 26, 1, 1, 1, 'PortfolioPage', '2016-01-19 12:14:59', '2015-10-24 05:04:11', 'my-word-is-yours', 'My Word Is Yours', NULL, '<p class="lead">The project goal was to take a Maori writing, and working directly with the author create two typographic artworks which resonated with the story.</p>\n<p>The author wrote the following to describe the writing and help guide my design:</p>\n<p>"As adults, we live in a modern world of cumbersome obligations and responsibilities that simply have us exist in, rather than allow ourselves to experience our environment.  We lose sight of the fact that our first responsibility is the protection of this environment for future generations.  We allow ourselves to be weighted with our perception of success and failure that we forget the delight of discovery and from our environment.  </p>\n<p>"The simple, innocent view of the world that is experienced by the child - a world that has seen physical, cultural and spiritual elements eroded.  The traditional narratives I grew up with, became myths and legends to having no meaning or relevance in the context of the \'modern\' world ... But with my learning of te reo, I have gone back to my childhood and those narratives to discover that their context and relevance were of significance in the world that existed then.  And with this discovery I am able to experience again the environment that I am in, with my renewed perspective.  </p>', NULL, NULL, 1, 1, 2, 0, 0, NULL, 'Inherit', 'Inherit', 6),
 (146, 32, 7, 1, 1, 1, 'PortfolioPage', '2016-01-19 12:15:27', '2016-01-18 13:07:39', 'treshna', 'Treshna', NULL, NULL, NULL, NULL, 1, 1, 20, 0, 0, NULL, 'Inherit', 'Inherit', 6),
 (147, 32, 8, 1, 1, 1, 'PortfolioPage', '2016-01-19 12:21:50', '2016-01-18 13:07:39', 'treshna', 'Treshna', NULL, '<p class="lead">Treshna Enterprises required a redesign to their website, which would portray them as a modern, innovative and exciting company.</p>\n<p>It was important the website communicate clearly the business services and goals so that a visitor knows exactly what Treshna does the moment they arrive. A short company story was also placed front and centre. By understanding the target audience we knew the importance of a local team with history and commitment to quality. </p>\n<p>The design was successful through its use of bold typography, vivid imagery, and designing with a clear purpose and audience in mind.</p>\n<p> </p>', NULL, NULL, 1, 1, 20, 0, 0, NULL, 'Inherit', 'Inherit', 6),
 (148, 32, 9, 1, 1, 1, 'PortfolioPage', '2016-01-19 12:23:01', '2016-01-18 13:07:39', 'treshna', 'Treshna', NULL, '<p class="lead">Treshna Enterprises required a redesign of their website to portray them as a modern, innovative and exciting local company.</p>\n<p>It was important the website communicate clearly the business services and goals so that a visitor knows exactly what Treshna does the moment they arrive. A short company story was also placed front and centre. By understanding the target audience we knew the importance of a local team with history and commitment to quality. </p>\n<p>The design was successful through its use of bold typography, vivid imagery, and designing with a clear purpose and audience in mind.</p>\n<p> </p>', NULL, NULL, 1, 1, 20, 0, 0, NULL, 'Inherit', 'Inherit', 6),
@@ -1844,8 +1671,8 @@ INSERT INTO `SiteTree_versions` (`ID`, `RecordID`, `Version`, `WasPublished`, `A
 (150, 10, 9, 1, 1, 1, 'PortfolioPage', '2016-01-20 10:12:54', '2015-10-24 05:05:42', 'playtime', 'Playtime', NULL, '<p class="lead">In a collaboration project, we were asked to create a poster for a special screening event in tribute to Playtime by Jacques Tati.</p>\n<p>We used a style that was playful and exciting, showing the feeling of being lost and made to feel small and insignificant in a big city. The graphical elements reflect plot points from the film, things like the icon, the landmarks of France and the hero with his pipe. </p>', NULL, NULL, 1, 1, 4, 0, 0, NULL, 'Inherit', 'Inherit', 6),
 (151, 11, 9, 1, 1, 1, 'PortfolioPage', '2016-01-20 10:48:13', '2015-10-24 05:05:58', 'matsons', 'Matsons', NULL, '<div class="page" title="Page 1">\n<div class="layoutArea">\n<div class="column">\n<p><span>This logo was designed in keeping with the core values of the company, which is to produce and provide high quality, fresh, New Zealand made beverages. I’ve used water symbolically throughout the rebrand as a symbol of freshness and purity. </span></p>\n<p><span>The graphical logo design reminiscent of a waterfall or </span><span>fountain, reinforcing Matson’s dedication to pure and fresh ingredients, </span><span>and the natural artesian water they use. </span></p>\n<p><span>The typography has been manipulated to reflect the </span><span>look and feel of water.</span><span> I used Grendel font as it’s dynamic and modern, while carrying confidence and a sense of heritage.</span></p>\n</div>\n</div>\n</div>', NULL, NULL, 1, 1, 5, 0, 0, NULL, 'Inherit', 'Inherit', 6),
 (152, 13, 8, 1, 1, 1, 'PortfolioPage', '2016-01-20 10:48:50', '2015-10-24 05:06:23', 'ascot-angiography', 'Ascot Angiography', NULL, NULL, NULL, NULL, 1, 1, 7, 0, 0, NULL, 'Inherit', 'Inherit', 6),
-(153, 13, 9, 1, 1, 1, 'PortfolioPage', '2016-01-20 10:54:46', '2015-10-24 05:06:23', 'ascot-angiography', 'Ascot Angiography', NULL, '<p>The logo is inspired by the intricate process of coronary stenting. <span>This involves a tiny balloon being inflated inside the artery to improve blood flow, by pushing open the blocked area. Both logo concepts took inspiration from the design of coronary stents which are like a matrix of thin metal, curled into a long cylinder. </span></p>\n<p><span>While these logos weren''t accepted by the client in the end, they do show good exploration of an idea, and execution in an interesting way. </span></p>', NULL, NULL, 1, 1, 7, 0, 0, NULL, 'Inherit', 'Inherit', 6),
-(154, 13, 10, 1, 1, 1, 'PortfolioPage', '2016-01-20 10:55:43', '2015-10-24 05:06:23', 'ascot-angiography', 'Ascot Angiography', NULL, '<p class="lead">Ascot Angiography is a private angiography theatre at Ascot Hospital.</p>\n<p>The logo is inspired by the intricate process of coronary stenting. <span>This involves a tiny balloon being inflated inside the artery to improve blood flow, by pushing open the blocked area. Both logo concepts took inspiration from the design of coronary stents which are like a matrix of thin metal, curled into a long cylinder. </span></p>\n<p><span>While these logos weren''t accepted by the client in the end, they do show good exploration of an idea, and execution in an interesting way. </span></p>', NULL, NULL, 1, 1, 7, 0, 0, NULL, 'Inherit', 'Inherit', 6),
+(153, 13, 9, 1, 1, 1, 'PortfolioPage', '2016-01-20 10:54:46', '2015-10-24 05:06:23', 'ascot-angiography', 'Ascot Angiography', NULL, '<p>The logo is inspired by the intricate process of coronary stenting. <span>This involves a tiny balloon being inflated inside the artery to improve blood flow, by pushing open the blocked area. Both logo concepts took inspiration from the design of coronary stents which are like a matrix of thin metal, curled into a long cylinder. </span></p>\n<p><span>While these logos weren\'t accepted by the client in the end, they do show good exploration of an idea, and execution in an interesting way. </span></p>', NULL, NULL, 1, 1, 7, 0, 0, NULL, 'Inherit', 'Inherit', 6),
+(154, 13, 10, 1, 1, 1, 'PortfolioPage', '2016-01-20 10:55:43', '2015-10-24 05:06:23', 'ascot-angiography', 'Ascot Angiography', NULL, '<p class="lead">Ascot Angiography is a private angiography theatre at Ascot Hospital.</p>\n<p>The logo is inspired by the intricate process of coronary stenting. <span>This involves a tiny balloon being inflated inside the artery to improve blood flow, by pushing open the blocked area. Both logo concepts took inspiration from the design of coronary stents which are like a matrix of thin metal, curled into a long cylinder. </span></p>\n<p><span>While these logos weren\'t accepted by the client in the end, they do show good exploration of an idea, and execution in an interesting way. </span></p>', NULL, NULL, 1, 1, 7, 0, 0, NULL, 'Inherit', 'Inherit', 6),
 (155, 14, 3, 1, 1, 1, 'PortfolioPage', '2016-01-20 11:08:23', '2015-10-24 05:06:34', 'way-to-play', 'Way to Play', NULL, NULL, NULL, NULL, 1, 1, 8, 0, 0, NULL, 'Inherit', 'Inherit', 6),
 (156, 14, 4, 1, 1, 1, 'PortfolioPage', '2016-01-20 11:18:59', '2015-10-24 05:06:34', 'way-to-play', 'Way to Play', NULL, '<p class="lead">Way to Play is a one-day introduction to playing with children on the Autism Spectrum.</p>\n<p>Playing with a child with autism can be challenging, so the Way to Play workshop offers simple, easy to use strategies to begin playing joyously together. </p>\n<p>The Way to Play website was created to be a supplementary tool for parents and caregivers after completing the one-day workshop. Parents and caregivers are able to engage with a community of like-minded people to share experiences, and get support and advice from peers. </p>\n<p>As part of the website, users are also able to contact the coaches directly with questions, and upload videos showing their efforts for more targeted help with their problems. This tool is invaluable for parents who have so often felt like they are on their own, and on a bad day have no one to turn to for support. </p>', NULL, NULL, 1, 1, 8, 0, 0, NULL, 'Inherit', 'Inherit', 6),
 (157, 14, 5, 1, 1, 1, 'PortfolioPage', '2016-01-20 11:22:11', '2015-10-24 05:06:34', 'way-to-play', 'Way to Play', NULL, '<p class="lead">Way to Play is a one-day introduction to playing with children on the Autism Spectrum.</p>\n<p>Playing with a child with autism can be challenging, so the Way to Play workshop offers simple, easy to use strategies to begin playing joyously together. </p>\n<p>The Way to Play website was created to be a supplementary tool for parents and caregivers after completing the one-day workshop. Parents and caregivers are able to engage with a community of like-minded people to share experiences, and get support and advice from peers. </p>\n<p>As part of the website, users are also able to contact the coaches directly with questions, and upload videos showing their efforts for more targeted help with their problems. This tool is invaluable for parents who have so often felt like they are on their own, and on a bad day have no one to turn to for support. </p>', NULL, NULL, 1, 1, 8, 0, 0, NULL, 'Inherit', 'Inherit', 6),
@@ -1858,11 +1685,11 @@ INSERT INTO `SiteTree_versions` (`ID`, `RecordID`, `Version`, `WasPublished`, `A
 (164, 15, 8, 1, 1, 1, 'PortfolioPage', '2016-01-20 11:53:21', '2015-10-24 05:06:59', 'dig-my-idea', 'Dig My Idea', NULL, '<p>DIGMYIDEA is the Māori Innovation Challenge, and peoples chance to submit a digital business idea that has the potential to go global.</p>\n<p>Our brief was to create a website that communicates extreme digital innovation, and combining this with Maori iconography.</p>\n<p>With the branding and image treatments already defined, I expanded on those ideas by creating repeating graphics of kowhaiwhai, and opting for a gradual colour change as the user scrolls. With these simple effects I was able to make the site feel quite cutting edge and fresh, but still hold onto some Maori influence through subtle patterns.</p>', NULL, NULL, 1, 1, 9, 0, 0, NULL, 'Inherit', 'Inherit', 6),
 (165, 15, 9, 1, 1, 1, 'PortfolioPage', '2016-01-20 11:53:32', '2015-10-24 05:06:59', 'dig-my-idea', 'Dig My Idea', NULL, '<p>DIGMYIDEA is the Māori Innovation Challenge, and presented people with a chance to submit a digital business idea that has the potential to go global.</p>\n<p>Our brief was to create a website that communicates extreme digital innovation, and combining this with Maori iconography.</p>\n<p>With the branding and image treatments already defined, I expanded on those ideas by creating repeating graphics of kowhaiwhai, and opting for a gradual colour change as the user scrolls. With these simple effects I was able to make the site feel quite cutting edge and fresh, but still hold onto some Maori influence through subtle patterns.</p>', NULL, NULL, 1, 1, 9, 0, 0, NULL, 'Inherit', 'Inherit', 6),
 (166, 32, 11, 1, 1, 1, 'PortfolioPage', '2016-01-20 12:24:07', '2016-01-18 13:07:39', 'treshna', 'Treshna', NULL, '<p class="lead">Treshna Enterprises required a redesign of their website to portray them as a modern, innovative and exciting local company.</p>\n<p>It was important the website communicate clearly the business services and goals so that a visitor knows exactly what Treshna does the moment they arrive. A short company story was also placed front and centre. By understanding the target audience we knew the importance of a local team with history and commitment to quality. </p>\n<p>The design was successful through its use of bold typography, vivid imagery, and designing with a clear purpose and audience in mind.</p>', NULL, NULL, 1, 1, 20, 0, 0, NULL, 'Inherit', 'Inherit', 6),
-(167, 9, 10, 1, 1, 1, 'PortfolioPage', '2016-01-20 12:25:59', '2015-10-24 05:04:37', 'road-to-recovery', 'Road to Recovery', NULL, '<p class="lead">The aim of this project was to visually communicate the story of community wellbeing following the disastrous Christchurch earthquakes.</p>\n<p>Collaborating with a friend, we created a video for CERA, the Christchurch Earthquake Recovery Authority, to use in house and promotionally to spread the message of all that''s being done for affected communities. From disaster response to recovery and the general support of the Christchurch residents.</p>\n<p>  In displaying this key information we decided to use the more human, expressive approach of stop motion revolving around the story of a character and his experience’s post earthquake; deciding the animation would follow a story. Our choice of materials reflects the nature of the message we wanted to convey; a raw and genuine warmth to an otherwise cold and serious subject. We chose to use paper with its creases and imperfections to express the feeling of the story. Paper is very effective in portraying the story based feeling, giving it a depth and authenticity that would be lacking in a purely digital animation. Our chosen audio adds to this impression with the natural, human sounding acoustic music combined with the realistic sounds of life on top, it’s effective in supporting the visuals throughout the story.</p>', NULL, NULL, 1, 1, 3, 0, 0, NULL, 'Inherit', 'Inherit', 6),
+(167, 9, 10, 1, 1, 1, 'PortfolioPage', '2016-01-20 12:25:59', '2015-10-24 05:04:37', 'road-to-recovery', 'Road to Recovery', NULL, '<p class="lead">The aim of this project was to visually communicate the story of community wellbeing following the disastrous Christchurch earthquakes.</p>\n<p>Collaborating with a friend, we created a video for CERA, the Christchurch Earthquake Recovery Authority, to use in house and promotionally to spread the message of all that\'s being done for affected communities. From disaster response to recovery and the general support of the Christchurch residents.</p>\n<p>  In displaying this key information we decided to use the more human, expressive approach of stop motion revolving around the story of a character and his experience’s post earthquake; deciding the animation would follow a story. Our choice of materials reflects the nature of the message we wanted to convey; a raw and genuine warmth to an otherwise cold and serious subject. We chose to use paper with its creases and imperfections to express the feeling of the story. Paper is very effective in portraying the story based feeling, giving it a depth and authenticity that would be lacking in a purely digital animation. Our chosen audio adds to this impression with the natural, human sounding acoustic music combined with the realistic sounds of life on top, it’s effective in supporting the visuals throughout the story.</p>', NULL, NULL, 1, 1, 3, 0, 0, NULL, 'Inherit', 'Inherit', 6),
 (168, 12, 4, 1, 1, 1, 'PortfolioPage', '2016-01-21 08:17:45', '2015-10-24 05:06:12', 'religion-tequila', 'Religion Tequila', NULL, NULL, NULL, NULL, 1, 1, 6, 0, 0, NULL, 'Inherit', 'Inherit', 6),
 (169, 12, 5, 1, 1, 1, 'PortfolioPage', '2016-01-26 08:00:49', '2015-10-24 05:06:12', 'religion-tequila', 'Religion Tequila', NULL, '<p>Our plan was monastically simple: use only the finest organic ingredients in a patient, natural process, allowing the true flavor of the blue agave to travel from the Amatitán valley all the way to our bottle, on the shelf before your eyes or the hands of a skilled mixologist, and into the glass wrapped in your fingers.</p>', NULL, NULL, 1, 1, 6, 0, 0, NULL, 'Inherit', 'Inherit', 6),
 (170, 12, 6, 1, 1, 1, 'PortfolioPage', '2016-01-26 08:02:33', '2015-10-24 05:06:12', 'religion-tequila', 'Religion Tequila', NULL, '<p>Our plan was monastically simple: use only the finest organic ingredients in a patient, natural process, allowing the true flavor of the blue agave to travel from the Amatitán valley all the way to our bottle, on the shelf before your eyes or the hands of a skilled mixologist, and into the glass wrapped in your fingers.</p>', NULL, NULL, 1, 1, 6, 0, 0, NULL, 'Inherit', 'Inherit', 6),
-(171, 29, 9, 1, 1, 1, 'PortfolioPage', '2016-01-26 08:03:45', '2015-10-24 05:03:55', 'lifes-a-gamble', 'Life''s a Gamble', NULL, NULL, NULL, NULL, 1, 1, 10, 0, 0, NULL, 'Inherit', 'Inherit', 6),
+(171, 29, 9, 1, 1, 1, 'PortfolioPage', '2016-01-26 08:03:45', '2015-10-24 05:03:55', 'lifes-a-gamble', 'Life\'s a Gamble', NULL, NULL, NULL, NULL, 1, 1, 10, 0, 0, NULL, 'Inherit', 'Inherit', 6),
 (172, 31, 5, 1, 1, 1, 'PortfolioPage', '2016-01-26 08:03:50', '2016-01-18 12:55:44', 'plains-fm', 'Plains FM', NULL, NULL, NULL, NULL, 1, 1, 11, 0, 0, NULL, 'Inherit', 'Inherit', 6),
 (173, 30, 5, 1, 1, 1, 'PortfolioPage', '2016-01-26 08:03:57', '2016-01-18 12:52:50', 'reflections', 'Reflections', NULL, NULL, NULL, NULL, 1, 1, 12, 0, 0, NULL, 'Inherit', 'Inherit', 6),
 (174, 32, 12, 1, 1, 1, 'PortfolioPage', '2016-01-26 08:04:02', '2016-01-18 13:07:39', 'treshna', 'Treshna', NULL, '<p class="lead">Treshna Enterprises required a redesign of their website to portray them as a modern, innovative and exciting local company.</p>\n<p>It was important the website communicate clearly the business services and goals so that a visitor knows exactly what Treshna does the moment they arrive. A short company story was also placed front and centre. By understanding the target audience we knew the importance of a local team with history and commitment to quality. </p>\n<p>The design was successful through its use of bold typography, vivid imagery, and designing with a clear purpose and audience in mind.</p>', NULL, NULL, 1, 1, 13, 0, 0, NULL, 'Inherit', 'Inherit', 6),
@@ -1886,23 +1713,23 @@ INSERT INTO `SiteTree_versions` (`ID`, `RecordID`, `Version`, `WasPublished`, `A
 (191, 16, 19, 1, 1, 1, 'PortfolioPage', '2016-02-05 11:11:46', '2015-10-24 05:07:10', 'line-7-frontier', 'Line 7 Frontier', NULL, '<p class="lead">To launch Line 7 Frontier into the United States, we created a highly-responsive web experience integrating bold campaign commercial content.</p>\n<p>Visitors are encouraged to explore the product range, and to go “Into the Wonder”. Products feature rich lifestyle imagery, and 360° rotating  shots to show the products from all angles. </p>\n<p> Line 7 Frontier now has all the tools to become globally-recognised for engineered and intrepid adventure design.</p>', NULL, NULL, 1, 1, 14, 0, 0, NULL, 'Inherit', 'Inherit', 6),
 (192, 16, 20, 1, 1, 1, 'PortfolioPage', '2016-02-11 06:51:44', '2015-10-24 05:07:10', 'line-7-frontier', 'Line 7 Frontier', NULL, '<p class="lead">To launch Line 7 Frontier into the United States, we created a highly-responsive web experience integrating bold campaign commercial content.</p>\n<p>Visitors are encouraged to explore the product range, and to go “Into the Wonder”. Products feature rich lifestyle imagery, and 360° rotating  shots to show the products from all angles. </p>\n<p> Line 7 Frontier now has all the tools to become globally-recognised for engineered and intrepid adventure design.</p>', NULL, NULL, 1, 1, 14, 0, 0, NULL, 'Inherit', 'Inherit', 6),
 (193, 12, 7, 1, 1, 1, 'PortfolioPage', '2016-02-11 06:52:05', '2015-10-24 05:06:12', 'religion-tequila', 'Religion Tequila', NULL, '<p>Our plan was monastically simple: use only the finest organic ingredients in a patient, natural process, allowing the true flavor of the blue agave to travel from the Amatitán valley all the way to our bottle, on the shelf before your eyes or the hands of a skilled mixologist, and into the glass wrapped in your fingers.</p>', NULL, NULL, 1, 1, 6, 0, 0, NULL, 'Inherit', 'Inherit', 6),
-(194, 9, 11, 1, 1, 1, 'PortfolioPage', '2016-02-11 06:52:16', '2015-10-24 05:04:37', 'road-to-recovery', 'Road to Recovery', NULL, '<p class="lead">The aim of this project was to visually communicate the story of community wellbeing following the disastrous Christchurch earthquakes.</p>\n<p>Collaborating with a friend, we created a video for CERA, the Christchurch Earthquake Recovery Authority, to use in house and promotionally to spread the message of all that''s being done for affected communities. From disaster response to recovery and the general support of the Christchurch residents.</p>\n<p>  In displaying this key information we decided to use the more human, expressive approach of stop motion revolving around the story of a character and his experience’s post earthquake; deciding the animation would follow a story. Our choice of materials reflects the nature of the message we wanted to convey; a raw and genuine warmth to an otherwise cold and serious subject. We chose to use paper with its creases and imperfections to express the feeling of the story. Paper is very effective in portraying the story based feeling, giving it a depth and authenticity that would be lacking in a purely digital animation. Our chosen audio adds to this impression with the natural, human sounding acoustic music combined with the realistic sounds of life on top, it’s effective in supporting the visuals throughout the story.</p>', NULL, NULL, 1, 1, 3, 0, 0, NULL, 'Inherit', 'Inherit', 6),
+(194, 9, 11, 1, 1, 1, 'PortfolioPage', '2016-02-11 06:52:16', '2015-10-24 05:04:37', 'road-to-recovery', 'Road to Recovery', NULL, '<p class="lead">The aim of this project was to visually communicate the story of community wellbeing following the disastrous Christchurch earthquakes.</p>\n<p>Collaborating with a friend, we created a video for CERA, the Christchurch Earthquake Recovery Authority, to use in house and promotionally to spread the message of all that\'s being done for affected communities. From disaster response to recovery and the general support of the Christchurch residents.</p>\n<p>  In displaying this key information we decided to use the more human, expressive approach of stop motion revolving around the story of a character and his experience’s post earthquake; deciding the animation would follow a story. Our choice of materials reflects the nature of the message we wanted to convey; a raw and genuine warmth to an otherwise cold and serious subject. We chose to use paper with its creases and imperfections to express the feeling of the story. Paper is very effective in portraying the story based feeling, giving it a depth and authenticity that would be lacking in a purely digital animation. Our chosen audio adds to this impression with the natural, human sounding acoustic music combined with the realistic sounds of life on top, it’s effective in supporting the visuals throughout the story.</p>', NULL, NULL, 1, 1, 3, 0, 0, NULL, 'Inherit', 'Inherit', 6),
 (195, 16, 21, 1, 1, 1, 'PortfolioPage', '2016-02-11 07:36:32', '2015-10-24 05:07:10', 'line-7-frontier', 'Line 7 Frontier', NULL, '<p class="lead">To launch Line 7 Frontier into the United States, we created a highly-responsive web experience integrating bold campaign commercial content.</p>\n<p>Visitors are encouraged to explore the product range, and discover what it means to go “Into the Wonder”. Products feature rich lifestyle imagery, and 360° rotating  shots to show the products from all angles. </p>\n<p> Line 7 Frontier now has all the tools to become globally-recognised for engineered and intrepid adventure design.</p>', NULL, NULL, 1, 1, 14, 0, 0, NULL, 'Inherit', 'Inherit', 6),
 (196, 15, 10, 1, 1, 1, 'PortfolioPage', '2016-02-11 07:39:01', '2015-10-24 05:06:59', 'dig-my-idea', 'Dig My Idea', NULL, '<p>DIGMYIDEA is the Māori Innovation Challenge, and presented people with a chance to submit a digital business idea that has the potential to go global.</p>\n<p>Our brief was to create a website that communicates extreme digital innovation, and combining this with Maori iconography.</p>\n<p>With the branding and image treatments already defined, I expanded on those ideas by creating repeating graphics of kowhaiwhai, and opting for a gradual colour change as the user scrolls. With these simple effects I was able to make the site feel quite cutting edge and fresh, but still hold onto some Maori influence through subtle patterns.</p>', NULL, NULL, 1, 1, 9, 0, 0, NULL, 'Inherit', 'Inherit', 6),
 (197, 14, 7, 1, 1, 1, 'PortfolioPage', '2016-02-11 07:39:31', '2015-10-24 05:06:34', 'way-to-play', 'Way to Play', NULL, '<p class="lead">Way to Play is a one-day introduction to playing with children on the Autism Spectrum.</p>\n<p>Playing with a child with autism can be challenging, so the Way to Play workshop offers simple, easy to use strategies to begin playing joyously together. </p>\n<p>The Way to Play website was created to be a supplementary tool for parents and caregivers after completing the one-day workshop. Parents and caregivers are able to engage with a community of like-minded people to share experiences, and get support and advice from peers. </p>\n<p>As part of the website, users are also able to contact the coaches directly with questions, and upload videos showing their efforts for more targeted help with their problems. This tool is invaluable for parents who have so often felt like they are on their own, and on a bad day have no one to turn to for support. </p>', NULL, NULL, 1, 1, 8, 0, 0, NULL, 'Inherit', 'Inherit', 6),
-(198, 9, 12, 1, 1, 1, 'PortfolioPage', '2016-02-11 07:46:44', '2015-10-24 05:04:37', 'road-to-recovery', 'Road to Recovery', NULL, '<p class="lead">The aim of this project was to visually communicate the story of community wellbeing following the disastrous Christchurch earthquakes.</p>\n<p>Collaborating with a friend, we created a video for CERA, the Christchurch Earthquake Recovery Authority, to use in house and promotionally to spread the message of all that''s being done for affected communities. From disaster response to recovery and the general support of the Christchurch residents.</p>\n<p>  In displaying this key information we decided to use the more human, expressive approach of stop motion revolving around the story of a character and his experience’s post earthquake; deciding the animation would follow a story. Our choice of materials reflects the nature of the message we wanted to convey; a raw and genuine warmth to an otherwise cold and serious subject. We chose to use paper with its creases and imperfections to express the feeling of the story. Paper is very effective in portraying the story based feeling, giving it a depth and authenticity that would be lacking in a purely digital animation. Our chosen audio adds to this impression with the natural, human sounding acoustic music combined with the realistic sounds of life on top, it’s effective in supporting the visuals throughout the story.</p>', NULL, NULL, 1, 1, 3, 0, 0, NULL, 'Inherit', 'Inherit', 6),
-(199, 9, 13, 1, 1, 1, 'PortfolioPage', '2016-02-11 07:47:30', '2015-10-24 05:04:37', 'road-to-recovery', 'Road to Recovery', NULL, '<p class="lead">The aim of this project was to visually communicate the story of community wellbeing following the disastrous Christchurch earthquakes.</p>\n<p>Collaborating with a friend, we created a video for CERA, the Christchurch Earthquake Recovery Authority, to use in house and promotionally to spread the message of all that''s being done for affected communities. From disaster response to recovery and the general support of the Christchurch residents.</p>\n<p>  In displaying this key information we decided to use the more human, expressive approach of stop motion revolving around the story of a character and his experience’s post earthquake; deciding the animation would follow a story. Our choice of materials reflects the nature of the message we wanted to convey; a raw and genuine warmth to an otherwise cold and serious subject. We chose to use paper with its creases and imperfections to express the feeling of the story. Paper is very effective in portraying the story based feeling, giving it a depth and authenticity that would be lacking in a purely digital animation. Our chosen audio adds to this impression with the natural, human sounding acoustic music combined with the realistic sounds of life on top, it’s effective in supporting the visuals throughout the story.</p>', NULL, NULL, 1, 1, 3, 0, 0, NULL, 'Inherit', 'Inherit', 6),
-(200, 29, 10, 1, 1, 1, 'PortfolioPage', '2016-02-11 07:55:33', '2015-10-24 05:03:55', 'lifes-a-gamble', 'Life''s a Gamble', NULL, '<p>This poster design was a personal project to practice photo manipulation and technical editing in Photoshop. </p>', NULL, NULL, 1, 1, 10, 0, 0, NULL, 'Inherit', 'Inherit', 6),
-(201, 29, 11, 1, 1, 1, 'PortfolioPage', '2016-02-11 07:56:11', '2015-10-24 05:03:55', 'lifes-a-gamble', 'Life''s a Gamble', NULL, '<p class="lead">Life is a gamble, so roll the dice.</p>\n<p>This poster design was a personal project to practice photo manipulation and technical editing in Photoshop. </p>', NULL, NULL, 1, 1, 10, 0, 0, NULL, 'Inherit', 'Inherit', 6),
+(198, 9, 12, 1, 1, 1, 'PortfolioPage', '2016-02-11 07:46:44', '2015-10-24 05:04:37', 'road-to-recovery', 'Road to Recovery', NULL, '<p class="lead">The aim of this project was to visually communicate the story of community wellbeing following the disastrous Christchurch earthquakes.</p>\n<p>Collaborating with a friend, we created a video for CERA, the Christchurch Earthquake Recovery Authority, to use in house and promotionally to spread the message of all that\'s being done for affected communities. From disaster response to recovery and the general support of the Christchurch residents.</p>\n<p>  In displaying this key information we decided to use the more human, expressive approach of stop motion revolving around the story of a character and his experience’s post earthquake; deciding the animation would follow a story. Our choice of materials reflects the nature of the message we wanted to convey; a raw and genuine warmth to an otherwise cold and serious subject. We chose to use paper with its creases and imperfections to express the feeling of the story. Paper is very effective in portraying the story based feeling, giving it a depth and authenticity that would be lacking in a purely digital animation. Our chosen audio adds to this impression with the natural, human sounding acoustic music combined with the realistic sounds of life on top, it’s effective in supporting the visuals throughout the story.</p>', NULL, NULL, 1, 1, 3, 0, 0, NULL, 'Inherit', 'Inherit', 6),
+(199, 9, 13, 1, 1, 1, 'PortfolioPage', '2016-02-11 07:47:30', '2015-10-24 05:04:37', 'road-to-recovery', 'Road to Recovery', NULL, '<p class="lead">The aim of this project was to visually communicate the story of community wellbeing following the disastrous Christchurch earthquakes.</p>\n<p>Collaborating with a friend, we created a video for CERA, the Christchurch Earthquake Recovery Authority, to use in house and promotionally to spread the message of all that\'s being done for affected communities. From disaster response to recovery and the general support of the Christchurch residents.</p>\n<p>  In displaying this key information we decided to use the more human, expressive approach of stop motion revolving around the story of a character and his experience’s post earthquake; deciding the animation would follow a story. Our choice of materials reflects the nature of the message we wanted to convey; a raw and genuine warmth to an otherwise cold and serious subject. We chose to use paper with its creases and imperfections to express the feeling of the story. Paper is very effective in portraying the story based feeling, giving it a depth and authenticity that would be lacking in a purely digital animation. Our chosen audio adds to this impression with the natural, human sounding acoustic music combined with the realistic sounds of life on top, it’s effective in supporting the visuals throughout the story.</p>', NULL, NULL, 1, 1, 3, 0, 0, NULL, 'Inherit', 'Inherit', 6),
+(200, 29, 10, 1, 1, 1, 'PortfolioPage', '2016-02-11 07:55:33', '2015-10-24 05:03:55', 'lifes-a-gamble', 'Life\'s a Gamble', NULL, '<p>This poster design was a personal project to practice photo manipulation and technical editing in Photoshop. </p>', NULL, NULL, 1, 1, 10, 0, 0, NULL, 'Inherit', 'Inherit', 6),
+(201, 29, 11, 1, 1, 1, 'PortfolioPage', '2016-02-11 07:56:11', '2015-10-24 05:03:55', 'lifes-a-gamble', 'Life\'s a Gamble', NULL, '<p class="lead">Life is a gamble, so roll the dice.</p>\n<p>This poster design was a personal project to practice photo manipulation and technical editing in Photoshop. </p>', NULL, NULL, 1, 1, 10, 0, 0, NULL, 'Inherit', 'Inherit', 6),
 (202, 33, 1, 0, 1, 0, 'BlogPost', '2016-02-11 07:57:22', '2016-02-11 07:57:22', 'new-blog-post', 'New Blog Post', NULL, NULL, NULL, NULL, 0, 1, 1, 0, 0, NULL, 'Inherit', 'Inherit', 23),
 (203, 33, 2, 0, 1, 0, 'BlogPost', '2016-02-11 07:57:43', '2016-02-11 07:57:22', 'new-blog-post', 'New Blog Post', NULL, '<p class="lead">Donec id elit non mi porta gravida at eget metus. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Curabitur blandit tempus porttitor.</p>\n<p>Nullam id dolor id nibh ultricies vehicula ut id elit. Aenean lacinia bibendum nulla sed consectetur. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Maecenas faucibus mollis interdum.</p>', NULL, NULL, 0, 1, 1, 0, 0, NULL, 'Inherit', 'Inherit', 23),
 (204, 33, 3, 1, 1, 1, 'BlogPost', '2016-02-11 07:57:43', '2016-02-11 07:57:22', 'new-blog-post', 'New Blog Post', NULL, '<p class="lead">Donec id elit non mi porta gravida at eget metus. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Curabitur blandit tempus porttitor.</p>\n<p>Nullam id dolor id nibh ultricies vehicula ut id elit. Aenean lacinia bibendum nulla sed consectetur. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Maecenas faucibus mollis interdum.</p>', NULL, NULL, 0, 1, 1, 0, 0, NULL, 'Inherit', 'Inherit', 23),
-(205, 1, 8, 1, 1, 1, 'HomePage', '2016-02-11 08:09:35', '2015-10-23 22:53:25', 'home', 'Home', NULL, '<p class="lead"><span>Ahoy! I''m Hamish.</span></p>\n<p class="lead"><span>Designer, developer, dreamer. </span></p>\n<p class="lead"><span>I have years of experience working in digital design, this is a selection of my recent projects. Take a look around and if you want to work together, please feel free to get in touch.</span></p>', NULL, NULL, 1, 1, 1, 0, 0, NULL, 'Inherit', 'Inherit', 0),
-(206, 1, 9, 1, 1, 1, 'HomePage', '2016-02-11 08:09:53', '2015-10-23 22:53:25', 'home', 'Home', NULL, '<p class="lead"><span>Ahoy! I''m Hamish. </span>Designer, developer, dreamer. </p>\n<p class="lead"><span>I have years of experience working in digital design, this is a selection of my recent projects. Take a look around and if you want to work together, please feel free to get in touch.</span></p>', NULL, NULL, 1, 1, 1, 0, 0, NULL, 'Inherit', 'Inherit', 0),
-(207, 1, 10, 1, 1, 1, 'HomePage', '2016-02-11 08:10:23', '2015-10-23 22:53:25', 'home', 'Home', NULL, '<p class="lead"><span><strong>Ahoy! I''m Hamish.</strong> </span>Designer, developer, dreamer. </p>\n<p class="lead"><span>I have years of experience working in digital design, this is a selection of my recent projects. Take a look around and if you want to work together, please feel free to get in touch.</span></p>', NULL, NULL, 1, 1, 1, 0, 0, NULL, 'Inherit', 'Inherit', 0),
-(208, 1, 11, 1, 1, 1, 'HomePage', '2016-02-11 08:10:37', '2015-10-23 22:53:25', 'home', 'Home', NULL, '<p class="lead"><span>Ahoy! I''m Hamish. </span>Designer, developer, dreamer. </p>\n<p class="lead"><span>I have years of experience working in digital design, this is a selection of my recent projects. Take a look around and if you want to work together, please feel free to get in touch.</span></p>', NULL, NULL, 1, 1, 1, 0, 0, NULL, 'Inherit', 'Inherit', 0),
+(205, 1, 8, 1, 1, 1, 'HomePage', '2016-02-11 08:09:35', '2015-10-23 22:53:25', 'home', 'Home', NULL, '<p class="lead"><span>Ahoy! I\'m Hamish.</span></p>\n<p class="lead"><span>Designer, developer, dreamer. </span></p>\n<p class="lead"><span>I have years of experience working in digital design, this is a selection of my recent projects. Take a look around and if you want to work together, please feel free to get in touch.</span></p>', NULL, NULL, 1, 1, 1, 0, 0, NULL, 'Inherit', 'Inherit', 0),
+(206, 1, 9, 1, 1, 1, 'HomePage', '2016-02-11 08:09:53', '2015-10-23 22:53:25', 'home', 'Home', NULL, '<p class="lead"><span>Ahoy! I\'m Hamish. </span>Designer, developer, dreamer. </p>\n<p class="lead"><span>I have years of experience working in digital design, this is a selection of my recent projects. Take a look around and if you want to work together, please feel free to get in touch.</span></p>', NULL, NULL, 1, 1, 1, 0, 0, NULL, 'Inherit', 'Inherit', 0),
+(207, 1, 10, 1, 1, 1, 'HomePage', '2016-02-11 08:10:23', '2015-10-23 22:53:25', 'home', 'Home', NULL, '<p class="lead"><span><strong>Ahoy! I\'m Hamish.</strong> </span>Designer, developer, dreamer. </p>\n<p class="lead"><span>I have years of experience working in digital design, this is a selection of my recent projects. Take a look around and if you want to work together, please feel free to get in touch.</span></p>', NULL, NULL, 1, 1, 1, 0, 0, NULL, 'Inherit', 'Inherit', 0),
+(208, 1, 11, 1, 1, 1, 'HomePage', '2016-02-11 08:10:37', '2015-10-23 22:53:25', 'home', 'Home', NULL, '<p class="lead"><span>Ahoy! I\'m Hamish. </span>Designer, developer, dreamer. </p>\n<p class="lead"><span>I have years of experience working in digital design, this is a selection of my recent projects. Take a look around and if you want to work together, please feel free to get in touch.</span></p>', NULL, NULL, 1, 1, 1, 0, 0, NULL, 'Inherit', 'Inherit', 0),
 (209, 15, 11, 1, 1, 1, 'PortfolioPage', '2016-02-22 10:23:45', '2015-10-24 05:06:59', 'dig-my-idea', 'Dig My Idea', NULL, '<p>DIGMYIDEA is the Māori Innovation Challenge, and presented people with a chance to submit a digital business idea that has the potential to go global.</p>\n<p>Our brief was to create a website that communicates extreme digital innovation, and combining this with Maori iconography.</p>\n<p>With the branding and image treatments already defined, I expanded on those ideas by creating repeating graphics of kowhaiwhai, and opting for a gradual colour change as the user scrolls. With these simple effects I was able to make the site feel quite cutting edge and fresh, but still hold onto some Maori influence through subtle patterns.</p>', NULL, NULL, 1, 1, 9, 0, 0, NULL, 'Inherit', 'Inherit', 6),
-(210, 1, 12, 1, 1, 1, 'HomePage', '2016-02-22 10:23:59', '2015-10-23 22:53:25', 'home', 'Home', NULL, '<p class="lead"><span>Hi! I''m Hamish. </span>Designer, developer, dreamer. </p>\n<p class="lead"><span>I have years of experience working in digital design, this is a selection of my recent projects. Take a look around and if you want to work together, please feel free to get in touch.</span></p>', NULL, NULL, 1, 1, 1, 0, 0, NULL, 'Inherit', 'Inherit', 0),
+(210, 1, 12, 1, 1, 1, 'HomePage', '2016-02-22 10:23:59', '2015-10-23 22:53:25', 'home', 'Home', NULL, '<p class="lead"><span>Hi! I\'m Hamish. </span>Designer, developer, dreamer. </p>\n<p class="lead"><span>I have years of experience working in digital design, this is a selection of my recent projects. Take a look around and if you want to work together, please feel free to get in touch.</span></p>', NULL, NULL, 1, 1, 1, 0, 0, NULL, 'Inherit', 'Inherit', 0),
 (211, 14, 8, 1, 1, 1, 'PortfolioPage', '2016-02-22 10:26:59', '2015-10-24 05:06:34', 'way-to-play', 'Way to Play', NULL, '<p class="lead">Way to Play is a one-day introduction to playing with children on the Autism Spectrum.</p>\n<p>Playing with a child with autism can be challenging, so the Way to Play workshop offers simple, easy to use strategies to begin playing joyously together. </p>\n<p>The Way to Play website was created to be a supplementary tool for parents and caregivers after completing the one-day workshop. Parents and caregivers are able to engage with a community of like-minded people to share experiences, and get support and advice from peers. </p>\n<p>As part of the website, users are also able to contact the coaches directly with questions, and upload videos showing their efforts for more targeted help with their problems. This tool is invaluable for parents who have so often felt like they are on their own, and on a bad day have no one to turn to for support. </p>', NULL, NULL, 1, 1, 8, 0, 0, NULL, 'Inherit', 'Inherit', 6);
 
 -- --------------------------------------------------------
@@ -1911,14 +1738,11 @@ INSERT INTO `SiteTree_versions` (`ID`, `RecordID`, `Version`, `WasPublished`, `A
 -- Table structure for table `SiteTree_ViewerGroups`
 --
 
-CREATE TABLE IF NOT EXISTS `SiteTree_ViewerGroups` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `SiteTree_ViewerGroups` (
+  `ID` int(11) NOT NULL,
   `SiteTreeID` int(11) NOT NULL DEFAULT '0',
-  `GroupID` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`ID`),
-  KEY `SiteTreeID` (`SiteTreeID`),
-  KEY `GroupID` (`GroupID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `GroupID` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -1926,13 +1750,11 @@ CREATE TABLE IF NOT EXISTS `SiteTree_ViewerGroups` (
 -- Table structure for table `VirtualPage`
 --
 
-CREATE TABLE IF NOT EXISTS `VirtualPage` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `VirtualPage` (
+  `ID` int(11) NOT NULL,
   `VersionID` int(11) NOT NULL DEFAULT '0',
-  `CopyContentFromID` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`ID`),
-  KEY `CopyContentFromID` (`CopyContentFromID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `CopyContentFromID` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -1940,13 +1762,11 @@ CREATE TABLE IF NOT EXISTS `VirtualPage` (
 -- Table structure for table `VirtualPage_Live`
 --
 
-CREATE TABLE IF NOT EXISTS `VirtualPage_Live` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `VirtualPage_Live` (
+  `ID` int(11) NOT NULL,
   `VersionID` int(11) NOT NULL DEFAULT '0',
-  `CopyContentFromID` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`ID`),
-  KEY `CopyContentFromID` (`CopyContentFromID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `CopyContentFromID` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -1954,19 +1774,817 @@ CREATE TABLE IF NOT EXISTS `VirtualPage_Live` (
 -- Table structure for table `VirtualPage_versions`
 --
 
-CREATE TABLE IF NOT EXISTS `VirtualPage_versions` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `VirtualPage_versions` (
+  `ID` int(11) NOT NULL,
   `RecordID` int(11) NOT NULL DEFAULT '0',
   `Version` int(11) NOT NULL DEFAULT '0',
   `VersionID` int(11) NOT NULL DEFAULT '0',
-  `CopyContentFromID` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`ID`),
-  UNIQUE KEY `RecordID_Version` (`RecordID`,`Version`),
-  KEY `RecordID` (`RecordID`),
-  KEY `Version` (`Version`),
-  KEY `CopyContentFromID` (`CopyContentFromID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `CopyContentFromID` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `Blog`
+--
+ALTER TABLE `Blog`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `ParentID` (`ParentID`);
+
+--
+-- Indexes for table `BlogCategory`
+--
+ALTER TABLE `BlogCategory`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `BlogID` (`BlogID`),
+  ADD KEY `ClassName` (`ClassName`);
+
+--
+-- Indexes for table `BlogEntry`
+--
+ALTER TABLE `BlogEntry`
+  ADD PRIMARY KEY (`ID`);
+
+--
+-- Indexes for table `BlogEntry_Live`
+--
+ALTER TABLE `BlogEntry_Live`
+  ADD PRIMARY KEY (`ID`);
+
+--
+-- Indexes for table `BlogEntry_versions`
+--
+ALTER TABLE `BlogEntry_versions`
+  ADD PRIMARY KEY (`ID`),
+  ADD UNIQUE KEY `RecordID_Version` (`RecordID`,`Version`),
+  ADD KEY `RecordID` (`RecordID`),
+  ADD KEY `Version` (`Version`);
+
+--
+-- Indexes for table `BlogHolder`
+--
+ALTER TABLE `BlogHolder`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `OwnerID` (`OwnerID`);
+
+--
+-- Indexes for table `BlogHolder_Live`
+--
+ALTER TABLE `BlogHolder_Live`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `OwnerID` (`OwnerID`);
+
+--
+-- Indexes for table `BlogHolder_versions`
+--
+ALTER TABLE `BlogHolder_versions`
+  ADD PRIMARY KEY (`ID`),
+  ADD UNIQUE KEY `RecordID_Version` (`RecordID`,`Version`),
+  ADD KEY `RecordID` (`RecordID`),
+  ADD KEY `Version` (`Version`),
+  ADD KEY `OwnerID` (`OwnerID`);
+
+--
+-- Indexes for table `BlogPost`
+--
+ALTER TABLE `BlogPost`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `FeaturedImageID` (`FeaturedImageID`);
+
+--
+-- Indexes for table `BlogPost_Authors`
+--
+ALTER TABLE `BlogPost_Authors`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `BlogPostID` (`BlogPostID`),
+  ADD KEY `MemberID` (`MemberID`);
+
+--
+-- Indexes for table `BlogPost_Categories`
+--
+ALTER TABLE `BlogPost_Categories`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `BlogPostID` (`BlogPostID`),
+  ADD KEY `BlogCategoryID` (`BlogCategoryID`);
+
+--
+-- Indexes for table `BlogPost_Live`
+--
+ALTER TABLE `BlogPost_Live`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `FeaturedImageID` (`FeaturedImageID`);
+
+--
+-- Indexes for table `BlogPost_Tags`
+--
+ALTER TABLE `BlogPost_Tags`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `BlogPostID` (`BlogPostID`),
+  ADD KEY `BlogTagID` (`BlogTagID`);
+
+--
+-- Indexes for table `BlogPost_versions`
+--
+ALTER TABLE `BlogPost_versions`
+  ADD PRIMARY KEY (`ID`),
+  ADD UNIQUE KEY `RecordID_Version` (`RecordID`,`Version`),
+  ADD KEY `RecordID` (`RecordID`),
+  ADD KEY `Version` (`Version`),
+  ADD KEY `FeaturedImageID` (`FeaturedImageID`);
+
+--
+-- Indexes for table `BlogTag`
+--
+ALTER TABLE `BlogTag`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `BlogID` (`BlogID`),
+  ADD KEY `ClassName` (`ClassName`);
+
+--
+-- Indexes for table `BlogTree`
+--
+ALTER TABLE `BlogTree`
+  ADD PRIMARY KEY (`ID`);
+
+--
+-- Indexes for table `BlogTree_Live`
+--
+ALTER TABLE `BlogTree_Live`
+  ADD PRIMARY KEY (`ID`);
+
+--
+-- Indexes for table `BlogTree_versions`
+--
+ALTER TABLE `BlogTree_versions`
+  ADD PRIMARY KEY (`ID`),
+  ADD UNIQUE KEY `RecordID_Version` (`RecordID`,`Version`),
+  ADD KEY `RecordID` (`RecordID`),
+  ADD KEY `Version` (`Version`);
+
+--
+-- Indexes for table `Blog_Contributors`
+--
+ALTER TABLE `Blog_Contributors`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `BlogID` (`BlogID`),
+  ADD KEY `MemberID` (`MemberID`);
+
+--
+-- Indexes for table `Blog_Editors`
+--
+ALTER TABLE `Blog_Editors`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `BlogID` (`BlogID`),
+  ADD KEY `MemberID` (`MemberID`);
+
+--
+-- Indexes for table `Blog_Live`
+--
+ALTER TABLE `Blog_Live`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `ParentID` (`ParentID`);
+
+--
+-- Indexes for table `Blog_versions`
+--
+ALTER TABLE `Blog_versions`
+  ADD PRIMARY KEY (`ID`),
+  ADD UNIQUE KEY `RecordID_Version` (`RecordID`,`Version`),
+  ADD KEY `RecordID` (`RecordID`),
+  ADD KEY `Version` (`Version`),
+  ADD KEY `ParentID` (`ParentID`);
+
+--
+-- Indexes for table `Blog_Writers`
+--
+ALTER TABLE `Blog_Writers`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `BlogID` (`BlogID`),
+  ADD KEY `MemberID` (`MemberID`);
+
+--
+-- Indexes for table `ContactRequest`
+--
+ALTER TABLE `ContactRequest`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `ClassName` (`ClassName`);
+
+--
+-- Indexes for table `ErrorPage`
+--
+ALTER TABLE `ErrorPage`
+  ADD PRIMARY KEY (`ID`);
+
+--
+-- Indexes for table `ErrorPage_Live`
+--
+ALTER TABLE `ErrorPage_Live`
+  ADD PRIMARY KEY (`ID`);
+
+--
+-- Indexes for table `ErrorPage_versions`
+--
+ALTER TABLE `ErrorPage_versions`
+  ADD PRIMARY KEY (`ID`),
+  ADD UNIQUE KEY `RecordID_Version` (`RecordID`,`Version`),
+  ADD KEY `RecordID` (`RecordID`),
+  ADD KEY `Version` (`Version`);
+
+--
+-- Indexes for table `File`
+--
+ALTER TABLE `File`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `ParentID` (`ParentID`),
+  ADD KEY `OwnerID` (`OwnerID`),
+  ADD KEY `ClassName` (`ClassName`);
+
+--
+-- Indexes for table `Group`
+--
+ALTER TABLE `Group`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `ParentID` (`ParentID`),
+  ADD KEY `ClassName` (`ClassName`);
+
+--
+-- Indexes for table `Group_Members`
+--
+ALTER TABLE `Group_Members`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `GroupID` (`GroupID`),
+  ADD KEY `MemberID` (`MemberID`);
+
+--
+-- Indexes for table `Group_Roles`
+--
+ALTER TABLE `Group_Roles`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `GroupID` (`GroupID`),
+  ADD KEY `PermissionRoleID` (`PermissionRoleID`);
+
+--
+-- Indexes for table `LoginAttempt`
+--
+ALTER TABLE `LoginAttempt`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `MemberID` (`MemberID`),
+  ADD KEY `ClassName` (`ClassName`);
+
+--
+-- Indexes for table `Member`
+--
+ALTER TABLE `Member`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `Email` (`Email`),
+  ADD KEY `ClassName` (`ClassName`),
+  ADD KEY `BlogProfileImageID` (`BlogProfileImageID`);
+
+--
+-- Indexes for table `MemberPassword`
+--
+ALTER TABLE `MemberPassword`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `MemberID` (`MemberID`),
+  ADD KEY `ClassName` (`ClassName`);
+
+--
+-- Indexes for table `Page`
+--
+ALTER TABLE `Page`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `BannerImageID` (`BannerImageID`);
+
+--
+-- Indexes for table `Page_Live`
+--
+ALTER TABLE `Page_Live`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `BannerImageID` (`BannerImageID`);
+
+--
+-- Indexes for table `Page_versions`
+--
+ALTER TABLE `Page_versions`
+  ADD PRIMARY KEY (`ID`),
+  ADD UNIQUE KEY `RecordID_Version` (`RecordID`,`Version`),
+  ADD KEY `RecordID` (`RecordID`),
+  ADD KEY `Version` (`Version`),
+  ADD KEY `BannerImageID` (`BannerImageID`);
+
+--
+-- Indexes for table `Permission`
+--
+ALTER TABLE `Permission`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `GroupID` (`GroupID`),
+  ADD KEY `Code` (`Code`),
+  ADD KEY `ClassName` (`ClassName`);
+
+--
+-- Indexes for table `PermissionRole`
+--
+ALTER TABLE `PermissionRole`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `ClassName` (`ClassName`);
+
+--
+-- Indexes for table `PermissionRoleCode`
+--
+ALTER TABLE `PermissionRoleCode`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `RoleID` (`RoleID`),
+  ADD KEY `ClassName` (`ClassName`);
+
+--
+-- Indexes for table `PortfolioImage`
+--
+ALTER TABLE `PortfolioImage`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `ImageID` (`ImageID`),
+  ADD KEY `ParentID` (`ParentID`),
+  ADD KEY `ClassName` (`ClassName`);
+
+--
+-- Indexes for table `PortfolioPage`
+--
+ALTER TABLE `PortfolioPage`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `ThumbnailImageID` (`ThumbnailImageID`);
+
+--
+-- Indexes for table `PortfolioPage_Live`
+--
+ALTER TABLE `PortfolioPage_Live`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `ThumbnailImageID` (`ThumbnailImageID`);
+
+--
+-- Indexes for table `PortfolioPage_versions`
+--
+ALTER TABLE `PortfolioPage_versions`
+  ADD PRIMARY KEY (`ID`),
+  ADD UNIQUE KEY `RecordID_Version` (`RecordID`,`Version`),
+  ADD KEY `RecordID` (`RecordID`),
+  ADD KEY `Version` (`Version`),
+  ADD KEY `ThumbnailImageID` (`ThumbnailImageID`);
+
+--
+-- Indexes for table `RedirectorPage`
+--
+ALTER TABLE `RedirectorPage`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `LinkToID` (`LinkToID`);
+
+--
+-- Indexes for table `RedirectorPage_Live`
+--
+ALTER TABLE `RedirectorPage_Live`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `LinkToID` (`LinkToID`);
+
+--
+-- Indexes for table `RedirectorPage_versions`
+--
+ALTER TABLE `RedirectorPage_versions`
+  ADD PRIMARY KEY (`ID`),
+  ADD UNIQUE KEY `RecordID_Version` (`RecordID`,`Version`),
+  ADD KEY `RecordID` (`RecordID`),
+  ADD KEY `Version` (`Version`),
+  ADD KEY `LinkToID` (`LinkToID`);
+
+--
+-- Indexes for table `SiteConfig`
+--
+ALTER TABLE `SiteConfig`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `ClassName` (`ClassName`),
+  ADD KEY `LogoID` (`LogoID`),
+  ADD KEY `LogoAltID` (`LogoAltID`);
+
+--
+-- Indexes for table `SiteConfig_CreateTopLevelGroups`
+--
+ALTER TABLE `SiteConfig_CreateTopLevelGroups`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `SiteConfigID` (`SiteConfigID`),
+  ADD KEY `GroupID` (`GroupID`);
+
+--
+-- Indexes for table `SiteConfig_EditorGroups`
+--
+ALTER TABLE `SiteConfig_EditorGroups`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `SiteConfigID` (`SiteConfigID`),
+  ADD KEY `GroupID` (`GroupID`);
+
+--
+-- Indexes for table `SiteConfig_ViewerGroups`
+--
+ALTER TABLE `SiteConfig_ViewerGroups`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `SiteConfigID` (`SiteConfigID`),
+  ADD KEY `GroupID` (`GroupID`);
+
+--
+-- Indexes for table `SiteTree`
+--
+ALTER TABLE `SiteTree`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `ParentID` (`ParentID`),
+  ADD KEY `URLSegment` (`URLSegment`),
+  ADD KEY `ClassName` (`ClassName`);
+
+--
+-- Indexes for table `SiteTree_EditorGroups`
+--
+ALTER TABLE `SiteTree_EditorGroups`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `SiteTreeID` (`SiteTreeID`),
+  ADD KEY `GroupID` (`GroupID`);
+
+--
+-- Indexes for table `SiteTree_ImageTracking`
+--
+ALTER TABLE `SiteTree_ImageTracking`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `SiteTreeID` (`SiteTreeID`),
+  ADD KEY `FileID` (`FileID`);
+
+--
+-- Indexes for table `SiteTree_LinkTracking`
+--
+ALTER TABLE `SiteTree_LinkTracking`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `SiteTreeID` (`SiteTreeID`),
+  ADD KEY `ChildID` (`ChildID`);
+
+--
+-- Indexes for table `SiteTree_Live`
+--
+ALTER TABLE `SiteTree_Live`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `ParentID` (`ParentID`),
+  ADD KEY `URLSegment` (`URLSegment`),
+  ADD KEY `ClassName` (`ClassName`);
+
+--
+-- Indexes for table `SiteTree_versions`
+--
+ALTER TABLE `SiteTree_versions`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `RecordID_Version` (`RecordID`,`Version`),
+  ADD KEY `RecordID` (`RecordID`),
+  ADD KEY `Version` (`Version`),
+  ADD KEY `AuthorID` (`AuthorID`),
+  ADD KEY `PublisherID` (`PublisherID`),
+  ADD KEY `ParentID` (`ParentID`),
+  ADD KEY `URLSegment` (`URLSegment`),
+  ADD KEY `ClassName` (`ClassName`);
+
+--
+-- Indexes for table `SiteTree_ViewerGroups`
+--
+ALTER TABLE `SiteTree_ViewerGroups`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `SiteTreeID` (`SiteTreeID`),
+  ADD KEY `GroupID` (`GroupID`);
+
+--
+-- Indexes for table `VirtualPage`
+--
+ALTER TABLE `VirtualPage`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `CopyContentFromID` (`CopyContentFromID`);
+
+--
+-- Indexes for table `VirtualPage_Live`
+--
+ALTER TABLE `VirtualPage_Live`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `CopyContentFromID` (`CopyContentFromID`);
+
+--
+-- Indexes for table `VirtualPage_versions`
+--
+ALTER TABLE `VirtualPage_versions`
+  ADD PRIMARY KEY (`ID`),
+  ADD UNIQUE KEY `RecordID_Version` (`RecordID`,`Version`),
+  ADD KEY `RecordID` (`RecordID`),
+  ADD KEY `Version` (`Version`),
+  ADD KEY `CopyContentFromID` (`CopyContentFromID`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `Blog`
+--
+ALTER TABLE `Blog`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+--
+-- AUTO_INCREMENT for table `BlogCategory`
+--
+ALTER TABLE `BlogCategory`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `BlogEntry`
+--
+ALTER TABLE `BlogEntry`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `BlogEntry_Live`
+--
+ALTER TABLE `BlogEntry_Live`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `BlogEntry_versions`
+--
+ALTER TABLE `BlogEntry_versions`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `BlogHolder`
+--
+ALTER TABLE `BlogHolder`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `BlogHolder_Live`
+--
+ALTER TABLE `BlogHolder_Live`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `BlogHolder_versions`
+--
+ALTER TABLE `BlogHolder_versions`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `BlogPost`
+--
+ALTER TABLE `BlogPost`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `BlogPost_Authors`
+--
+ALTER TABLE `BlogPost_Authors`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+--
+-- AUTO_INCREMENT for table `BlogPost_Categories`
+--
+ALTER TABLE `BlogPost_Categories`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `BlogPost_Live`
+--
+ALTER TABLE `BlogPost_Live`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `BlogPost_Tags`
+--
+ALTER TABLE `BlogPost_Tags`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `BlogPost_versions`
+--
+ALTER TABLE `BlogPost_versions`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+--
+-- AUTO_INCREMENT for table `BlogTag`
+--
+ALTER TABLE `BlogTag`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `BlogTree`
+--
+ALTER TABLE `BlogTree`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `BlogTree_Live`
+--
+ALTER TABLE `BlogTree_Live`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `BlogTree_versions`
+--
+ALTER TABLE `BlogTree_versions`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `Blog_Contributors`
+--
+ALTER TABLE `Blog_Contributors`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `Blog_Editors`
+--
+ALTER TABLE `Blog_Editors`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `Blog_Live`
+--
+ALTER TABLE `Blog_Live`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+--
+-- AUTO_INCREMENT for table `Blog_versions`
+--
+ALTER TABLE `Blog_versions`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `Blog_Writers`
+--
+ALTER TABLE `Blog_Writers`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `ContactRequest`
+--
+ALTER TABLE `ContactRequest`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `ErrorPage`
+--
+ALTER TABLE `ErrorPage`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+--
+-- AUTO_INCREMENT for table `ErrorPage_Live`
+--
+ALTER TABLE `ErrorPage_Live`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+--
+-- AUTO_INCREMENT for table `ErrorPage_versions`
+--
+ALTER TABLE `ErrorPage_versions`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `File`
+--
+ALTER TABLE `File`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
+--
+-- AUTO_INCREMENT for table `Group`
+--
+ALTER TABLE `Group`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+--
+-- AUTO_INCREMENT for table `Group_Members`
+--
+ALTER TABLE `Group_Members`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT for table `Group_Roles`
+--
+ALTER TABLE `Group_Roles`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `LoginAttempt`
+--
+ALTER TABLE `LoginAttempt`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `Member`
+--
+ALTER TABLE `Member`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT for table `MemberPassword`
+--
+ALTER TABLE `MemberPassword`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT for table `Page`
+--
+ALTER TABLE `Page`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+--
+-- AUTO_INCREMENT for table `Page_Live`
+--
+ALTER TABLE `Page_Live`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+--
+-- AUTO_INCREMENT for table `Page_versions`
+--
+ALTER TABLE `Page_versions`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=125;
+--
+-- AUTO_INCREMENT for table `Permission`
+--
+ALTER TABLE `Permission`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+--
+-- AUTO_INCREMENT for table `PermissionRole`
+--
+ALTER TABLE `PermissionRole`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `PermissionRoleCode`
+--
+ALTER TABLE `PermissionRoleCode`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `PortfolioImage`
+--
+ALTER TABLE `PortfolioImage`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+--
+-- AUTO_INCREMENT for table `PortfolioPage`
+--
+ALTER TABLE `PortfolioPage`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+--
+-- AUTO_INCREMENT for table `PortfolioPage_Live`
+--
+ALTER TABLE `PortfolioPage_Live`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+--
+-- AUTO_INCREMENT for table `PortfolioPage_versions`
+--
+ALTER TABLE `PortfolioPage_versions`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=173;
+--
+-- AUTO_INCREMENT for table `RedirectorPage`
+--
+ALTER TABLE `RedirectorPage`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `RedirectorPage_Live`
+--
+ALTER TABLE `RedirectorPage_Live`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `RedirectorPage_versions`
+--
+ALTER TABLE `RedirectorPage_versions`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `SiteConfig`
+--
+ALTER TABLE `SiteConfig`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT for table `SiteConfig_CreateTopLevelGroups`
+--
+ALTER TABLE `SiteConfig_CreateTopLevelGroups`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `SiteConfig_EditorGroups`
+--
+ALTER TABLE `SiteConfig_EditorGroups`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `SiteConfig_ViewerGroups`
+--
+ALTER TABLE `SiteConfig_ViewerGroups`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `SiteTree`
+--
+ALTER TABLE `SiteTree`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+--
+-- AUTO_INCREMENT for table `SiteTree_EditorGroups`
+--
+ALTER TABLE `SiteTree_EditorGroups`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `SiteTree_ImageTracking`
+--
+ALTER TABLE `SiteTree_ImageTracking`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `SiteTree_LinkTracking`
+--
+ALTER TABLE `SiteTree_LinkTracking`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `SiteTree_Live`
+--
+ALTER TABLE `SiteTree_Live`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+--
+-- AUTO_INCREMENT for table `SiteTree_versions`
+--
+ALTER TABLE `SiteTree_versions`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=212;
+--
+-- AUTO_INCREMENT for table `SiteTree_ViewerGroups`
+--
+ALTER TABLE `SiteTree_ViewerGroups`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `VirtualPage`
+--
+ALTER TABLE `VirtualPage`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `VirtualPage_Live`
+--
+ALTER TABLE `VirtualPage_Live`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `VirtualPage_versions`
+--
+ALTER TABLE `VirtualPage_versions`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
